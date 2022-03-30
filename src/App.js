@@ -7,7 +7,9 @@ import {
 import Landing from "./components/Landing/Landing";
 import Home from "./components/Home/Home";
 
-function App() {
+
+
+function App({ children }) {
   return (
     <div>
       <BrowserRouter>
@@ -15,6 +17,10 @@ function App() {
 
           <Route exact path='/'>
             <Landing />
+          </Route>
+
+          <Route exact path='/home'>
+            <Home />
           </Route>
           
         </Switch>
