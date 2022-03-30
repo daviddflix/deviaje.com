@@ -16,6 +16,7 @@ export default function Landing() {
     const [value, setValue] = React.useState('')
     console.log(value)
     return (
+        // comentarioooooo
         <div className={s.flex}>
             <Stack spacing={2} sx={{ width: 300 }}>
                 <Autocomplete
