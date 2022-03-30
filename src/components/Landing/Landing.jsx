@@ -15,8 +15,10 @@ function Landing() {
                 <input type='text' placeholder='Enter destination city' className={s.input} />
                 <input type='date' placeholder="Date" className={s.date} />
                 <input type='date' className={s.date} />
-                <button className={s.btn}><SearchIcon />
-                    Search</button>
+                <button className={s.btn}>
+                    <SearchIcon />
+                    Search
+                </button>
             </div>
         </div>
     );
