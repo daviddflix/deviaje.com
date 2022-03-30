@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { Link } from "react-router-dom";
@@ -33,3 +34,16 @@ export default function Home() {
     </>
   );
 }
+=======
+import React from 'react';
+
+function Home() {
+    return (
+        <div>
+            <h1>homeee</h1>
+        </div>
+    );
+}
+
+export default Home;
+>>>>>>> 94b0df411fe4967c3fad57cd3dca3989131d5644
