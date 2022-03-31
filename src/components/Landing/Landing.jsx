@@ -1,8 +1,6 @@
-import React from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import Autocomplete from "@mui/material/Autocomplete";
-import { TextField } from "@mui/material";
-import s from "./Landing.module.css";
+import React from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import s from './Landing.module.css';
 
 function Landing() {
   return (
