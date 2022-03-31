@@ -7,7 +7,7 @@ import SearchBar from '../SearchBar/SearchBar';
 
 export default function Home() {
 
-
+    
     let handleInputChange = (e) => {
         setInput(prev => ({...prev, [e.target.name] : e.target.value
         })); 
