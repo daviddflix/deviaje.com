@@ -6,7 +6,7 @@ import { IoIosAirplane } from 'react-icons/io';
 
 export default function Home() {
 
-
+    
     let handleInputChange = (e) => {
         setInput(prev => ({...prev, [e.target.name] : e.target.value
         })); 
