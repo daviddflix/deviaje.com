@@ -3,6 +3,7 @@ import styles from './Home.module.css';
 import LuggageIcon from '@mui/icons-material/Luggage';
 import ConnectingAirportsOutlinedIcon from '@mui/icons-material/ConnectingAirportsOutlined';
 import { IoIosAirplane } from 'react-icons/io';
+import SearchBar from '../SearchBar/SearchBar';
 
 export default function Home() {
 
@@ -79,6 +80,7 @@ export default function Home() {
               }): <h1>Nothing to render</h1>
          }
          
+         <SearchBar />
          
 
         </div>
