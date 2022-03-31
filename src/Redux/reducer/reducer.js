@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function reducer() {
-  return <div>reducer</div>;
+  return <div>esto es el reducer</div>;
 }
