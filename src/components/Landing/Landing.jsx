@@ -1,11 +1,16 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import Autocomplete from "@mui/material/Autocomplete";
-import { TextField } from "@mui/material";
 import s from "./Landing.module.css";
+import LoginButton from '../login/Login';
+import LogoutButton from '../login/Logout'
 
 function Landing() {
   return (
+    <>
+        <div>
+                <LoginButton />
+                <LogoutButton />
+        </div>
     <div className={s.fondo}>
       <h1 className={s.titulo}>
         Welcome to <span className={s.url}>deviaje.com</span>
@@ -29,6 +34,7 @@ function Landing() {
         </button>
       </div>
     </div>
+    </>
   );
 }
 
