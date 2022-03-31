@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import {Provider} from 'react-redux';
-import store from '../src/Redux/store/store'
+// import {Provider} from 'react-redux';
+// import store from '../src/Redux/store/store'
 import { Auth0Provider } from '@auth0/auth0-react';
-import dotenv from 'dotenv';
 
-dotenv.config();
+
+
+console.log(
+  process.env.REACT_APP_AUTH0_DOMAIN,
+  process.env.REACT_APP_AUTH0_CLIENT_ID
+  );
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -16,7 +20,7 @@ const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 ReactDOM.render( 
   <React.StrictMode>
     <BrowserRouter>
-    <Provider store = {store}>
+    {/*<Provider store = {store}>*/}
       <Auth0Provider
       domain = {domain}
       clientId = {clientId}
@@ -24,7 +28,7 @@ ReactDOM.render(
       >
     <App />
     </Auth0Provider>
-    </Provider>
+    {/* </Provider> */}
     </BrowserRouter>
   </React.StrictMode>,
 

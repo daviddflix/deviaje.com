@@ -1,4 +1,4 @@
-// import React from 'react';
+//import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 // import DateAdapter from '@mui/lab/AdapterDateFns';
 
@@ -10,12 +10,19 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
+import LoginButton from '../login/Login';
+import LogoutButton from '../login/Logout'
 
 
 export default function Landing() {
     const [value, setValue] = React.useState('')
     console.log(value)
     return (
+        <>
+        <div>
+                <LoginButton />
+                <LogoutButton />
+        </div>
         <div className={s.flex}>
             <Stack spacing={2} sx={{ width: 300 }}>
                 <Autocomplete
@@ -68,7 +75,9 @@ export default function Landing() {
                 <SearchIcon />
                 Search
             </button>
+            
         </div>
+        </>
 
     );
 }

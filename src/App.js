@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css';
 import Landing from './components/Landing/Landing.jsx';
 import {Switch, Route} from 'react-router-dom';
