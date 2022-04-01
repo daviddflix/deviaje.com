@@ -5,6 +5,7 @@ import ConnectingAirportsOutlinedIcon from "@mui/icons-material/ConnectingAirpor
 import { IoIosAirplane } from "react-icons/io";
 import SearchBar from "../SearchBar/SearchBar";
 import CardDetail from "../CardDetail/CardDetail";
+import Filter from "../Filter/Filter";
 
 export default function Home() {
   let handleInputChange = (e) => {
@@ -31,6 +32,8 @@ export default function Home() {
       .catch((err) => console.log(err));
   });
 
+  //console.log(flights.data[0].has_airport_change)
+
   return (
     <div>
       <input
@@ -49,60 +52,75 @@ export default function Home() {
         Submit
       </button>
 
-      {flights.data ? (
-        flights.data.map((f) => {
-          return (
-            <div key={f.id} className={styles.home}>
-              <div className={styles.container}>
-                <div className={styles.flex}>
-                  <ConnectingAirportsOutlinedIcon color="success" />
-                  <h2>DeViaje.com</h2>
-                </div>
-                <div className={styles.container_departure}>
-                  <div className={styles.flex}>
-                    <IoIosAirplane />
-                    <h4>IDA</h4>
-                    <h4 className={styles.padding_left}>{f.cityFrom} -</h4>
-                    <h4 className={styles.padding_left}>{f.cityTo}</h4>
-                  </div>
-                  <div>
-                    <h4>{f.local_departure.slice(0, 10)}</h4>
-                  </div>
-                  <div className={styles.flex}>
-                    <h4>{f.local_departure.slice(11, 16)}</h4>
-                    <h4 className={styles.padding_left}>
-                      {f.has_airport_change ? (
-                        <p>Directo</p>
-                      ) : (
-                        <p>Con escala</p>
-                      )}
-                    </h4>
-                  </div>
-                </div>
-                <LuggageIcon />
-                <div className={styles.price}>
-                  <h3>Precio</h3>
-                  <div className={styles.flex}>
-                    <h6>{flights.currency}</h6>
-                    <h4 className={styles.padding_left}>{f.price}</h4>
-                  </div>
-                </div>
-              </div>
-              <CardDetail
-                cityfrom={flights.cityfrom}
-                cityTo={flights.cityTo}
-                local_departure={flights.local_departure}
-                price={flights.price}
-                currency={flights.currency}
-              />
-            </div>
-          );
-        })
-      ) : (
-        <h1>Nothing to render</h1>
-      )}
+      <div className={styles.grid}>
+        <div className={styles.wrapper}>
+          <SearchBar />
+          <Filter />
+        </div>
+        <div>
 
-      <SearchBar />
+        
+        {flights.data ? (
+          flights.data.map((f) => {
+            return (
+
+              <div key={f.id} className={styles.home}>
+                <div className={styles.container}>
+                  <div className={styles.flex}>
+                    <ConnectingAirportsOutlinedIcon color="success" />
+                    <h2>DeViaje.com</h2>
+                  </div>
+                  <div className={styles.container_departure}>
+                    <div className={styles.flex}>
+                      <IoIosAirplane />
+                      <h4>IDA</h4>
+                      <h4 className={styles.padding_left}>{f.cityFrom} -</h4>
+                      <h4 className={styles.padding_left}>{f.cityTo}</h4>
+                    </div>
+                    <div>
+                      <h4>{f.local_departure.slice(0, 10)}</h4>
+                    </div>
+                    <div className={styles.flex}>
+                      <h4>{f.local_departure.slice(11, 16)}</h4>
+                      <h4 className={styles.padding_left}>
+                        {f.has_airport_change ? (
+                          <p>Directo</p>
+                        ) : (
+                          <p>Con escala</p>
+                        )}
+                      </h4>
+                    </div>
+                  </div>
+                  <LuggageIcon />
+                  <div className={styles.price}>
+                    <h3>Precio</h3>
+                    <div className={styles.flex}>
+                      <h6>{flights.currency}</h6>
+                      <h4 className={styles.padding_left}>{f.price}</h4>
+                    </div>
+                  </div>
+                </div>
+                <CardDetail
+                  cityfrom={flights.cityfrom}
+                  cityTo={flights.cityTo}
+                  local_departure={flights.local_departure}
+                  price={flights.price}
+                  currency={flights.currency}
+                />
+              </div>
+
+
+            );
+          })
+        ) : (
+          <h1>Nothing to render</h1>
+        )}</div>
+      </div>
+
+
+
+
+
     </div>
   );
 }
