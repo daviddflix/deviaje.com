@@ -2,7 +2,7 @@
   border: solid #000 1px;
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: auto;
   height: 200px;
   margin: 2rem;
   border-radius: 5px;
@@ -39,6 +39,16 @@
 
 .padding_left{
   padding-left: 0.4rem;
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.grid{
+  display: flex;
+  flex-direction: row;
 }
 
 
