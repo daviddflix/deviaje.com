@@ -1,18 +1,12 @@
 import SearchIcon from "@mui/icons-material/Search";
 import s from "./Landing.module.css";
-import LoginButton from "../login/Login";
-import LogoutButton from "../login/Logout";
 
 function Landing() {
   return (
     <>
-      <div>
-        <LoginButton />
-        <LogoutButton />
-      </div>
       <div className={s.fondo}>
         <h1 className={s.titulo}>
-          Welcome to <span className={s.url}> deviaje.com</span>
+          Welcome to <span className={s.url}>deviaje.com</span>
         </h1>
         <div className={s.flex}>
           <input
