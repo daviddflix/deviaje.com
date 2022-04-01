@@ -1,51 +1,64 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Home.module.css";
 import LuggageIcon from "@mui/icons-material/Luggage";
 import ConnectingAirportsOutlinedIcon from "@mui/icons-material/ConnectingAirportsOutlined";
 import { IoIosAirplane } from "react-icons/io";
 import SearchBar from "../SearchBar/SearchBar";
 import CardDetail from "../CardDetail/CardDetail";
+import { getFlightsInfo } from "../../Redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const flights = useSelector((state) => state.allFlights);
+
   let handleInputChange = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const [flights, setFlights] = useState([]);
-  console.log(flights);
-
   const [input, setInput] = useState({
-    from: "",
-    to: "",
+    fly_from: "",
+    fly_to: "",
+    dateFrom: "",
+    dateTo: "",
   });
 
-  const fetchRequest = useCallback(() => {
-    fetch(
-      `https://tequila-api.kiwi.com/v2/search?fly_from=${input.from}&fly_to=${input.to}&dateFrom=01/04/2022&dateTo=30/04/2022`,
-      {
-        headers: { apikey: "-bo7TXYPf_ZTWM3PbGt2Su4ZNpgWu6-K" },
-      }
-    )
-      .then((data) => data.json())
-      .then((dataFetch) => setFlights(dataFetch))
-      .catch((err) => console.log(err));
-  });
+  function handleClick(e) {
+    e.preventDefault();
+    dispatch(getFlightsInfo(input));
+  }
 
   return (
     <div>
       <input
-        value={input.from}
+        value={input.fly_from}
         placeholder="origen"
         onChange={handleInputChange}
-        name="from"
+        name="fly_from"
       />
+
       <input
-        value={input.to}
+        value={input.fly_to}
         placeholder="destino"
         onChange={handleInputChange}
-        name="to"
+        name="fly_to"
       />
-      <button type="submit" onClick={fetchRequest}>
+      <input
+        value={input.dateFrom}
+        type="date"
+        onChange={handleInputChange}
+        name="dateFrom"
+        placeholder="Fecha salida"
+      />
+      <input
+        id="fecha"
+        type="date"
+        value={input.dateTo}
+        onChange={handleInputChange}
+        name="dateTo"
+        placeholder="Fecha llegada"
+      />
+      <button type="submit" onClick={handleClick}>
         Submit
       </button>
 
@@ -89,11 +102,11 @@ export default function Home() {
                 </div>
               </div>
               <CardDetail
-                cityfrom={flights.cityfrom}
-                cityTo={flights.cityTo}
-                local_departure={flights.local_departure}
-                price={flights.price}
-                currency={flights.currency}
+                cityfrom={f.cityfrom}
+                cityTo={f.cityTo}
+                local_departure={f.local_departure}
+                price={f.price}
+                currency={f.currency}
               />
             </div>
           );

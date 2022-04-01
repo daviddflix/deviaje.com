@@ -1,4 +1,3 @@
-import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import s from "./Landing.module.css";
 import LoginButton from "../login/Login";

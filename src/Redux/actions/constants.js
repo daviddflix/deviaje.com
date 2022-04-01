@@ -1,0 +1,1 @@
+export const GET_FLIGHTS_INFO = "GETFLIGHTSINFO";
