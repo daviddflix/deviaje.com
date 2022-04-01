@@ -2,6 +2,7 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import s from "./Landing.module.css";
 
+
 function Landing() {
   return (
     <>       
@@ -26,8 +27,8 @@ function Landing() {
           <SearchIcon />
           Search
         </button>
+
       </div>
-    </div>
     </>
   );
 }
