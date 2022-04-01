@@ -1,10 +1,10 @@
 .home {
-  border: solid #000 1px;
+  border:solid #00000069 1px;
   display: flex;
   flex-direction: column;
   width: auto;
   height: 200px;
-  margin: 2rem;
+   margin-top: 0.5rem;
   border-radius: 5px;
   background-color: #e5e5e5;
 }
@@ -15,7 +15,26 @@
   justify-content: space-around;
 
 }
+.containerFlights{
+  /* border: solid 1px black; */
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 90%;
+}
+.containerGeneral{
+  display: grid;
+    justify-items: start;
+    grid-template-columns: 1fr 2fr;
+    background-color: #9AD0EC;
+  }
 
+  .containerSearch{
+    
+    display: flex;
+    flex-direction: column;
+  }
 .container_departure{
   display: flex;
   flex-direction: column;  
@@ -29,7 +48,7 @@
 .price{
   display: flex;
   flex-direction: column;
-  border-left: #000 solid 1px;
+  border-left: #00000036 solid 1px;
   color: green;
   width: 20%;
   height: 200px;

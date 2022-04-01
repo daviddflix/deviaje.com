@@ -1,69 +1,46 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Home.module.css";
 import LuggageIcon from "@mui/icons-material/Luggage";
 import ConnectingAirportsOutlinedIcon from "@mui/icons-material/ConnectingAirportsOutlined";
 import { IoIosAirplane } from "react-icons/io";
 import SearchBar from "../SearchBar/SearchBar";
-import CardDetail from "../CardDetail/CardDetail";
+//import CardDetail from "../CardDetail/CardDetail";
+//import { getFlightsInfo } from "../../Redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 import Filter from "../Filter/Filter";
 
 export default function Home() {
-  let handleInputChange = (e) => {
-    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const dispatch = useDispatch();
+  const flights = useSelector((state) => state.allFlights);
 
-  const [flights, setFlights] = useState([]);
-  console.log(flights);
+  // let handleInputChange = (e) => {
+  //   setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  // };
 
   const [input, setInput] = useState({
-    from: "",
-    to: "",
+    fly_from: "",
+    fly_to: "",
+    dateFrom: "",
+    dateTo: "",
   });
 
-  const fetchRequest = useCallback(() => {
-    fetch(
-      `https://tequila-api.kiwi.com/v2/search?fly_from=${input.from}&fly_to=${input.to}&dateFrom=01/04/2022&dateTo=30/04/2022`,
-      {
-        headers: { apikey: "-bo7TXYPf_ZTWM3PbGt2Su4ZNpgWu6-K" },
-      }
-    )
-      .then((data) => data.json())
-      .then((dataFetch) => setFlights(dataFetch))
-      .catch((err) => console.log(err));
-  });
+  // function handleClick(e) {
+  //   e.preventDefault();
+  //   dispatch(getFlightsInfo(input));
+  // }
 
   //console.log(flights.data[0].has_airport_change)
 
   return (
-    <div>
-      <input
-        value={input.from}
-        placeholder="origen"
-        onChange={handleInputChange}
-        name="from"
-      />
-      <input
-        value={input.to}
-        placeholder="destino"
-        onChange={handleInputChange}
-        name="to"
-      />
-      <button type="submit" onClick={fetchRequest}>
-        Submit
-      </button>
-
-      <div className={styles.grid}>
-        <div className={styles.wrapper}>
-          <SearchBar />
-          <Filter />
-        </div>
-        <div>
-
-        
+    <div className={styles.containerGeneral}>
+      <div className={styles.containerSearch}>
+        <SearchBar />
+        <Filter />
+      </div>
+      <div className={styles.containerFlights}>
         {flights.data ? (
           flights.data.map((f) => {
             return (
-
               <div key={f.id} className={styles.home}>
                 <div className={styles.container}>
                   <div className={styles.flex}>
@@ -93,34 +70,27 @@ export default function Home() {
                   </div>
                   <LuggageIcon />
                   <div className={styles.price}>
-                    <h3>Precio</h3>
+                    <h3>Price</h3>
                     <div className={styles.flex}>
                       <h6>{flights.currency}</h6>
                       <h4 className={styles.padding_left}>{f.price}</h4>
                     </div>
                   </div>
                 </div>
-                <CardDetail
-                  cityfrom={flights.cityfrom}
-                  cityTo={flights.cityTo}
-                  local_departure={flights.local_departure}
-                  price={flights.price}
-                  currency={flights.currency}
-                />
+                {/* <CardDetail
+                  cityfrom={f.cityfrom}
+                  cityTo={f.cityTo}
+                  local_departure={f.local_departure}
+                  price={f.price}
+                  currency={f.currency}
+                /> */}
               </div>
-
-
             );
           })
         ) : (
           <h1>Nothing to render</h1>
-        )}</div>
+        )}
       </div>
-
-
-
-
-
     </div>
   );
 }
