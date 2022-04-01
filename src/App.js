@@ -1,32 +1,22 @@
-<<<<<<< HEAD
-import './App.css';
-import Landing from './components/Landing/Landing.jsx'
-import {Router, Route} from 'react-router-dom'
-=======
+import React from "react";
 import "./App.css";
->>>>>>> ece08d7a882d4451c39e68cef8ac6f7f2b77bd7a
+import Landing from "./components/Landing/Landing.jsx";
+import { Switch, Route } from "react-router-dom";
+import Home from "./components/Home/Home";
+import Nav from "./components/Nav/Nav";
 
 function App() {
   return (
-    <div className="App">
-<<<<<<< HEAD
-    
-  
-=======
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
->>>>>>> ece08d7a882d4451c39e68cef8ac6f7f2b77bd7a
+    <div>
+      <Nav />
+      <Switch>
+        <Route exact path="/">
+          <Landing />
+        </Route>
+        <Route exact path="/home">
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 }
