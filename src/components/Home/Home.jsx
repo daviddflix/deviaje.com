@@ -31,37 +31,7 @@ export default function Home() {
   return (
     <div className={styles.containerGeneral}>
       <SearchBar />
-      {/* <input
-        value={input.fly_from}
-        placeholder="origen"
-        onChange={handleInputChange}
-        name="fly_from"
-      />
 
-      <input
-        value={input.fly_to}
-        placeholder="destino"
-        onChange={handleInputChange}
-        name="fly_to"
-      />
-      <input
-        value={input.dateFrom}
-        type="date"
-        onChange={handleInputChange}
-        name="dateFrom"
-        placeholder="Fecha salida"
-      />
-      <input
-        id="fecha"
-        type="date"
-        value={input.dateTo}
-        onChange={handleInputChange}
-        name="dateTo"
-        placeholder="Fecha llegada"
-      />
-      <button type="submit" onClick={handleClick}>
-        Submit
-      </button> */}
       <div className={styles.containerFlights}>
         {flights.data ? (
           flights.data.map((f) => {
