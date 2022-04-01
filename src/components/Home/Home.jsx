@@ -4,17 +4,17 @@ import LuggageIcon from "@mui/icons-material/Luggage";
 import ConnectingAirportsOutlinedIcon from "@mui/icons-material/ConnectingAirportsOutlined";
 import { IoIosAirplane } from "react-icons/io";
 import SearchBar from "../SearchBar/SearchBar";
-import CardDetail from "../CardDetail/CardDetail";
-import { getFlightsInfo } from "../../Redux/actions/actions";
+//import CardDetail from "../CardDetail/CardDetail";
+//import { getFlightsInfo } from "../../Redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
   const dispatch = useDispatch();
   const flights = useSelector((state) => state.allFlights);
 
-  let handleInputChange = (e) => {
-    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  // let handleInputChange = (e) => {
+  //   setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  // };
 
   const [input, setInput] = useState({
     fly_from: "",
@@ -23,14 +23,15 @@ export default function Home() {
     dateTo: "",
   });
 
-  function handleClick(e) {
-    e.preventDefault();
-    dispatch(getFlightsInfo(input));
-  }
+  // function handleClick(e) {
+  //   e.preventDefault();
+  //   dispatch(getFlightsInfo(input));
+  // }
 
   return (
-    <div>
-      <input
+    <div className={styles.containerGeneral}>
+      <SearchBar />
+      {/* <input
         value={input.fly_from}
         placeholder="origen"
         onChange={handleInputChange}
@@ -60,62 +61,61 @@ export default function Home() {
       />
       <button type="submit" onClick={handleClick}>
         Submit
-      </button>
-
-      {flights.data ? (
-        flights.data.map((f) => {
-          return (
-            <div key={f.id} className={styles.home}>
-              <div className={styles.container}>
-                <div className={styles.flex}>
-                  <ConnectingAirportsOutlinedIcon color="success" />
-                  <h2>DeViaje.com</h2>
-                </div>
-                <div className={styles.container_departure}>
+      </button> */}
+      <div className={styles.containerFlights}>
+        {flights.data ? (
+          flights.data.map((f) => {
+            return (
+              <div key={f.id} className={styles.home}>
+                <div className={styles.container}>
                   <div className={styles.flex}>
-                    <IoIosAirplane />
-                    <h4>IDA</h4>
-                    <h4 className={styles.padding_left}>{f.cityFrom} -</h4>
-                    <h4 className={styles.padding_left}>{f.cityTo}</h4>
+                    <ConnectingAirportsOutlinedIcon color="success" />
+                    <h2>DeViaje.com</h2>
                   </div>
-                  <div>
-                    <h4>{f.local_departure.slice(0, 10)}</h4>
+                  <div className={styles.container_departure}>
+                    <div className={styles.flex}>
+                      <IoIosAirplane />
+                      <h4>IDA</h4>
+                      <h4 className={styles.padding_left}>{f.cityFrom} -</h4>
+                      <h4 className={styles.padding_left}>{f.cityTo}</h4>
+                    </div>
+                    <div>
+                      <h4>{f.local_departure.slice(0, 10)}</h4>
+                    </div>
+                    <div className={styles.flex}>
+                      <h4>{f.local_departure.slice(11, 16)}</h4>
+                      <h4 className={styles.padding_left}>
+                        {f.has_airport_change ? (
+                          <p>Directo</p>
+                        ) : (
+                          <p>Con escala</p>
+                        )}
+                      </h4>
+                    </div>
                   </div>
-                  <div className={styles.flex}>
-                    <h4>{f.local_departure.slice(11, 16)}</h4>
-                    <h4 className={styles.padding_left}>
-                      {f.has_airport_change ? (
-                        <p>Directo</p>
-                      ) : (
-                        <p>Con escala</p>
-                      )}
-                    </h4>
+                  <LuggageIcon />
+                  <div className={styles.price}>
+                    <h3>Price</h3>
+                    <div className={styles.flex}>
+                      <h6>{flights.currency}</h6>
+                      <h4 className={styles.padding_left}>{f.price}</h4>
+                    </div>
                   </div>
                 </div>
-                <LuggageIcon />
-                <div className={styles.price}>
-                  <h3>Precio</h3>
-                  <div className={styles.flex}>
-                    <h6>{flights.currency}</h6>
-                    <h4 className={styles.padding_left}>{f.price}</h4>
-                  </div>
-                </div>
+                {/* <CardDetail
+                  cityfrom={f.cityfrom}
+                  cityTo={f.cityTo}
+                  local_departure={f.local_departure}
+                  price={f.price}
+                  currency={f.currency}
+                /> */}
               </div>
-              <CardDetail
-                cityfrom={f.cityfrom}
-                cityTo={f.cityTo}
-                local_departure={f.local_departure}
-                price={f.price}
-                currency={f.currency}
-              />
-            </div>
-          );
-        })
-      ) : (
-        <h1>Nothing to render</h1>
-      )}
-
-      <SearchBar />
+            );
+          })
+        ) : (
+          <h1>Nothing to render</h1>
+        )}
+      </div>
     </div>
   );
 }

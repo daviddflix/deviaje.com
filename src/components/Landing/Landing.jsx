@@ -12,7 +12,7 @@ function Landing() {
       </div>
       <div className={s.fondo}>
         <h1 className={s.titulo}>
-          Welcome to <span className={s.url}>deviaje.com</span>
+          Welcome to <span className={s.url}> deviaje.com</span>
         </h1>
         <div className={s.flex}>
           <input
