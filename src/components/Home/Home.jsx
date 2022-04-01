@@ -7,6 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 //import CardDetail from "../CardDetail/CardDetail";
 //import { getFlightsInfo } from "../../Redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
+import Filter from "../Filter/Filter";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -28,10 +29,14 @@ export default function Home() {
   //   dispatch(getFlightsInfo(input));
   // }
 
+  //console.log(flights.data[0].has_airport_change)
+
   return (
     <div className={styles.containerGeneral}>
-      <SearchBar />
-
+      <div className={styles.containerSearch}>
+        <SearchBar />
+        <Filter />
+      </div>
       <div className={styles.containerFlights}>
         {flights.data ? (
           flights.data.map((f) => {

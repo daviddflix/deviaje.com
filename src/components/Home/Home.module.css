@@ -2,7 +2,7 @@
   border:solid #00000069 1px;
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: auto;
   height: 200px;
    margin-top: 0.5rem;
   border-radius: 5px;
@@ -29,6 +29,12 @@
     grid-template-columns: 1fr 2fr;
     background-color: #9AD0EC;
   }
+
+  .containerSearch{
+    
+    display: flex;
+    flex-direction: column;
+  }
 .container_departure{
   display: flex;
   flex-direction: column;  
@@ -52,6 +58,16 @@
 
 .padding_left{
   padding-left: 0.4rem;
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.grid{
+  display: flex;
+  flex-direction: row;
 }
 
 
