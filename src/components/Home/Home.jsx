@@ -4,8 +4,6 @@ import LuggageIcon from "@mui/icons-material/Luggage";
 import ConnectingAirportsOutlinedIcon from "@mui/icons-material/ConnectingAirportsOutlined";
 import { IoIosAirplane } from "react-icons/io";
 import SearchBar from "../SearchBar/SearchBar";
-//import CardDetail from "../CardDetail/CardDetail";
-//import { getFlightsInfo } from "../../Redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Filter from "../Filter/Filter";
 
@@ -13,23 +11,12 @@ export default function Home() {
   const dispatch = useDispatch();
   const flights = useSelector((state) => state.allFlights);
 
-  // let handleInputChange = (e) => {
-  //   setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  // };
-
   const [input, setInput] = useState({
     fly_from: "",
     fly_to: "",
     dateFrom: "",
     dateTo: "",
   });
-
-  // function handleClick(e) {
-  //   e.preventDefault();
-  //   dispatch(getFlightsInfo(input));
-  // }
-
-  //console.log(flights.data[0].has_airport_change)
 
   return (
     <div className={styles.containerGeneral}>
@@ -77,13 +64,6 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                {/* <CardDetail
-                  cityfrom={f.cityfrom}
-                  cityTo={f.cityTo}
-                  local_departure={f.local_departure}
-                  price={f.price}
-                  currency={f.currency}
-                /> */}
               </div>
             );
           })
