@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './Nav.module.css'
+import axios from 'axios'
 
 const Nav = () => {
 
@@ -12,6 +13,13 @@ const Nav = () => {
                     <h2 className={styles.url}>deviaje.com</h2>
                 </span>
             </div>
+            <button style={{backgroundColor:'red', height:'50px', width:'50px'}} onClick={()=>{
+              axios.get('https://deviaje.herokuapp.com/')
+              .then(()=>alert('hay info'))
+              .catch(()=>alert('hubo un problema'))
+            }}>
+
+            </button>
             <div className = { styles.containerButton } >
                 <button
                     color='none'
