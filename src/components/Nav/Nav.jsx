@@ -4,6 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import styles from "./Nav.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const { isAuthenticated, user, loginWithPopup, logout } = useAuth0();
@@ -34,9 +35,11 @@ const Nav = () => {
           }}
         >
           <div className="navbar-brand-box" style={{ background: "#FDFEFE" }}>
-            <span className={styles.containerTitle}>
-              <h2 className={styles.url}>deviaje.com</h2>
-            </span>
+            <Link to="/" style={{textDecoration: "none"}}>
+              <span className={styles.containerTitle}>
+                <h2 className={styles.url}>flyXworld</h2>
+              </span>
+            </Link>
           </div>
 
           <div className={styles.containerButton}>

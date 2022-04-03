@@ -4,7 +4,7 @@ import s from "./SearchBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getFlightsInfo } from "../../Redux/actions/actions";
 
-function SearchBar() {
+function SearchBar( { setShowLoading } ) {
   const dispatch = useDispatch();
   const flights = useSelector((state) => state.allFlights);
 
@@ -22,7 +22,9 @@ function SearchBar() {
   function handleClick(e) {
     e.preventDefault();
     dispatch(getFlightsInfo(input));
+    setShowLoading( true )
   }
+  
   return (
     <div className={s.display}>
       <div className={s.flights}>Flights</div>
