@@ -5,6 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { IoIosAirplane } from "react-icons/io";
 import SearchBar from "../SearchBar/SearchBar";
 import { useSelector } from "react-redux";
+
 import Filter from "../Filter/Filter";
 import { ModalDetails } from '../modalDetails/ModalDetails';
 import Popup from 'reactjs-popup';

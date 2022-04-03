@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:4001/";
+axios.defaults.baseURL = "http://localhost:4001";
 
 export const axiosWithOutToken = async (endpoint, data, method = "GET") => {
    if (method === "GET") {

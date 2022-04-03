@@ -30,7 +30,7 @@ function SearchBar( { setShowLoading } ) {
       <div className={s.flights}>Flights</div>
       <input
         value={input.fly_from}
-        placeholder="origen"
+        placeholder="Enter departure city"
         onChange={handleInputChange}
         name="fly_from"
         className={s.input}
@@ -38,7 +38,7 @@ function SearchBar( { setShowLoading } ) {
 
       <input
         value={input.fly_to}
-        placeholder="destino"
+        placeholder="Enter destination city"
         onChange={handleInputChange}
         name="fly_to"
         className={s.input}
@@ -50,7 +50,7 @@ function SearchBar( { setShowLoading } ) {
           type="date"
           onChange={handleInputChange}
           name="dateFrom"
-          placeholder="Fecha salida"
+          placeholder="dd-mm-yyyy"
         />
         <input
           className={s.date}
@@ -58,7 +58,7 @@ function SearchBar( { setShowLoading } ) {
           value={input.dateTo}
           onChange={handleInputChange}
           name="dateTo"
-          placeholder="Fecha llegada"
+          placeholder="dd-mm-yyyy"
         />
       </div>
       <button className={s.btn} type="submit" onClick={handleClick}>

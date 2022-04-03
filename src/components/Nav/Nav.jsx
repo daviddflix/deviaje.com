@@ -6,6 +6,11 @@ import styles from "./Nav.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
+import axios from 'axios'
+import { axiosWithOutToken } from '../../services/axios'
+
+//axios.defaults.baseURL = 'http://localhost:3001/api'
+
 const Nav = () => {
   const { isAuthenticated, user, loginWithPopup, logout } = useAuth0();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,6 +25,12 @@ const Nav = () => {
   const handleClickLogout = () => {
     logout();
   };
+
+  let auth0User = async () => {
+    const userpost = await axiosWithOutToken('/postUser', user, 'post')
+    console.log(userpost.data)
+    return userpost.data
+  }
 
   return (
     <header className="header-container-general">
@@ -43,7 +54,7 @@ const Nav = () => {
           </div>
 
           <div className={styles.containerButton}>
-            {isAuthenticated === true ? (
+            {isAuthenticated && auth0User() ? (
               <div>
                 <Button
                   id="basic-button"
