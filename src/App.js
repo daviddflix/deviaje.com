@@ -4,6 +4,7 @@ import Landing from "./components/Landing/Landing.jsx";
 import { Switch, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
+import FlightDetail from "./components/FlightDetail/FlightDetail";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         </Route>
         <Route exact path="/home">
           <Home />
+        </Route>
+        <Route exact path='/:id'>
+          <FlightDetail />
         </Route>
       </Switch>
     </div>
