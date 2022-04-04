@@ -25,6 +25,7 @@ export default function Home() {
   const handleDetails = () => {
     setShowDetails( true )
   }
+  
   //homeeeeeee
   return (
     <div className={styles.containerGeneral}>
