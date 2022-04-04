@@ -4,6 +4,7 @@
     flex-Direction: column;
     justify-content: center;
     align-items: center;
+    margin-right: 10rem;
 }
 .subTitle {
     font-weight: bold;
