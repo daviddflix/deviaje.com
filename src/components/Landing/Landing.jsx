@@ -1,16 +1,18 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getFlightsInfo } from "../../Redux/actions/actions";
 import s from "./Landing.module.css";
 import validate from './utils/validate';
+import { Modal } from '../../components/modal/index'
 
 function Landing() {
 
   const dispatch = useDispatch()
 
   const history = useHistory()
+  const modalErr = useSelector((state) => state.modalErr)
 
   const [input, setInput] = useState({
     fly_from: "",
@@ -32,9 +34,10 @@ function Landing() {
     }))
   }
 
-  const handleClick = e => {
+  const handleClick = async (e) => {
     e.preventDefault()
-    dispatch(getFlightsInfo(input))
+    const res =  await dispatch(getFlightsInfo(input))
+    if( res.payload === true ){ return }
     history.push('/home')
   }
 
@@ -44,6 +47,9 @@ function Landing() {
         <h1 className={s.titulo}>
           Welcome to <span className={s.url}>deviaje.com</span>
         </h1>
+        {
+          modalErr && <Modal title='No flights found' /> 
+        }
         <div className={s.flex}>
           <div className={s.boxErrors}>
             <input
