@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
@@ -24,11 +24,23 @@ const Nav = () => {
     logout()
   }
 
-  let auth0User = async () => {
-    const userpost = await axiosWithOutToken('/postUser', user, 'post')
-    console.log(userpost.data)
-    return userpost.data
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      axiosWithOutToken('/postUser', user, 'post')
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }, [isAuthenticated])
+
+  // let auth0User = async () => {
+  //   const userpost = await axiosWithOutToken('/postUser', user, 'post')
+  //   console.log(userpost.data)
+  //   return userpost.data
+  // }
 
   return (
     <header className='header-container-general'>
@@ -52,7 +64,7 @@ const Nav = () => {
           </div>
 
           <div className={styles.containerButton}>
-            {isAuthenticated && auth0User() ? (
+            {isAuthenticated ? (
               <div>
                 <Button
                   id='basic-button'
