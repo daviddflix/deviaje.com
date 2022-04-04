@@ -15,7 +15,7 @@ import { Loading } from "../loading/Loading";
 export default function Home() {
   
   const flights = useSelector((state) => state.allFlights);
-  console.log(flights.data)
+  console.log(flights)
 
   const [ showDetails, setShowDetails ] = useState( false )
   const [ showLoading, setShowLoading ] = useState( false )
@@ -31,7 +31,7 @@ export default function Home() {
     }
       <div className={styles.containerSearch}>
         <SearchBar setShowLoading = { setShowLoading } />
-        <Filter />
+        <Filter setShowLoading = { setShowLoading } />
       </div>
       <div className={styles.containerFlights}>
         {

@@ -6,13 +6,21 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Checkbox from '@mui/material/Checkbox';
 import s from './Filter.module.css';
+import { stopsFilter } from '../../Redux/actions/actions';
+import {useDispatch} from 'react-redux'
 
 
-function Filter() {
-    const [value, setValue] = useState([20, 200]);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+function Filter( ) {
+
+    
+    const dispatch = useDispatch()
+ 
+
+ const handleStops = (e) => {
+        e.preventDefault();  
+      dispatch(stopsFilter(e.target.value))
+    }
+
     return (
         <div className={s.filters}>
             <Accordion>
@@ -29,14 +37,14 @@ function Filter() {
                             <Checkbox />
                             Carry-on baggage
                         </div>
-                        <div className={s.description}>
+                        <div  className={s.description}>
                             <Checkbox />
-                            Checked baggage
+                         Price
                         </div>
                     </div>
-
                 </AccordionDetails>
             </Accordion>
+           
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -46,18 +54,21 @@ function Filter() {
                     <Typography>Stops</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className={s.details}>
-                        <div className={s.description}>
-                            <Checkbox />
-                            0 stops
-                        </div>
-                        <div className={s.description}>
-                            <Checkbox />
-                            1 or more
-                        </div>
-                    </div>
+                <div >
+                <input type="checkbox" value='direct' id='direct' onChange={handleStops}/>
+                <label htmlFor="direct">Direct</label>
+                </div>
+                <div >
+                <input type="checkbox" value='1'  onChange={handleStops}/>
+                <label >1 Stop</label>
+                </div>
+                <div >
+                <input type="checkbox" value='2'  onChange={handleStops}/>
+                <label >2 Stop</label>
+                </div>
                 </AccordionDetails>
             </Accordion>
+            
         </div>
     );
 }

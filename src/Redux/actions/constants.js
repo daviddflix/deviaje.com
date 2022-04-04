@@ -1,1 +1,2 @@
 export const GET_FLIGHTS_INFO = "GETFLIGHTSINFO";
+export const STOP_FILTER = "STOP_FILTER";

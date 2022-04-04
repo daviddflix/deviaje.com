@@ -1,4 +1,4 @@
-import { GET_FLIGHTS_INFO } from "./constants";
+import { GET_FLIGHTS_INFO, STOP_FILTER } from "./constants";
 import { axiosWithOutToken } from '../../services/axios'
 
 export const getFlightsInfo = (payload) => {
@@ -22,3 +22,10 @@ export const getFlightsInfo = (payload) => {
     }
   };
 };
+
+export function stopsFilter (value){
+  return{
+      type: STOP_FILTER,
+      payload: value
+  }
+}
