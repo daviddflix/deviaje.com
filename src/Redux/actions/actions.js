@@ -1,26 +1,28 @@
-import { GET_FLIGHTS_INFO, STOP_FILTER } from "./constants";
+import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND, STOP_FILTER  } from "./constants";
 import { axiosWithOutToken } from '../../services/axios'
 
 export const getFlightsInfo = (payload) => {
-  const url = "http://localhost:4001";
 
   return async (dispatch) => {
     let fechaModificada = payload.dateFrom.split("-").reverse().join("/");
     let fechaModificada2 = payload.dateTo.split("-").reverse().join("/");
 
     try {
-       const response = await axiosWithOutToken(
-          `${url}/getflightspost?fly_from=${payload.fly_from}&fly_to=${payload.fly_to}&date_from=${fechaModificada}&date_to=${fechaModificada2}`
-        );
-  
-      return dispatch({
-        type: GET_FLIGHTS_INFO,
-        payload: response.data,
-      });
+        const response = await axiosWithOutToken(
+            `/getflights?fly_from=${payload.fly_from}&fly_to=${payload.fly_to}&date_from=${fechaModificada}&date_to=${fechaModificada2}`
+        )
+        return dispatch({
+            type: GET_FLIGHTS_INFO,
+            payload: response.data,
+        });  
     } catch ( err ) {
-      console.log( err.response );
-    }
-  };
+        console.log( err.response );
+        return dispatch({
+            type: FLIGHTS_NO_FOUND,
+            payload: true,
+        });
+      }
+    };
 };
 
 export function stopsFilter (value){
@@ -29,3 +31,9 @@ export function stopsFilter (value){
       payload: value
   }
 }
+export const hideModalErr = () => {
+  return {
+    type: FLIGHTS_NO_FOUND,
+    payload: false,
+  }
+} 
