@@ -46,7 +46,7 @@ const Nav = () => {
           <div className='navbar-brand-box' style={{ background: '#FDFEFE' }}>
             <Link to='/' style={{ textDecoration: 'none' }}>
               <span className={styles.containerTitle}>
-                <h2 className={styles.url}>flyXworld</h2>
+                <h2 className={styles.url}>deviaje.com</h2>
               </span>
             </Link>
           </div>
