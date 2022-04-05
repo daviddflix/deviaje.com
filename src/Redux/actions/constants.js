@@ -1,3 +1,6 @@
 export const GET_FLIGHTS_INFO = "GETFLIGHTSINFO";
 export const STOP_FILTER = "STOP_FILTER";
 export const FLIGHTS_NO_FOUND = "FLIGHTS_NO_FOUND";
+export const DATE_FILTER = "DATE_FILTER";
+export const PRICE_FILTER = "PRICE_FILTER";
+export const SCHEDULE_FILTER = "SCHEDULE_FILTER";

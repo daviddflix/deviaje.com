@@ -4,6 +4,7 @@ import Landing from "./components/Landing/Landing.jsx";
 import { Switch, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
+import { Footer } from "./components/Footer/footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Home />
         </Route>
       </Switch>
+      <Footer/>
     </div>
   );
 }

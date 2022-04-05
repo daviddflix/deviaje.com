@@ -1,4 +1,4 @@
-import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER } from "../actions/constants";
+import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, DATE_FILTER, PRICE_FILTER } from "../actions/constants";
 
 const initialState = {
   flights: [],
@@ -7,19 +7,19 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  console.log(action)
+  
   switch (action.type) {
 
     case GET_FLIGHTS_INFO:
       return {
         ...state,
         flights: action.payload,
-        allFlights: action.payload
+        allFlights: action.payload.data
       };
 
       case STOP_FILTER:
         console.log(action.payload)
-        const filtered = action.payload === 'direct'? state.flights.data.filter(p => {
+        let filterStops = action.payload === 'direct'? state.flights.data.filter(p => {
            return p.route.length === 1
         }) : state.flights.data.filter(p => {
           if(action.payload === '1'){
@@ -30,19 +30,49 @@ export default function reducer(state = initialState, action) {
        })
         return {
           ...state,
-          allFlights: filtered,
+          allFlights: filterStops,
           
         };
-  
+        case DATE_FILTER:
+          const filterDate = action.payload === 'date'? state.flights.data.sort((a,b) => (a.local_departure > b.local_departure ? 1 : -1)): state.flights.sort((a, b) => (a.local_departure > b.local_departure ? -1 : 1))
+          return{
+            ...state,
+            allFlights: filterDate,
+          }
+          case PRICE_FILTER:
+          const filterPrice =  state.flights.data.filter(p =>  (p.price * 1.8).toFixed() <= action.payload)
+          return{
+            ...state,
+            allFlights: filterPrice,
+          };
 
-    case FLIGHTS_NO_FOUND:
-      return {
-        ...state,
-        flights: [],
-        allFlights: [],
-        modalErr: action.payload
-      }
-    default:
-      return state;
+          // case SCHEDULE_FILTER:
+          // const filterSchedule = action.payload === 'day'? state.flights.data.filter(p =>  {
+          //   // console.log(parseInt(p.local_departure.slice(12,13)))
+          //   // if(p.local_departure.slice(12,13) <= 17 ){
+          //   //   return p
+          //   // }
+          //   for (let i = 0; i < state.flights.data.length; i++) {
+          //     if(state.flights.data[i].local_departure <= 17){
+          //       return p
+          //     }
+          //     console.log(parseInt(state.flights.data[i].local_departure.slice(0,1)))              
+          //   }
+          // })
+          //  :  state.flights.data.filter(p =>  parseInt(p.local_departure.substring(12,13)) >= '18')
+          // return{
+          //   ...state,
+          //   allFlights: filterSchedule,
+          // }
+
+       case FLIGHTS_NO_FOUND:
+        return {
+          ...state,
+          flights: [],
+          allFlights: [],
+          modalErr: action.payload
+        }
+      default:
+        return state;
   }
 }

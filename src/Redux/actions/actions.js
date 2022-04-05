@@ -1,4 +1,4 @@
-import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND, STOP_FILTER  } from "./constants";
+import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, PRICE_FILTER, SCHEDULE_FILTER  } from "./constants";
 import { axiosWithOutToken } from '../../services/axios'
 
 export const getFlightsInfo = (payload) => {
@@ -37,3 +37,26 @@ export const hideModalErr = () => {
     payload: false,
   }
 } 
+
+export const dateFilter = (value) => {
+  return {
+    type: DATE_FILTER,
+    payload: value
+  }
+} 
+
+export const priceFilter = (value) => {
+  return {
+    type: PRICE_FILTER,
+    payload: value
+  }
+} 
+
+export const scheduleFilter = (value) => {
+  return {
+    type: SCHEDULE_FILTER,
+    payload: value
+  }
+} 
+
+

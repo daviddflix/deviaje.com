@@ -12,15 +12,29 @@ import Popup from 'reactjs-popup';
 import { CardScaleDetails } from "./CardScaleDetails";
 import { Loading } from "../loading/Loading";
 import { Modal } from "../modal";
+import { Paginado } from "../Paginado/paginado";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { Footer } from "../Footer/footer";
 
 export default function Home() {
   
   const flights = useSelector((state) => state.allFlights);
   const modalErr = useSelector((state) => state.modalErr);
-  console.log(flights.data)
+  console.log(flights)
 
   const [ showDetails, setShowDetails ] = useState( false )
   const [ showLoading, setShowLoading ] = useState( false )
+
+  let [currentPage, setcurrentPage] = useState(1);
+  const [flightsPerPage, setFlightsPerPage] = useState(10)
+  const indexOfLastFlight = currentPage * flightsPerPage; // 10
+  const indexOfFirstFlight = indexOfLastFlight - flightsPerPage // 10 - 10 = 0 
+  const currentFlights = flights.slice(indexOfFirstFlight, indexOfLastFlight)
+  
+  const pagination = (pageNumber) => {
+    setcurrentPage(pageNumber)
+  }
  
 
   const handleDetails = () => {
@@ -28,7 +42,9 @@ export default function Home() {
   }
   
   return (
+   
     <div className={styles.containerGeneral}>
+     
     {
       showDetails && <ModalDetails  setShowDetails = {setShowDetails} />
     }
@@ -41,8 +57,8 @@ export default function Home() {
       </div>
       <div className={styles.containerFlights}>
         {
-          flights.data ?
-          flights.data.map((f) => 
+          currentFlights ?
+          currentFlights.map((f) => 
             (
               <div key={f.id} className={styles.containerPrincipal} >
                 <div className={styles.home}>
@@ -107,6 +123,12 @@ export default function Home() {
         ) 
           : showLoading && <Loading />
         }
+         <Paginado
+    flightsPerPage={flightsPerPage}
+    flights={flights.length}
+    pagination={pagination}
+    />
+   
       </div>
   </div>
   );

@@ -1,0 +1,23 @@
+.buttonList{
+    display: inline-flex;
+    margin: 4px;
+    list-style: none;
+    position: relative;
+    left: 9rem;
+    
+    
+ }
+ 
+ .button{
+     padding: 10px;
+     border: none;
+     border-radius: 60%;
+ }
+ 
+ .button:hover{
+     background-color: #664aff;
+ }
+
+
+
+

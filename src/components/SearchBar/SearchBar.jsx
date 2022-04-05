@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import s from "./SearchBar.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getFlightsInfo } from "../../Redux/actions/actions";
 import validate from '../Landing/utils/validate'
 
 function SearchBar( { setShowLoading } ) {
   const dispatch = useDispatch();
-  const flights = useSelector((state) => state.allFlights);
+  // const flights = useSelector((state) => state.allFlights);
 
   let handleInputChange = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));

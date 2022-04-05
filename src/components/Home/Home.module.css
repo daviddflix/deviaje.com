@@ -37,6 +37,8 @@
   grid-template-columns: 1fr 2fr;
   background-color: #9AD0EC;
 }
+
+
 .containerSearch{    
   display: flex;
   flex-direction: column;
