@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
@@ -6,7 +6,7 @@ import styles from "./Nav.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
-import axios from 'axios'
+//import axios from 'axios'
 import { axiosWithOutToken } from '../../services/axios'
 
 //axios.defaults.baseURL = 'http://localhost:3001/api'
@@ -26,11 +26,23 @@ const Nav = () => {
     logout();
   };
 
-  let auth0User = async () => {
-    const userpost = await axiosWithOutToken('/postUser', user, 'post')
-    console.log(userpost.data)
-    return userpost.data
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      axiosWithOutToken('/postUser', user, 'post')
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
+    }
+  }, [isAuthenticated])
+
+  // let auth0User = async () => {
+  //   const userpost = await axiosWithOutToken('/postUser', user, 'post')
+  //   console.log(userpost.data)
+  //   return userpost.data
+  // }
 
   return (
     <header className="header-container-general">
@@ -54,7 +66,7 @@ const Nav = () => {
           </div>
 
           <div className={styles.containerButton}>
-            {isAuthenticated && auth0User() ? (
+            {isAuthenticated  ? (
               <div>
                 <Button
                   id="basic-button"

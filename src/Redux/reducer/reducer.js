@@ -12,8 +12,8 @@ export default function reducer(state = initialState, action) {
     case GET_FLIGHTS_INFO:
       return {
         ...state,
-        flights: action.payload,
-        allFlights: action.payload
+        flights: action.payload.data,
+        allFlights: action.payload.data
       };
     case FLIGHTS_NO_FOUND:
       return {

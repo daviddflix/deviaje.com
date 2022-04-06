@@ -1,6 +1,6 @@
 .display{
-    width: 300px;
-    height: 320px;
+    width: 315px;
+    height: 330px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -9,7 +9,8 @@
     padding: 15px;
     /* background-color: #0a66c2; */
     border: #F8F9F9;
-    background-color: #CACFD2;
+    /* background-color: #dbe6e6; */
+    background-color: #AAB7B8;
     border-radius: 8px;
 }
 
@@ -17,10 +18,10 @@
     font-size: 1.5rem;
     font-weight: bolder;
     letter-spacing: 1.5px;
-    color: #6e7172;
-    font-family: 'Roboto Mono', monospace;
+    color: #17202A;
+    font-family: 'Roboto Condensed', sans-serif;
     font-weight: 900;
-    background-color: #D6EAF8;
+    background-color: #FDFEFE;
     padding: 10px;
     border-bottom-right-radius: 2rem;
     border-top-left-radius: 1rem;
@@ -30,36 +31,36 @@
 
 .input{
     height: 40px;
-    padding: 5px;
+    padding: 10px;
     outline: none;
     border-radius: 6px;
     border: none;
     background-color: #FDFEFE;
     color: #0c0c0c;
     font-weight: 900;
-    font-size:.9rem;
-    font-family: 'Roboto Mono', monospace;
+    font-size:1rem;
+    font-family: 'Roboto Condensed', sans-serif;
     margin-bottom: 1.2rem;
 }
 .input::placeholder{
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Roboto Condensed', sans-serif;
     color: #6e7172;
     font-weight: 900;
-    font-size:.8rem;
+    font-size:1rem;
 }
 
 .dates{
-    position: relative;
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    gap:5px;
+    justify-content:space-between; 
     margin-bottom: 5rem;
 }
 
 .date{
     height: 40px;
-    padding: 5px;
-    margin: 0 2px;
+    /* padding: 5px;
+    margin: 0 2px; */
     outline: none;
     border-radius: 6px;
     border: none;
@@ -84,7 +85,7 @@
     font-size: 15px;
     cursor: pointer;
     position: absolute;
-    top:22.5rem;
+    top:23.7rem;
 }
 .btn:hover{
     background-color: #84badf;
