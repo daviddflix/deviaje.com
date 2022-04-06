@@ -1,0 +1,2 @@
+export const GET_FLIGHTS_INFO = "GETFLIGHTSINFO";
+export const FLIGHTS_NO_FOUND = "FLIGHTS_NO_FOUND";
