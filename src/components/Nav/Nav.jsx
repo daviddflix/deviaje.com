@@ -1,4 +1,5 @@
 import React from "react";
+import {useHistory} from 'react-router-dom'
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
@@ -6,12 +7,13 @@ import styles from "./Nav.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
-import axios from 'axios'
+//import axios from 'axios'
 import { axiosWithOutToken } from '../../services/axios'
 
 //axios.defaults.baseURL = 'http://localhost:3001/api'
 
 const Nav = () => {
+  const history = useHistory();
   const { isAuthenticated, user, loginWithPopup, logout } = useAuth0();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -21,6 +23,10 @@ const Nav = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+const handleForm = ()=> {
+  history.push('/userconfig')
+}
 
   const handleClickLogout = () => {
     logout();
@@ -75,7 +81,7 @@ const Nav = () => {
                   }}
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={handleForm}>Settings</MenuItem>
                   <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
                 </Menu>
               </div>
