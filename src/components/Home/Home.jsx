@@ -12,6 +12,7 @@ import Popup from 'reactjs-popup';
 import { CardScaleDetails } from "./CardScaleDetails";
 import { Loading } from "../loading/Loading";
 import { Modal } from "../modal";
+import { Link } from "@mui/material";
 
 export default function Home() {
 
@@ -99,7 +100,11 @@ export default function Home() {
                      <div style={{marginTop:'-7rem'}}>       
                       <h4 className={styles.taxes}>Taxes-rates: {flights.currency} <span>{(f.price * .8).toFixed()}</span></h4>
                       <h4 className={styles.finalPrice}>Final Price: {flights.currency} <span style={{fontSize:'17px', color:'#000'}}>{(f.price * 1.8).toFixed()}</span></h4>
-                      <button className={styles.buttonBuy}>Buy</button>
+                      
+                      <Link to={`/${f.id}`}>
+                        <button className={styles.buttonBuy}>Buy</button>
+                      </Link>
+                      
                     </div>
                 </div>
             </div>

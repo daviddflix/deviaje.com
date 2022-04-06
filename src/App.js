@@ -5,6 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
 import FlightDetail from "./components/FlightDetail/FlightDetail";
+import SuccessPayment from "./components/SuccessPayment/SuccessPayment";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route exact path='/:id'>
           <FlightDetail />
+        </Route>
+        <Route exact path='/success'>
+          <SuccessPayment />
         </Route>
       </Switch>
     </div>
