@@ -8,6 +8,7 @@ import validate from '../Landing/utils/validate'
 function SearchBar( { setShowLoading } ) {
   const dispatch = useDispatch();
   // const flights = useSelector((state) => state.allFlights);
+  
 
   let handleInputChange = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -33,12 +34,6 @@ function SearchBar( { setShowLoading } ) {
       setShowLoading( true )  
         dispatch(getFlightsInfo(input));
       setShowLoading( false )
-      setInput({
-        fly_from: "",
-        fly_to: "",
-        dateFrom: "",
-        dateTo: "",
-      })
     }
     
   }
