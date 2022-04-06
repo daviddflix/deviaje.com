@@ -26,6 +26,7 @@ export default function Home() {
     setShowDetails( true )
   }
   
+  //homeeeeeee
   return (
     <div className={styles.containerGeneral}>
     {
