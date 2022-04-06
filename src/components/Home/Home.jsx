@@ -11,15 +11,32 @@ import Popup from 'reactjs-popup';
 import { CardScaleDetails } from "./CardScaleDetails";
 import { Loading } from "../loading/Loading";
 import { Modal } from "../modal";
+import { Paginado } from "../Paginado/paginado";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { Footer } from "../Footer/footer";
 
 export default function Home() {
   
   const flights = useSelector((state) => state.allFlights);
   const modalErr = useSelector((state) => state.modalErr);
+  console.log(flights)
 
   const [ showDetails, setShowDetails ] = useState( false )
   const [ showLoading, setShowLoading ] = useState( false )
   const [ idDetails, setIdDetails ] = useState()
+
+  let [currentPage, setcurrentPage] = useState(1);
+  const [flightsPerPage, setFlightsPerPage] = useState(10)
+  const indexOfLastFlight = currentPage * flightsPerPage; // 10
+  const indexOfFirstFlight = indexOfLastFlight - flightsPerPage // 10 - 10 = 0 
+  const currentFlights = flights.slice(indexOfFirstFlight, indexOfLastFlight)
+  
+  const pagination = (pageNumber) => {
+    setcurrentPage(pageNumber)
+  }
+ 
+
 
   const handleDetails = ( id ) => {
     setIdDetails( flights.find( el =>  el.id === id ) ) 
@@ -28,7 +45,9 @@ export default function Home() {
   
   //homeeeeeee
   return (
+   
     <div className={styles.containerGeneral}>
+     
     {
       showDetails && <ModalDetails  idDetails = { idDetails } setShowDetails = {setShowDetails} />
     }
@@ -37,15 +56,12 @@ export default function Home() {
     }
       <div className={styles.containerSearch}>
         <SearchBar setShowLoading = { setShowLoading } />
-        <Filter />
+        <Filter setShowLoading = { setShowLoading } />
       </div>
       <div className={styles.containerFlights}>
         {
-          showLoading && <div style={{marginBottom:'100%'}} ><Loading /></div> 
-        }
-        {
-          flights &&
-          flights.map((f) => 
+         
+          currentFlights?.map((f) => 
             (
               <div key={f.id} className={styles.containerPrincipal} >
                 <div className={styles.home}>
@@ -70,11 +86,11 @@ export default function Home() {
                         <div style={{display: 'flex', flex:'20%', justifyContent:'right'}}>  
                           <h4 className={styles.padding_left}>
                             { f.route.length === 1 ? 
-                            <p style={{}}>non-stop</p>
+                            <p style={{}}>Non-Stop</p>
                             : 
                               <Popup
                                 trigger={  <p style={{cursor: 'pointer'}}>
-                                {f.route.length > 2 ? (f.route.length - 1) + ' scales' : (f.route.length - 1) + ' stop'}</p> }
+                                {f.route.length > 2 ? (f.route.length - 1) + ' scales' : (f.route.length - 1) + ' Stop'}</p> }
                                 position='top center'
                                 on={['hover', 'focus']}
                               >
@@ -109,6 +125,12 @@ export default function Home() {
           )
         ) 
         }
+         <Paginado
+    flightsPerPage={flightsPerPage}
+    flights={flights.length}
+    pagination={pagination}
+    />
+   
       </div>
   </div>
   );

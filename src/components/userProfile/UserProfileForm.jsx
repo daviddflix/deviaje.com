@@ -35,12 +35,12 @@ const UserProfileForm = () =>  {
   })
 }
 
-function handleSubmit(e){
-  e.prevent.default;
-  if(form.dni < 1 || form.age < 1 || form.phone < 1 || !form.state || !form.city || form.zip < 1){
+// function handleSubmit(e){
+//   e.prevent.default;
+//   if(form.dni < 1 || form.age < 1 || form.phone < 1 || !form.state || !form.city || form.zip < 1){
     
-  }
-}
+//   }
+// }
 
 
 

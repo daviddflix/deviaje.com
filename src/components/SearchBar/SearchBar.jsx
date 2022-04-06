@@ -7,7 +7,8 @@ import validate from '../Landing/utils/validate'
 
 function SearchBar( { setShowLoading } ) {
   const dispatch = useDispatch();
-  //const flights = useSelector((state) => state.allFlights);
+  // const flights = useSelector((state) => state.allFlights);
+  
 
   let handleInputChange = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -31,7 +32,7 @@ function SearchBar( { setShowLoading } ) {
     setError( validate( input ))
     if( Object.keys( validate( input )).length === 0 ){
       setShowLoading( true )  
-      await dispatch(getFlightsInfo(input));
+        dispatch(getFlightsInfo(input));
       setShowLoading( false )
     }
     
