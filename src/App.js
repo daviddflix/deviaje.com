@@ -4,6 +4,8 @@ import Landing from "./components/Landing/Landing.jsx";
 import { Switch, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
+//import UserProfile from "./components/userProfile/UserProfile";
+import UserProfileForm from "./components/userProfile/UserProfileForm";
 
 function App() {
   return (
@@ -16,6 +18,10 @@ function App() {
         <Route exact path="/home">
           <Home />
         </Route>
+        <Route exact path="/userconfig">
+          <UserProfileForm />
+        </Route>
+
       </Switch>
     </div>
   );

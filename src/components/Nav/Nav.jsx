@@ -1,22 +1,41 @@
-import React, { useEffect } from 'react'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import Button from '@mui/material/Button'
-import styles from './Nav.module.css'
-import { useAuth0 } from '@auth0/auth0-react'
-import { Link } from 'react-router-dom'
+
+import React from "react";
+import {useHistory} from 'react-router-dom'
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
+import styles from "./Nav.module.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
+
+//import axios from 'axios'
+
 import { axiosWithOutToken } from '../../services/axios'
 
 const Nav = () => {
+
+  const history = useHistory();
+  const { isAuthenticated, user, loginWithPopup, logout } = useAuth0();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   const { isAuthenticated, user, loginWithPopup, logout } = useAuth0()
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = event => {
     setAnchorEl(event.currentTarget)
   }
+  
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+const handleForm = ()=> {
+  history.push('/userconfig')
+}
 
   const handleClickLogout = () => {
     logout();
@@ -91,7 +110,7 @@ const Nav = () => {
                   }}
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={handleForm}>Settings</MenuItem>
                   <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
                 </Menu>
               </div>
