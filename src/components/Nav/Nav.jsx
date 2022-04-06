@@ -7,8 +7,6 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { Link } from 'react-router-dom'
 import { axiosWithOutToken } from '../../services/axios'
 
-//axios.defaults.baseURL = 'http://localhost:4001/api'
-
 const Nav = () => {
   const { isAuthenticated, user, loginWithPopup, logout } = useAuth0()
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -21,8 +19,20 @@ const Nav = () => {
   }
 
   const handleClickLogout = () => {
-    logout()
-  }
+    logout();
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      axiosWithOutToken('/postUser', user, 'post')
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
+    }
+  }, [isAuthenticated])
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -35,12 +45,6 @@ const Nav = () => {
         })
     }
   }, [isAuthenticated])
-
-  // let auth0User = async () => {
-  //   const userpost = await axiosWithOutToken('/postUser', user, 'post')
-  //   console.log(userpost.data)
-  //   return userpost.data
-  // }
 
   return (
     <header className='header-container-general'>
@@ -64,7 +68,9 @@ const Nav = () => {
           </div>
 
           <div className={styles.containerButton}>
+
             {isAuthenticated ? (
+
               <div>
                 <Button
                   id='basic-button'
