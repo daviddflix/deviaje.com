@@ -23,7 +23,7 @@ function Filter( ) {
        dispatch(stopsFilter(check))
          }
         
-     }, [dispatch, check])
+     }, [check])
     
     const handleDate = (e) => {
         e.preventDefault();  
@@ -34,17 +34,17 @@ function Filter( ) {
        if(price){
         dispatch(priceFilter(price))
        }
-   }, [dispatch, price])
+   }, [ price])
  
     let handleInputPrice = (e) => {
         setPrice(e.target.value);
       };
 
-      useEffect(()=> {
-          if(schedule){
-              dispatch(scheduleFilter(schedule))
-          }
-      }, [dispatch, schedule])
+    //   useEffect(()=> {
+    //       if(schedule){
+    //           dispatch(scheduleFilter(schedule))
+    //       }
+    //   }, [dispatch, schedule])
 
       let handleInputSchedule = (e) => {
         setSchedule(e.target.value);
