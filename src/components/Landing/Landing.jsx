@@ -7,6 +7,7 @@ import s from "./Landing.module.css";
 import validate from './utils/validate';
 import { Modal } from '../../components/modal/index'
 import { Loading } from "../loading/Loading";
+import { TopDestination } from "../TopDestinations/TopDestination";
 
 function Landing() {
 
@@ -123,6 +124,7 @@ function Landing() {
 
         </div>
       </div>
+      <TopDestination/>
     </>
   );
 }

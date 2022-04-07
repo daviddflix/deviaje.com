@@ -1,0 +1,18 @@
+.mainContainer{
+    display:flex;
+    justify-content: space-around;
+    margin: 2rem;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.offers{
+    display: flex;
+}
+
+.text{
+    width:400px
+}
