@@ -61,6 +61,7 @@ export default function reducer(state = initialState, action) {
           allFlights: [],
           modalErr: action.payload
         }
+
       default:
         return state;
   }

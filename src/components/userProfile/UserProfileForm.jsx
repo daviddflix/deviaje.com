@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import {isNumberValid, isTwoNumberValid} from './Validations'
+import {axiosWithOutToken} from '../../services/axios'
 
 
 
@@ -31,7 +32,7 @@ zip: '',
 genre: '',
 vaccinated: ''
 })
-const dispatch = useDispatch();
+//const dispatch = useDispatch();
 
 const [dniError, setDniError] = useState(false);
 const [dniErrorMsg, setDniErrorMsg] = useState('');
@@ -88,28 +89,37 @@ function handleChange(e) {
 
 
 function handleSubmit(e){
-  e.preventDefault();
-  //dispatch(nombreDeLaRuta(form))
-  setForm({
-    dni: '',
-  age: '',
-  phone: '',
-  country:'',
-  state: '',
-  city: '',
-  zip: '',
-  genre: '',
-  vaccinated: ''
-
-  });
-  <Alert severity="success">Form created successufully</Alert>
+  e.preventDefault();  
+  axiosWithOutToken('/updatepersonalinfo', form, 'POST')
+        .then(res => {
+          console.log(res.data)
+            setForm({
+              dni: '',
+              age: '',
+              phone: '',
+              country:'',
+              state: '',
+              city: '',
+              zip: '',
+              genre: '',
+              vaccinated: ''
+            
+              });
+              <Alert severity="success">Form created successufully</Alert>
+        })
+        .catch(err => {
+          console.log(err.response)
+          
+        })
+  
+}
 
 return (
 <div>
 
   <CssBaseline />
   <Typography variant="h4" align='center' gutterBottom component="div" sx={{m: 2}}>
-    DATOS PERSONALES
+    PERSONAL INFO
   </Typography>
 
   <Container maxWidth="xl" align='center'> 
@@ -250,7 +260,7 @@ return (
     
     <Box sx={{ '& button': { m: 3 } }}>
     <div>     
-        <Button size="medium" color="success" variant="contained"
+        <Button type='submit' size="medium" color="success" variant="contained"
           endIcon={<SendIcon />}>Submit</Button>
       </div>
     </Box>
@@ -262,4 +272,4 @@ return (
 }
 
 
-export default UserProfileForm
+export default UserProfileForm;
