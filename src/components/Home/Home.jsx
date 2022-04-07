@@ -9,12 +9,9 @@ import Filter from "../Filter/Filter";
 import { ModalDetails } from '../modalDetails/ModalDetails';
 import Popup from 'reactjs-popup';
 import { CardScaleDetails } from "./CardScaleDetails";
-import { Loading } from "../loading/Loading";
 import { Modal } from "../modal";
 import { Paginado } from "../Paginado/paginado";
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import { Footer } from "../Footer/footer";
+
 
 export default function Home() {
   
@@ -27,7 +24,7 @@ export default function Home() {
   const [ idDetails, setIdDetails ] = useState()
 
   let [currentPage, setcurrentPage] = useState(1);
-  const [flightsPerPage, setFlightsPerPage] = useState(10)
+  const [flightsPerPage, ] = useState(10)
   const indexOfLastFlight = currentPage * flightsPerPage; // 10
   const indexOfFirstFlight = indexOfLastFlight - flightsPerPage // 10 - 10 = 0 
   const currentFlights = flights.slice(indexOfFirstFlight, indexOfLastFlight)
@@ -43,7 +40,7 @@ export default function Home() {
     setShowDetails( true )
   }
   
-  //homeeeeeee
+
   return (
    
     <div className={styles.containerGeneral}>
@@ -61,7 +58,7 @@ export default function Home() {
       <div className={styles.containerFlights}>
         {
          
-          currentFlights?.map((f) => 
+         currentFlights?.map((f) => 
             (
               <div key={f.id} className={styles.containerPrincipal} >
                 <div className={styles.home}>
@@ -90,7 +87,7 @@ export default function Home() {
                             : 
                               <Popup
                                 trigger={  <p style={{cursor: 'pointer'}}>
-                                {f.route.length > 2 ? (f.route.length - 1) + ' scales' : (f.route.length - 1) + ' Stop'}</p> }
+                                {f.route.length > 2 ? (f.route.length - 1) + ' Stops' : (f.route.length - 1) + ' Stop'}</p> }
                                 position='top center'
                                 on={['hover', 'focus']}
                               >
@@ -129,7 +126,9 @@ export default function Home() {
     flightsPerPage={flightsPerPage}
     flights={flights.length}
     pagination={pagination}
+    currentPage={currentPage}
     />
+    
    
       </div>
   </div>

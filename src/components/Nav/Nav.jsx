@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import styles from "./Nav.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 //import axios from 'axios'
 
@@ -62,15 +62,13 @@ const handleForm = ()=> {
 
   return (
     <header className='header-container-general'>
-      <div
-        className='navbar-header'
-        style={{ borderBottom: '3px solid #d5e3e6' }}
-      >
+      <div  style={{ borderBottom: '3px solid #d5e3e6' }}>
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'top'
+            alignItems:'center',
+            borderBottom:'1px, solid, black'
           }}
         >
           <div className='navbar-brand-box' style={{ background: '#FDFEFE' }}>
@@ -78,7 +76,12 @@ const handleForm = ()=> {
               <span className={styles.containerTitle}>
                 <h2 className={styles.url}>deviaje.com</h2>
               </span>
-            </Link>
+            </Link> 
+          </div>
+
+          <div>
+           <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/about'>About Us</NavLink>
           </div>
 
           <div className={styles.containerButton}>
@@ -93,7 +96,7 @@ const handleForm = ()=> {
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClick}
                 >
-                  <img className={styles.imgLogin} src={user.picture} alt='' />
+                  <img className={styles.imgLogin} src={user.picture} alt='UserPicture' />
                 </Button>
                 <Menu
                   id='basic-menu'
@@ -110,7 +113,7 @@ const handleForm = ()=> {
                 </Menu>
               </div>
             ) : (
-              <Button variant='outlined' onClick={() => loginWithPopup()}>
+              <Button size="medium" variant='outlined' onClick={() => loginWithPopup()}>
                 Log In / Register
               </Button>
             )}

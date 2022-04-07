@@ -1,4 +1,4 @@
-import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, DATE_FILTER, PRICE_FILTER } from "../actions/constants";
+import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER } from "../actions/constants";
 
 const initialState = {
   flights: [],
@@ -46,24 +46,13 @@ export default function reducer(state = initialState, action) {
             allFlights: filterPrice,
           };
 
-          // case SCHEDULE_FILTER:
-          // const filterSchedule = action.payload === 'day'? state.flights.data.filter(p =>  {
-          //   // console.log(parseInt(p.local_departure.slice(12,13)))
-          //   // if(p.local_departure.slice(12,13) <= 17 ){
-          //   //   return p
-          //   // }
-          //   for (let i = 0; i < state.flights.data.length; i++) {
-          //     if(state.flights.data[i].local_departure <= 17){
-          //       return p
-          //     }
-          //     console.log(parseInt(state.flights.data[i].local_departure.slice(0,1)))              
-          //   }
-          // })
-          //  :  state.flights.data.filter(p =>  parseInt(p.local_departure.substring(12,13)) >= '18')
-          // return{
-          //   ...state,
-          //   allFlights: filterSchedule,
-          // }
+          case AVAILABILITY_FILTER:
+          const filterAvailability = state.flights.data.filter(p =>  Object.values(p.availability)[0] == action.payload)
+           
+          return{
+            ...state,
+            allFlights: filterAvailability
+          }
 
        case FLIGHTS_NO_FOUND:
         return {
