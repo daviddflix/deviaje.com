@@ -10,14 +10,27 @@ import { ModalDetails } from '../modalDetails/ModalDetails';
 import Popup from 'reactjs-popup';
 import { CardScaleDetails } from "./CardScaleDetails";
 import { Modal } from "../modal";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 import { Paginado } from "../Paginado/paginado";
 import { Loading } from "../loading/Loading";
 
 
 export default function Home() {
-  
+
   const flights = useSelector((state) => state.allFlights);
   const modalErr = useSelector((state) => state.modalErr);
+
+  const {id} = useParams()
+  console.log(flights.data)
+
+  const [showDetails, setShowDetails] = useState(false)
+  const [showLoading, setShowLoading] = useState(false)
+
+  const handleDetails = () => {
+    setShowDetails(true)
+
   console.log(flights)
 
   const [ showDetails, setShowDetails ] = useState( false )
@@ -39,6 +52,7 @@ export default function Home() {
   const handleDetails = ( id ) => {
     setIdDetails( flights.find( el =>  el.id === id ) ) 
     setShowDetails( true )
+
   }
   
   return (
@@ -52,6 +66,7 @@ export default function Home() {
       modalErr && <Modal title='No flights found' /> 
     }
       <div className={styles.containerSearch}>
+
         <SearchBar setShowLoading = { setShowLoading } />
         <Filter setShowLoading = { setShowLoading } />
       </div>
@@ -62,6 +77,7 @@ export default function Home() {
         {
          
          currentFlights?.map((f) => 
+
             (
               <div key={f.id} className={styles.containerPrincipal} >
                 <div className={styles.home}>
@@ -116,9 +132,19 @@ export default function Home() {
                     </div>
                   </div> 
                      <div style={{marginTop:'-7rem'}}>       
+
+                      <h4 className={styles.taxes}>Taxes-rates: {flights.currency} <span>{(f.price * .8).toFixed()}</span></h4>
+                      <h4 className={styles.finalPrice}>Final Price: {flights.currency} <span style={{fontSize:'17px', color:'#000'}}>{(f.price * 1.8).toFixed()}</span></h4>
+                      
+                      <Link to={`/${f.id}`}>
+                        <button className={styles.buttonBuy}>Buy</button>
+                      </Link>
+                      
+
                       <h4 className={styles.taxes}>Taxes-rates: USD {flights.currency} <span>{(f.price * .8).toFixed()}</span></h4>
                       <h4 className={styles.finalPrice}>Final Price: USD {flights.currency} <span style={{fontSize:'17px', color:'#000'}}>{(f.price * 1.8).toFixed()}</span></h4>
                       <button className={styles.buttonBuy}>Buy</button>
+
                     </div>
                 </div>
             </div>
