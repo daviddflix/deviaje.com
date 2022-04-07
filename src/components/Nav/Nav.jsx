@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, {useEffect} from "react";
 import {useHistory} from 'react-router-dom'
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -22,13 +22,7 @@ const Nav = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const { isAuthenticated, user, loginWithPopup, logout } = useAuth0()
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget)
-  }
-  
+    
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -53,17 +47,6 @@ const handleForm = ()=> {
     }
   }, [isAuthenticated])
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      axiosWithOutToken('/postUser', user, 'post')
-        .then(res => {
-          console.log(res.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
-  }, [isAuthenticated])
 
   return (
     <header className='header-container-general'>
