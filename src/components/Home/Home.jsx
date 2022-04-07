@@ -18,7 +18,8 @@ export default function Home() {
 
   const flights = useSelector((state) => state.allFlights);
   const modalErr = useSelector((state) => state.modalErr);
-  console.log(flights)
+  const {id} = useParams()
+  console.log(flights.data)
 
   const [ showDetails, setShowDetails ] = useState( false )
   const [ showLoading, setShowLoading ] = useState( false )
@@ -116,9 +117,13 @@ export default function Home() {
                     </div>
                   </div> 
                      <div style={{marginTop:'-7rem'}}>       
-                      <h4 className={styles.taxes}>Taxes-rates: USD {flights.currency} <span>{(f.price * .8).toFixed()}</span></h4>
-                      <h4 className={styles.finalPrice}>Final Price: USD {flights.currency} <span style={{fontSize:'17px', color:'#000'}}>{(f.price * 1.8).toFixed()}</span></h4>
-                      <button className={styles.buttonBuy}>Buy</button>
+                      <h4 className={styles.taxes}>Taxes-rates: {flights.currency} <span>{(f.price * .8).toFixed()}</span></h4>
+                      <h4 className={styles.finalPrice}>Final Price: {flights.currency} <span style={{fontSize:'17px', color:'#000'}}>{(f.price * 1.8).toFixed()}</span></h4>
+                      
+                      <Link to={`/${f.id}`}>
+                        <button className={styles.buttonBuy}>Buy</button>
+                      </Link>
+                      
                     </div>
                 </div>
             </div>

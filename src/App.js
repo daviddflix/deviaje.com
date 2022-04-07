@@ -26,7 +26,6 @@ function App() {
         <Route exact path="/userconfig">
           <UserProfileForm />
         </Route>
-
       </Switch>
       <Footer/>
     </div>
