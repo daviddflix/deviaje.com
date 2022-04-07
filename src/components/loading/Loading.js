@@ -6,7 +6,7 @@ export const Loading = () => {
 
     return (
         <div className= { styles.container }>
-            <img src={loading} />
+            <img src={loading} alt='loading' />
             <h3 className= { styles.subTitle}>Cargando...</h3>
         </div>
     )
