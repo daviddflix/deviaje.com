@@ -1,9 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import FlightInfo from '../FlightInfo/FlightInfo';
 import PaymentDetail from '../PaymentDetail/PaymentDetail';
 import s from './PassengersInfo.module.css';
 
 function PassengersInfo({ setShowPayment }) {
+    const flights = useSelector(state => state.allFlights)
+    const {id} = useParams()
+    const flight = flights.data?.filter(f => f.id === id)
+    
     return (
         <div>
             <p className={s.parrafo}>You're almost there! Fill in your personal details and complete your purchase.</p>
@@ -26,8 +32,15 @@ function PassengersInfo({ setShowPayment }) {
                 </div>
 
                 <div className={s.display}>
-                    <PaymentDetail />
-                    <FlightInfo />
+                    <PaymentDetail price={flight[0].price} />
+
+                    <FlightInfo departure={flight[0].flyFrom}
+                                arrival={flight[0].flyTo}
+                                date={flight[0].local_departure}
+                                cityD={flight[0].cityFrom} 
+                                cityA={flight[0].cityTo}
+                                timeD={flight[0].local_departure} 
+                                timeA={flight[0].local_arrival} /> 
                 </div>
 
             </div>

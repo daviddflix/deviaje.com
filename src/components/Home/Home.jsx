@@ -12,12 +12,14 @@ import Popup from 'reactjs-popup';
 import { CardScaleDetails } from "./CardScaleDetails";
 import { Loading } from "../loading/Loading";
 import { Modal } from "../modal";
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function Home() {
 
   const flights = useSelector((state) => state.allFlights);
   const modalErr = useSelector((state) => state.modalErr);
+  const {id} = useParams()
   console.log(flights.data)
 
   const [showDetails, setShowDetails] = useState(false)

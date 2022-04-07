@@ -6,6 +6,7 @@ import Row from "./prebuild/Row";
 import BillingDetails from "./prebuild/BillingDetails";
 import SubmitButton from "./prebuild/SubmitButton";
 import CheckoutError from "./prebuild/CheckoutError";
+import { useHistory } from "react-router-dom";
 
 const CardElementContainer = styled.div`
   height: 40px;
@@ -18,6 +19,7 @@ const CardElementContainer = styled.div`
 `;
 
 const PaymentForm = ({ price, onSuccessfulCheckout }) => {
+  const history = useHistory()
   const [processing, setProcessing] = useState(false);
   const [checkoutError, setCheckoutError] = useState();
 
@@ -73,7 +75,9 @@ const PaymentForm = ({ price, onSuccessfulCheckout }) => {
         return;
       }
 
-      onSuccessfulCheckout();
+      alert('payment proccesed ok!')
+      history.push('/')
+      // onSuccessfulCheckout();
 
     } catch (err) {
       setCheckoutError(err.message);
@@ -104,13 +108,13 @@ const PaymentForm = ({ price, onSuccessfulCheckout }) => {
     hidePostalCode: true
   };
 
-  return (
+  return ( 
     <form onSubmit={handleFormSubmit}>
 
       <Row>
         <BillingDetails />
       </Row>
-    
+
       <Row>
         <CardElementContainer>
           <CardElement
@@ -127,8 +131,8 @@ const PaymentForm = ({ price, onSuccessfulCheckout }) => {
           {processing ? "Processing..." : `Pay $${price}`}
         </SubmitButton>
       </Row>
-      
-    </form>
+
+    </form> 
   );
 };
 
