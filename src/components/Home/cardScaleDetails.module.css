@@ -4,7 +4,7 @@
     background:#F8F9F9;
     padding:1rem; 
     border-radius:.5rem; 
-    border:1px solid #BDC3C7
+    /* border:1px solid #BDC3C7 */
 }
 .containerCard{
     padding:.8rem;
@@ -14,7 +14,7 @@
     justify-content:center
 }
 .details{
-    /* font-size: 14px; */
-    color:#626567;
-    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem; 
+    color:#262a2e;
+    font-family: 'Roboto Condensed', sans-serif;
 }

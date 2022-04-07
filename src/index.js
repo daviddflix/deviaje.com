@@ -4,7 +4,8 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from '../src/Redux/store/store'
+import {store, persistor} from '../src/Redux/store/store'
+import { PersistGate } from 'redux-persist/integration/react'
 import { Auth0Provider } from '@auth0/auth0-react'
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN
@@ -14,6 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         <Auth0Provider
           domain={domain}
           clientId={clientId}
@@ -21,6 +23,7 @@ ReactDOM.render(
         >
           <App />
         </Auth0Provider>
+        </PersistGate>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

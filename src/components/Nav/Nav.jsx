@@ -1,28 +1,37 @@
-import React, { useEffect } from 'react'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import Button from '@mui/material/Button'
-import styles from './Nav.module.css'
-import { useAuth0 } from '@auth0/auth0-react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from "react";
+import {useHistory} from 'react-router-dom'
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
+import styles from "./Nav.module.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link, NavLink } from "react-router-dom";
+
+//import axios from 'axios'
+
 import { axiosWithOutToken } from '../../services/axios'
 
-//axios.defaults.baseURL = 'http://localhost:4001/api'
-
 const Nav = () => {
-  const { isAuthenticated, user, loginWithPopup, logout } = useAuth0()
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget)
-  }
+
+  const history = useHistory();
+  const { isAuthenticated, user, loginWithPopup, logout } = useAuth0();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   const handleClose = () => {
     setAnchorEl(null)
   }
 
+const handleForm = ()=> {
+  history.push('/userconfig')
+}
+
   const handleClickLogout = () => {
-    logout()
-  }
+    logout();
+  };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -31,28 +40,34 @@ const Nav = () => {
           console.log(res.data)
         })
         .catch(err => {
-          console.log(err)
+          console.log(err.response)
         })
     }
   }, [isAuthenticated])
 
-  // let auth0User = async () => {
-  //   const userpost = await axiosWithOutToken('/postUser', user, 'post')
-  //   console.log(userpost.data)
-  //   return userpost.data
-  // }
+
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     axiosWithOutToken('/postUser', user, 'post')
+  //       .then(res => {
+  //         console.log(res.data)
+  //       })
+  //       .catch(err => {
+  //         console.log(err)
+  //       })
+  //   }
+  // }, [isAuthenticated])
+
 
   return (
     <header className='header-container-general'>
-      <div
-        className='navbar-header'
-        style={{ borderBottom: '3px solid #d5e3e6' }}
-      >
+      <div  style={{ borderBottom: '3px solid #d5e3e6' }}>
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'top'
+            alignItems:'center',
+            borderBottom:'1px, solid, black'
           }}
         >
           <div className='navbar-brand-box' style={{ background: '#FDFEFE' }}>
@@ -60,11 +75,18 @@ const Nav = () => {
               <span className={styles.containerTitle}>
                 <h2 className={styles.url}>deviaje.com</h2>
               </span>
-            </Link>
+            </Link> 
+          </div>
+
+          <div>
+           <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/about'>About Us</NavLink>
           </div>
 
           <div className={styles.containerButton}>
+
             {isAuthenticated ? (
+
               <div>
                 <Button
                   id='basic-button'
@@ -73,7 +95,7 @@ const Nav = () => {
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClick}
                 >
-                  <img className={styles.imgLogin} src={user.picture} alt='' />
+                  <img className={styles.imgLogin} src={user.picture} alt='UserPicture' />
                 </Button>
                 <Menu
                   id='basic-menu'
@@ -85,12 +107,12 @@ const Nav = () => {
                   }}
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={handleForm}>Settings</MenuItem>
                   <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
                 </Menu>
               </div>
             ) : (
-              <Button variant='outlined' onClick={() => loginWithPopup()}>
+              <Button size="medium" variant='outlined' onClick={() => loginWithPopup()}>
                 Log In / Register
               </Button>
             )}
