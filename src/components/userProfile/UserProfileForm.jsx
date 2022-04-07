@@ -86,6 +86,7 @@ function handleChange(e) {
 
 }
 
+
 function handleSubmit(e){
   e.preventDefault();
   //dispatch(nombreDeLaRuta(form))
@@ -102,8 +103,6 @@ function handleSubmit(e){
 
   });
   <Alert severity="success">Form created successufully</Alert>
-
-}
 
 return (
 <div>
