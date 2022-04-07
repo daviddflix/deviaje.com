@@ -1,6 +1,7 @@
 import s from './pagination.module.css'
+import Pagination from '@mui/material/Pagination';
 
-export function Paginado({flightsPerPage,flights, pagination}){
+export function Paginado({flightsPerPage,flights, pagination, currentPage}){
 
 
 
@@ -14,23 +15,9 @@ export function Paginado({flightsPerPage,flights, pagination}){
 
      return(
   
-           <nav>
-           
-           <ul>
-                {   
-                     pageNumbers && pageNumbers.map(number => {
-                         return(
-                              <div key={number} className={s.buttonList}>
-                              <li>
-                              <button className={s.button} onClick={ () => pagination(number)}>{number}</button>
-                            </li>
-                              </div>
-                             
-                         )
-                     })
-                }
-           </ul>
-      </nav>
+           <nav className={s.container}>
+             <Pagination defaultValue={currentPage}  count={pageNumbers.length} onChange={(e, v) => pagination(v)} color="secondary"  shape="rounded" />  
+          </nav>
      
      )
 }

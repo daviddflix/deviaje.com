@@ -7,9 +7,12 @@ import s from './footer.module.css'
 export function Footer(){
     return(
       <div className={s.container}>
+        <div>
+          <h2 style={{color:'#1F618D'}}>DeViaje.com</h2>
+        </div>
          <div className={s.containerIcons}>
-         <IoLogoWhatsapp className={s.icons}/>
-          <BsFacebook className={s.icons}/>
+         <IoLogoWhatsapp className={s.iconsWhatapp}/>
+          <BsFacebook className={s.iconsFace}/>
           <FaInstagramSquare className={s.icons}/>
          </div>
         <div className={s.containerText}>
@@ -23,8 +26,15 @@ export function Footer(){
         </div>
         <div className={s.text}>
             <h2>Accounting docs</h2>
-            <p>To get the supporting documentation and proof of payment, send your request to deviajeaccounting@gmail.com.ar</p>
+            <p>To get the supporting documentation and proof of payment, send your request to deviajepuntocom12@gmail.com</p>
         </div>
+        </div>
+        <div className={s.flex}>
+          <p className={s.footerItem}>Terms & Conditions</p>
+          <p className={s.footerItem}>Privacy Policy</p>
+          <p className={s.footerItem}>Cookie Consent</p>
+          <p>© 2022 DeViaje.com - All Rights Reserved.</p>
+          
         </div>
       </div>
     )
