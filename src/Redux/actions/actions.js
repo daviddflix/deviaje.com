@@ -1,4 +1,4 @@
-import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, PRICE_FILTER, SCHEDULE_FILTER  } from "./constants";
+import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, PRICE_FILTER, SCHEDULE_FILTER, AVAILABILITY_FILTER  } from "./constants";
 import { axiosWithOutToken } from '../../services/axios'
 
 export const getFlightsInfo = (payload) => {
@@ -52,9 +52,9 @@ export const priceFilter = (value) => {
   }
 } 
 
-export const scheduleFilter = (value) => {
+export const availabilityFilter = (value) => {
   return {
-    type: SCHEDULE_FILTER,
+    type: AVAILABILITY_FILTER,
     payload: value
   }
 } 

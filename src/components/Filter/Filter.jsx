@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import s from './Filter.module.css';
-import { dateFilter, stopsFilter, priceFilter, scheduleFilter } from '../../Redux/actions/actions';
-import {useDispatch} from 'react-redux'
+import { dateFilter, stopsFilter, priceFilter, availabilityFilter } from '../../Redux/actions/actions';
+import {useDispatch, useSelector} from 'react-redux'
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import {Modal} from '../modal/index'
+
+
+
 
 
 function Filter( ) {
-
+    const modalErr = useSelector((state) => state.modalErr);
     const [price, setPrice] = useState('500')
     const [check, setCheck] = useState('')
-    const [schedule, setSchedule] = useState('')
+    const [availability, setAvailability] = useState('1')
    
     const dispatch = useDispatch()
 
@@ -27,7 +36,7 @@ function Filter( ) {
     
     const handleDate = (e) => {
         e.preventDefault();  
-      dispatch(dateFilter(e.target.value))
+        dispatch(dateFilter(e.target.value))
     }
 
    useEffect(() => {
@@ -40,48 +49,60 @@ function Filter( ) {
         setPrice(e.target.value);
       };
 
-    //   useEffect(()=> {
-    //       if(schedule){
-    //           dispatch(scheduleFilter(schedule))
-    //       }
-    //   }, [dispatch, schedule])
+      useEffect(()=> {
+          if(availability){
+              dispatch(availabilityFilter(availability))
+          }
+      }, [availability])
 
-      let handleInputSchedule = (e) => {
-        setSchedule(e.target.value);
+      let handleInputavailability = (e) => {
+        setAvailability(e.target.value);
       };
 
 
     return (
         <div className={s.filters}>
+             {
+      modalErr && <Modal title='No flights found' /> 
+    }
               <div className={s.container}>
-                <label className={s.title}>Stops</label>
-
-                <div  className={s.label}>
-                <input className={s.checkbox}  type="checkbox" value='direct' onChange={handlecheck} name='direct'/>
-                <label className={s.label}>Non-stops</label>
-                </div>
-                <div  className={s.label} >
-                <input className={s.checkbox}  type="checkbox" value='1'  onChange={handlecheck} name='1'/>
-                <label className={s.label}>1 Stop</label>
-                </div>
-                <div  className={s.label} >
-                <input className={s.checkbox}  type="checkbox" value='2'  onChange={handlecheck} name='2' />
-                <label className={s.label}>2 Stop or more</label>
-                </div>
+                <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Stops</FormLabel>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="direct"
+                    name="radio-buttons-group"
+                >
+                    <FormControlLabel value="direct" control={<Radio />} label="Non-Stop" onChange={handlecheck} />
+                    <FormControlLabel value="1" control={<Radio />} label="1 Stop" onChange={handlecheck} />
+                    <FormControlLabel value="2" control={<Radio />} label="2 Stop or more"  onChange={handlecheck}/>
+                </RadioGroup>
+                </FormControl>
               </div>
                
                 
                <div className={s.container2}>
-                    <label className={s.title}>Sort by</label>
+                    {/* <label className={s.title}>Sort by</label>
                 <div className={s.label}>
-                    <input  className={s.checkbox}  type="checkbox" value='date'  onChange={handleDate}/>
+                    <input  className={s.checkbox}  type="checkbox" value='date' checked={check} onChange={handleDate}/>
                     <label  className={s.label} >Upcoming flights</label>
-                </div>
+                </div> */}
+                <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Sort by</FormLabel>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue=""
+                    name="radio-buttons-group"
+                >
+                    <FormControlLabel value="date" control={<Radio />} label="Upcoming flights" onChange={handleDate} />
+                   
+                </RadioGroup>
+                </FormControl>
                </div>
                 
 
             <div className={s.container2}>
-                <label className={s.title}>Price</label>
+                <FormLabel className={s.title}  id="demo-radio-buttons-group-label">Price</FormLabel>
                 <div className={s.flex}>
                 <div>
                     <span className={s.padding} >$10</span>
@@ -92,20 +113,20 @@ function Filter( ) {
                     <span className={s.padding}>$1.000</span>
                 </div>
             </div>
-            </div>
+            </div> 
             <div   className={s.container2}>
-                <label className={s.title}>Schedule</label>
+            <FormLabel className={s.title} id="demo-radio-buttons-group-label">Availability</FormLabel>
+                <div className={s.flex}>
                 <div>
-                <div className={s.label}>
-                    <input  className={s.checkbox}  type="checkbox" value='day' name='day' onChange={handleInputSchedule} />
-                    <label className={s.label}>Day Flight</label>
+                    <span className={s.padding} >1</span>
                 </div>
-                <div className={s.label}>
-                    <input  className={s.checkbox}  type="checkbox" value='night' name='night' onChange={handleInputSchedule}/>
-                    <label className={s.label}>Night flight</label>
+                <div>
+                    <span className={s.price}>{availability}</span>
+                    <input className={s.range} type="range" min='1' max='10' name='availability'  value={availability}  onChange={handleInputavailability}/>
+                    <span className={s.padding}>10</span>
                 </div>
             </div>
-            </div>
+        </div>
         </div>
     );
 }
