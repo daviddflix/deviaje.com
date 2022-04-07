@@ -1,11 +1,23 @@
 import React from 'react';
 import s from './FlightInfo.module.css';
 
-function FlightInfo({departure, arrival, date, cityD, cityA, timeD, timeA}) {
+function FlightInfo({departure, arrival, date, cityD, cityA, timeD, timeA, duration}) {
     
     const depTime = timeD.slice(11, 16)
     const arrTime = timeA.slice(11, 16)
     const fecha = date.slice(0, 10)
+
+    function secondsToString(duration) {
+        var hour = Math.floor(duration / 3600);
+        hour = (hour < 10)? '0' + hour : hour;
+        var minute = Math.floor((duration / 60) % 60);
+        minute = (minute < 10)? '0' + minute : minute;
+        var second = duration % 60;
+        second = (second < 10)? '0' + second : second;
+        return hour + ':' + minute ;
+      }
+
+      const durationTime = secondsToString(duration)
 
     return (
         <div className={s.grid}>
@@ -26,7 +38,7 @@ function FlightInfo({departure, arrival, date, cityD, cityA, timeD, timeA}) {
                 </div>
                 <div className={s.ciudad}>
                     <div className={s.city}>Duration</div>
-                    <div className={s.time}>duracion</div>
+                    <div className={s.time}>{durationTime}</div>
                 </div>
             </div>
         </div>
