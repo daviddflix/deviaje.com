@@ -6,6 +6,7 @@ import { getFlightsInfo } from "../../Redux/actions/actions";
 import s from "./Landing.module.css";
 import validate from './utils/validate';
 import { Modal } from '../../components/modal/index'
+import { Loading } from "../loading/Loading";
 
 function Landing() {
 
@@ -20,7 +21,7 @@ function Landing() {
     dateFrom: "",
     dateTo: "",
   })
-
+  const [ showLoading, setShowLoading ] = useState( false )
   const [errors, setErrors] = useState({})
 
   let handleInputChange = e => {
@@ -36,8 +37,10 @@ function Landing() {
 
   const handleClick = async (e) => {
     e.preventDefault()
+    setShowLoading( true )
     const res =  await dispatch(getFlightsInfo(input))
-    if( res.payload === true ){ return }
+    if( res.payload === true ){ return setShowLoading( false )}
+    setShowLoading( false )
     history.push('/home')
   }
 
@@ -47,6 +50,9 @@ function Landing() {
         <h1 className={s.titulo}>
           Welcome to <span className={s.url}>deviaje.com</span>
         </h1>
+        {
+          showLoading &&  <div style={{marginTop:'-8rem'}} > <Loading /> </div> 
+        }
         {
           modalErr && <Modal title='No flights found' /> 
         }
