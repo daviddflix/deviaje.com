@@ -11,6 +11,7 @@ import Popup from 'reactjs-popup';
 import { CardScaleDetails } from "./CardScaleDetails";
 import { Modal } from "../modal";
 import { Paginado } from "../Paginado/paginado";
+import { Loading } from "../loading/Loading";
 
 
 export default function Home() {
@@ -40,7 +41,6 @@ export default function Home() {
     setShowDetails( true )
   }
   
-
   return (
    
     <div className={styles.containerGeneral}>
@@ -56,6 +56,9 @@ export default function Home() {
         <Filter setShowLoading = { setShowLoading } />
       </div>
       <div className={styles.containerFlights}>
+        {
+          showLoading && <div style={{marginBottom:'100%'}} ><Loading /></div> 
+        }
         {
          
          currentFlights?.map((f) => 
