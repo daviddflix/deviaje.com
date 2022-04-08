@@ -29,6 +29,10 @@ const handleForm = ()=> {
   history.push('/userconfig')
 }
 
+const handleProfile = ()=> {
+  history.push('/userprofile')
+}
+
   const handleClickLogout = () => {
     logout();
   };
@@ -93,7 +97,7 @@ const handleForm = ()=> {
                     'aria-labelledby': 'basic-button'
                   }}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleProfile}>Profile</MenuItem>
                   <MenuItem onClick={handleForm}>Settings</MenuItem>
                   <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
                 </Menu>
