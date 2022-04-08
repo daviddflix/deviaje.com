@@ -49,10 +49,11 @@ function App() {
         <Route exact path="/userconfig">
           <UserProfileForm />
         </Route>
-        
+
         <Route exact path="/userprofile">
           <UserProfile />
         </Route>
+
       </Switch>
       <Footer/>
     </div>
