@@ -46,20 +46,7 @@ const handleForm = ()=> {
   }, [isAuthenticated])
 
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     axiosWithOutToken('/postUser', user, 'post')
-  //       .then(res => {
-  //         console.log(res.data)
-  //       })
-  //       .catch(err => {
-  //         console.log(err)
-  //       })
-  //   }
-  // }, [isAuthenticated])
-
-
-  return (
+   return (
     <header className='header-container-general'>
       <div  style={{ borderBottom: '3px solid #d5e3e6' }}>
         <div

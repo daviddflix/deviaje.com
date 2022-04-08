@@ -1,6 +1,7 @@
 import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION  } from "./constants";
 import { axiosWithOutToken } from '../../services/axios'
 
+
 export const getFlightsInfo = (payload) => {
 
   return async (dispatch) => {
@@ -108,5 +109,6 @@ export const availabilityFilter = (value) => {
     payload: value
   }
 } 
+
 
 

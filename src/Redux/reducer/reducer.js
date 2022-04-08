@@ -65,9 +65,11 @@ export default function reducer(state = initialState, action) {
         case TOP_DESTINATION:
           
           return{
+            ...state,
             topDestination: action.payload
           }
+
       default:
-        return state;
+        return {...state};
   }
 }
