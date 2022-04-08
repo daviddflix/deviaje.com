@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import {useHistory} from 'react-router-dom'
 import Menu from "@mui/material/Menu";
@@ -22,8 +21,6 @@ const Nav = () => {
     setAnchorEl(event.currentTarget);
   };
 
- 
-  
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -48,6 +45,7 @@ const handleForm = ()=> {
     }
   }, [isAuthenticated])
 
+
   // useEffect(() => {
   //   if (isAuthenticated) {
   //     axiosWithOutToken('/postUser', user, 'post')
@@ -59,6 +57,7 @@ const handleForm = ()=> {
   //       })
   //   }
   // }, [isAuthenticated])
+
 
   return (
     <header className='header-container-general'>
@@ -82,6 +81,7 @@ const handleForm = ()=> {
           <div>
            <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
             <NavLink activeClassName={styles.active} className={styles.link} to='/about'>About Us</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/top'>Top Destinations</NavLink>
           </div>
 
           <div className={styles.containerButton}>
