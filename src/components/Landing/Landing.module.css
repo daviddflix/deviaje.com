@@ -50,6 +50,10 @@ body{
     align-items: center;
 }
 
+.btn:hover{
+    background-color: #2979ff;
+}
+
 .flex{
     position: absolute;
     top: 50%;
