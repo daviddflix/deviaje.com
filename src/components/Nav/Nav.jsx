@@ -68,6 +68,7 @@ const handleForm = ()=> {
           <div>
            <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
             <NavLink activeClassName={styles.active} className={styles.link} to='/about'>About Us</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/top'>Top Destinations</NavLink>
           </div>
 
           <div className={styles.containerButton}>

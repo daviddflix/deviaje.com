@@ -14,7 +14,7 @@ const stripePromise = loadStripe(PUBLIC_KEY)
 function StripeContainer() {
     const flights = useSelector(state => state.allFlights)
     const {id} = useParams()
-    const flight = flights.data?.filter(f => f.id === id)
+    const flight = flights?.filter(f => f.id === id)
     const history = useHistory()
     const router = useRouter()
     return (

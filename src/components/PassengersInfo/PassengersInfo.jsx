@@ -9,7 +9,7 @@ function PassengersInfo({ setShowPayment }) {
 
     const flights = useSelector(state => state.allFlights)
     const { id } = useParams()
-    const flight = flights.data?.filter(f => f.id === id)
+    const flight = flights?.filter(f => f.id === id)
 
     const passengers = 4
 

@@ -23,14 +23,9 @@ export default function Home() {
   const modalErr = useSelector((state) => state.modalErr);
 
   const {id} = useParams()
-  console.log(flights.data)
+  
 
-  const [showDetails, setShowDetails] = useState(false)
-  const [showLoading, setShowLoading] = useState(false)
-
-  const handleDetails = () => {
-    setShowDetails(true)
-
+ 
   console.log(flights)
 
   const [ showDetails, setShowDetails ] = useState( false )
@@ -38,13 +33,14 @@ export default function Home() {
   const [ idDetails, setIdDetails ] = useState()
 
   let [currentPage, setcurrentPage] = useState(1);
-  const [flightsPerPage, ] = useState(10)
+  const [flightsPerPage, setFlightsPerPage ] = useState(10)
   const indexOfLastFlight = currentPage * flightsPerPage; // 10
   const indexOfFirstFlight = indexOfLastFlight - flightsPerPage // 10 - 10 = 0 
   const currentFlights = flights.slice(indexOfFirstFlight, indexOfLastFlight)
   
   const pagination = (pageNumber) => {
     setcurrentPage(pageNumber)
+    window.scroll(0,0)
   }
  
 
@@ -139,11 +135,6 @@ export default function Home() {
                       <Link to={`/${f.id}`}>
                         <button className={styles.buttonBuy}>Buy</button>
                       </Link>
-                      
-
-                      <h4 className={styles.taxes}>Taxes-rates: USD {flights.currency} <span>{(f.price * .8).toFixed()}</span></h4>
-                      <h4 className={styles.finalPrice}>Final Price: USD {flights.currency} <span style={{fontSize:'17px', color:'#000'}}>{(f.price * 1.8).toFixed()}</span></h4>
-                      <button className={styles.buttonBuy}>Buy</button>
 
                     </div>
                 </div>
@@ -163,3 +154,4 @@ export default function Home() {
   </div>
   );
 }
+
