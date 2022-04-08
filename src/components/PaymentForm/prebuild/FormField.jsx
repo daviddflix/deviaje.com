@@ -33,7 +33,9 @@ const Input = styled.input`
   animation: 1ms void-animation-out;
   &::placeholder {
     color: #87bbfd;
-  }
+  };
+  outline: none;
+  border: none;
 `;
 
 const FormField = ({ label, type, name, placeholder, required }) => {

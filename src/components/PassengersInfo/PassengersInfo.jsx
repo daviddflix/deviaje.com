@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams } from 'react-router-dom';
 import FlightInfo from '../FlightInfo/FlightInfo';
 import PaymentDetail from '../PaymentDetail/PaymentDetail';
 import s from './PassengersInfo.module.css';
@@ -9,9 +9,13 @@ function PassengersInfo({ setShowPayment }) {
 
     const flights = useSelector(state => state.allFlights)
     const { id } = useParams()
-    const flight = flights.data?.filter(f => f.id === id)
+    const flight = flights?.filter(f => f.id === id)
 
-    const passengers = 4
+    const pass = 2
+    const array = []
+    for (var i = 0; i < pass; i++) {
+        array.push(flight)
+    }
 
     return (
         <div>
@@ -21,19 +25,25 @@ function PassengersInfo({ setShowPayment }) {
 
                 <div className={s.travellers}>
                     <p className={s.subtitulo}>Who is travelling?</p>
-
-                    <label className={s.pasajero}>Passenger</label>
-                    <div className={s.nombre}>Name</div>
-                    <input type='text' className={s.input} placeholder='As it appears in the travel document'></input>
-                    <div className={s.nombre}>Last Name</div>
-                    <input type='text' className={s.input} placeholder='As it appears in the travel document'></input>
-                    <div className={s.nombre}>Residence Country</div>
-                    <input type='text' className={s.input} placeholder='As it appears in the travel document'></input>
-                    <div className={s.nombre}>Number of travel document</div>
-                    <input type='number' className={s.input}></input>
-                    <div className={s.nombre}>Date of birth</div>
-                    <input type='date' className={s.input}></input> 
-
+                    {
+                        array.map((e, i) => {
+                            return (
+                                <div key={i} className={s.container}>
+                                    <label className={s.pasajero}>Passenger {i+1}</label>
+                                    <div className={s.nombre}>Name</div>
+                                    <input type='text' className={s.input} placeholder='As it appears in the travel document'></input>
+                                    <div className={s.nombre}>Last Name</div>
+                                    <input type='text' className={s.input} placeholder='As it appears in the travel document'></input>
+                                    <div className={s.nombre}>Residence Country</div>
+                                    <input type='text' className={s.input} placeholder='As it appears in the travel document'></input>
+                                    <div className={s.nombre}>Number of travel document</div>
+                                    <input type='number' className={s.input}></input>
+                                    <div className={s.nombre}>Date of birth</div>
+                                    <input type='date' className={s.input}></input>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
 
                 <div className={s.display}>
@@ -51,7 +61,8 @@ function PassengersInfo({ setShowPayment }) {
 
             </div>
 
-            <button onClick={() => setShowPayment(true)}>Continue to payment</button>
+            <button onClick={() => setShowPayment(true)} className={s.btn}>Continue to payment</button>
+
         </div>
     );
 }
