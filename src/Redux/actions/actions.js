@@ -60,7 +60,7 @@ export const  rutaTop = () => {
 
     try {
         const response = await axiosWithOutToken(
-            `http://localhost:4001/topdestination?city=bariloche`
+            `/topdestination?city=buenos%20aires`
         )
         return dispatch({
             type: TOP_DESTINATION,

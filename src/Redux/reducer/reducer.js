@@ -41,14 +41,14 @@ export default function reducer(state = initialState, action) {
             allFlights: filterDate,
           }
           case PRICE_FILTER:
-          const filterPrice =  state.flights.data.filter(p =>  (p.price * 1.8).toFixed() <= action.payload)
+          const filterPrice = action.payload?  state.flights.data.filter(p =>  (p.price * 1.8).toFixed() <= action.payload) : alert('no flights')
           return{
             ...state,
             allFlights: filterPrice,
           };
 
           case AVAILABILITY_FILTER:
-          const filterAvailability = state.flights.data.filter(p =>  Object.values(p.availability)[0] == action.payload)
+          const filterAvailability = state.flights.data.filter(p =>  Object.values(p.availability)[0] <= action.payload)
            
           return{
             ...state,

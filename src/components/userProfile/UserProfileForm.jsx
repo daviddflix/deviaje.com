@@ -5,7 +5,6 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-import {useDispatch} from 'react-redux' 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Alert from '@mui/material/Alert';
@@ -32,7 +31,7 @@ zip: '',
 genre: '',
 vaccinated: ''
 })
-//const dispatch = useDispatch();
+
 
 const [dniError, setDniError] = useState(false);
 const [dniErrorMsg, setDniErrorMsg] = useState('');
@@ -261,7 +260,7 @@ return (
     <Box sx={{ '& button': { m: 3 } }}>
     <div>     
         <Button type='submit' size="medium" color="success" variant="contained"
-          endIcon={<SendIcon />}>Submit</Button>
+          endIcon={<SendIcon />} onChange={(e) => {handleSubmit(e)}}>Submit</Button>
       </div>
     </Box>
   </Box> 

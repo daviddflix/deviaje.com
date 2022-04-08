@@ -1,36 +1,42 @@
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions } from '@mui/material';
+import { useSelector } from 'react-redux';
 
+export default function Top() {
 
-
-export default function Top(){
-
-//     const dispatch = useDispatch()
-//     const topDestination = useSelector(state => state.topDestination)
-//     console.log(topDestination)
-//    useEffect(() => {
-//        dispatch(rutaTop())
-//    }, [dispatch])
-
-// useEffect(() => {
-//     fetch(`https://api.unsplash.com/search/collections?page=1&query=office`, {
-//         headers: {Authorization: 'T1BBSyabd2WfWcgw9tRclvsDs_61JtzwL05IF87vOWU'}
-//     })
-//     .then(data => data.json())
-//     .then(req => console.log(req))
-// })
-
-    return(
-        <h1>hola</h1>
-           
-                //  <ul>
-                //      {
-                //             topDestination.map(p => {
-                //                 <div>
-                //                 <h1>{p.name}</h1>
-                //                 </div>
-                //             })
-                //      }
-                //  </ul>
-             
-        
-    )
+    const top = useSelector(state => state.topDestination.slice(0,10))
+    console.log(top)
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image="/static/images/cards/contemplative-reptile.jpg"
+          alt="green iguana"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Lizard
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Lizards are a widespread group of squamate reptiles, with over 6,000
+            species, ranging across all continents except Antarctica
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Share
+        </Button>
+      </CardActions>
+    </Card>
+  );
 }
+
+
+

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import s from './Filter.module.css';
 import { dateFilter, stopsFilter, priceFilter, availabilityFilter } from '../../Redux/actions/actions';
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -13,7 +13,7 @@ import FormLabel from '@mui/material/FormLabel';
 
 
 function Filter( ) {
-    const modalErr = useSelector((state) => state.modalErr);
+  
     const [price, setPrice] = useState('500')
     const [availability, setAvailability] = useState('1')
   

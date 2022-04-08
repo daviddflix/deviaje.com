@@ -43,7 +43,7 @@ const handleForm = ()=> {
           console.log(err.response)
         })
     }
-  }, [isAuthenticated])
+  }, [user, isAuthenticated])
 
 
    return (

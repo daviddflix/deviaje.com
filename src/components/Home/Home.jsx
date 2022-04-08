@@ -11,7 +11,6 @@ import Popup from 'reactjs-popup';
 import { CardScaleDetails } from "./CardScaleDetails";
 import { Modal } from "../modal";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 import { Paginado } from "../Paginado/paginado";
 import { Loading } from "../loading/Loading";
@@ -22,7 +21,7 @@ export default function Home() {
   const flights = useSelector((state) => state.allFlights);
   const modalErr = useSelector((state) => state.modalErr);
 
-  const {id} = useParams()
+ 
   
 
  
@@ -33,7 +32,7 @@ export default function Home() {
   const [ idDetails, setIdDetails ] = useState()
 
   let [currentPage, setcurrentPage] = useState(1);
-  const [flightsPerPage, setFlightsPerPage ] = useState(10)
+  const [flightsPerPage,  ] = useState(10)
   const indexOfLastFlight = currentPage * flightsPerPage; // 10
   const indexOfFirstFlight = indexOfLastFlight - flightsPerPage // 10 - 10 = 0 
   const currentFlights = flights.slice(indexOfFirstFlight, indexOfLastFlight)

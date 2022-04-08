@@ -11,7 +11,7 @@ function PassengersInfo({ setShowPayment }) {
     const { id } = useParams()
     const flight = flights?.filter(f => f.id === id)
 
-    const passengers = 4
+    // const passengers = 4
 
     return (
         <div>
