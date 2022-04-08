@@ -47,6 +47,15 @@ function handleChange(e) {
       ...form,
       [e.target.name]: e.target.value
     })
+  }
+}
+
+function handleChangeDni(e) {
+  if(e.target.value.length >= 0){
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
     // VALIDACION DNI
     if(!isNumberValid(e.target.value)){
       setDniError(true)
@@ -55,12 +64,24 @@ function handleChange(e) {
       setDniError(false)
       setDniErrorMsg('')
     }
-    //VALIDACION EDAD
+  }
+    else{
+      setDniError(false)
+      setDniErrorMsg('')
+    }
+  }
+
+function handleChangeAge(e) {
+      if(e.target.value.length >= 0){
+        setForm({
+          ...form,
+          [e.target.name]: e.target.value
+        })
     if(!isNumberValid(e.target.value)){
       setAgeError(true)
       setAgeErrorMsg('Debe ser solo número')
 
-    }else if(e.target.value < 18){
+    }else if(e.target.value < 18){ 
       setAgeError(true)
       setAgeErrorMsg('Debes ser mayor de edad')
 
@@ -72,6 +93,19 @@ function handleChange(e) {
       setAgeError(false)
       setAgeErrorMsg('')
     }
+  }
+    else{
+        setAgeError(false)
+        setAgeErrorMsg('')
+      }
+    }
+
+function handleChangePhone(e) {
+      if(e.target.value.length >= 0){
+        setForm({
+          ...form,
+          [e.target.name]: e.target.value
+        })
     //VALIDACION PHONE
     if(!isNumberValid(e.target.value)){
       setPhoneError(true)
@@ -81,19 +115,18 @@ function handleChange(e) {
     setPhoneErrorMsg('')
     }
   }else{
-    setDniError(false)
-    setDniErrorMsg('')
+    setPhoneError(false)
+    setPhoneErrorMsg('')
   }
-
 }
-
-
 function handleSubmit(e){
   e.preventDefault();  
   axiosWithOutToken('/updatepersonalinfo', form, 'POST')
         .then(res => {
           console.log(res.data)
             setForm({
+              name:'',
+              lastname:'',
               dni: '',
               age: '',
               phone: '',
@@ -126,12 +159,39 @@ return (
     <FormControl>
     <Box component="form" sx={{ '& > :not(style)': { m: 1 }, display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2, 1fr)', height: '70vh', width: '100vh'}} noValidate autoComplete="off">  
     <div> 
+    <TextField 
+      required
+      InputLabelProps={{ shrink: true }}     
+      id="standard-required" 
+      label="Name"
+      name='name' 
+      value={form.name} 
+      defaultValue="" 
+      variant="standard" 
+      color='success' 
+      />
+    </div> 
+
+    <div>
+    <TextField  
+      required      
+      InputLabelProps={{ shrink: true }}     
+      id="standard-required" 
+      label="Last Name"
+      name='lastname' 
+      value={form.lastname} 
+      defaultValue="" 
+      variant="standard" 
+      color='success' 
+      />
+    </div>
+
+    <div> 
       <TextField 
       required
       error={dniError} 
       helperText={dniErrorMsg}
-      InputLabelProps={{ shrink: true }}
-      inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+      InputLabelProps={{ shrink: true }}     
       id="standard-required" 
       label="DNI/Passport"
       name='dni' 
@@ -139,7 +199,7 @@ return (
       defaultValue="" 
       variant="standard" 
       color='success' 
-      onChange={(e) => handleChange(e)}/>
+      onChange={(e) => handleChangeDni(e)}/>
     </div>
 
     <div> 
@@ -156,7 +216,7 @@ return (
       defaultValue="" 
       variant="standard" 
       color='success' 
-      onChange={(e) => handleChange(e)}/>
+      onChange={(e) => handleChangeAge(e)}/>
     </div> 
 
     <div> 
@@ -173,7 +233,7 @@ return (
       defaultValue="" 
       variant="standard" 
       color='success' 
-      onChange={(e) => handleChange(e)}/>
+      onChange={(e) => handleChangePhone(e)}/>
     </div>
 
     <Autocomplete id="country-select-demo" sx={{ m: 1, width: '25ch' }} options={countries} autoHighlight
@@ -261,7 +321,7 @@ return (
     <Box sx={{ '& button': { m: 3 } }}>
     <div>     
         <Button type='submit' size="medium" color="success" variant="contained"
-          endIcon={<SendIcon />}>Submit</Button>
+          endIcon={<SendIcon />} onChange={(e) => handleSubmit(e)}>Submit</Button>
       </div>
     </Box>
   </Box> 
