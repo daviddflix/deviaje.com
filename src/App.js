@@ -31,11 +31,17 @@ function App() {
         <Route exact path="/about">
           <About />
         </Route>
-           <Route  path="*">
-          <NoMatch/>
-        </Route>
+         
         <Route exact path="/top">
           <Top />
+        </Route>
+
+        <Route exact path="/userconfig">
+          <UserProfileForm />
+        </Route>
+
+        <Route exact path="/userprofile">
+          <UserProfile />
         </Route>
       
 
@@ -45,15 +51,11 @@ function App() {
         <Route exact path='/success'>
           <SuccessPayment />
         </Route>
-      
-        <Route exact path="/userconfig">
-          <UserProfileForm />
-        </Route>
 
-        <Route exact path="/userprofile">
-          <UserProfile />
-        </Route>
-
+         <Route  path="*">
+          <NoMatch/>
+        </Route>     
+        
       </Switch>
       <Footer/>
     </div>

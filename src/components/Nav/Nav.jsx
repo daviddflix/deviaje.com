@@ -27,10 +27,12 @@ const Nav = () => {
 
 const handleForm = ()=> {
   history.push('/userconfig')
+  setAnchorEl(null)
 }
 
 const handleProfile = ()=> {
   history.push('/userprofile')
+  setAnchorEl(null)
 }
 
   const handleClickLogout = () => {
