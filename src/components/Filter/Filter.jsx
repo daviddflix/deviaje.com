@@ -38,6 +38,7 @@ function Filter( ) {
         dispatch(priceFilter(price))
        } 
    }, [dispatch, price, flights])
+
  
     let handleInputPrice = (e) => {
         setPrice(e.target.value);
