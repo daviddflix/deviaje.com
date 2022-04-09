@@ -54,7 +54,7 @@ body{
     position: absolute;
     top: 50%;
     left: 40px;
-    width: 850px;
+    width: 1000px;
     height: 80px;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
@@ -96,4 +96,22 @@ body{
 .boxErrors{
     display: flex;
     flex-direction: column;
+}
+
+.pass{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    height: 40px;
+    border-radius: 6px;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+.placeh{
+    color: gray;
+    letter-spacing: 1px;
 }

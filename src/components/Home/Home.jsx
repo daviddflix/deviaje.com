@@ -11,28 +11,20 @@ import Popup from 'reactjs-popup';
 import { CardScaleDetails } from "./CardScaleDetails";
 import { Modal } from "../modal";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 import { Paginado } from "../Paginado/paginado";
 import { Loading } from "../loading/Loading";
+import { useAuth0 } from '@auth0/auth0-react'
+import { useHistory } from "react-router-dom";
+import swal from 'sweetalert';
 
 
 export default function Home() {
-
+  const { isAuthenticated, user, loginWithPopup } = useAuth0()
+  const history = useHistory()
   const flights = useSelector((state) => state.allFlights);
   const modalErr = useSelector((state) => state.modalErr);
 
-  // const { id } = useParams()
-  // console.log(id)
-  // console.log(flights.data)
-
-  // const [showDetails, setShowDetails] = useState(false)
-  // const [showLoading, setShowLoading] = useState(false)
-
-  // const handleDetails = () => {
-  //   setShowDetails(true)
-
-  // console.log(flights)
 
   const [showDetails, setShowDetails] = useState(false)
   const [showLoading, setShowLoading] = useState(false)
@@ -48,13 +40,17 @@ export default function Home() {
     setcurrentPage(pageNumber)
   }
 
-
-
   const handleDetails = (id) => {
     setIdDetails(flights.find(el => el.id === id))
     setShowDetails(true)
   }
+  
+  const handleBuy = aux => {
+    user && isAuthenticated ? history.push(aux) : swal("Stop!", "If you want to buy, you must be registered!", "error")
 
+  }
+  
+  window.scrollTo(0, 0)
   return (
 
     <div className={styles.containerGeneral}>
@@ -135,14 +131,9 @@ export default function Home() {
                   <h4 className={styles.taxes}>Taxes-rates: {flights.currency} <span>{(f.price * .8).toFixed()}</span></h4>
                   <h4 className={styles.finalPrice}>Final Price: {flights.currency} <span style={{ fontSize: '17px', color: '#000' }}>{(f.price * 1.8).toFixed()}</span></h4>
 
-                  <Link to={`/${f.id}`}>
-                    <button className={styles.buttonBuy}>Buy</button>
-                  </Link>
-
-
-                  {/* <h4 className={styles.taxes}>Taxes-rates: USD {flights.currency} <span>{(f.price * .8).toFixed()}</span></h4>
-                      <h4 className={styles.finalPrice}>Final Price: USD {flights.currency} <span style={{fontSize:'17px', color:'#000'}}>{(f.price * 1.8).toFixed()}</span></h4>
-                      <button className={styles.buttonBuy}>Buy</button> */}
+                  {/* <Link to={`/${f.id}`}> */}
+                  <button className={styles.buttonBuy} onClick={() => handleBuy(`/${f.id}`)}>Buy</button>
+                  {/* </Link> */}
 
                 </div>
               </div>

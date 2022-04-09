@@ -1,12 +1,15 @@
+import React from 'react';
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { getFlightsInfo } from "../../Redux/actions/actions";
+import { getFlightsInfo, getPassengers } from "../../Redux/actions/actions";
 import s from "./Landing.module.css";
 import validate from './utils/validate';
 import { Modal } from '../../components/modal/index'
 import { Loading } from "../loading/Loading";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 function Landing() {
 
@@ -21,7 +24,7 @@ function Landing() {
     dateFrom: "",
     dateTo: "",
   })
-  const [ showLoading, setShowLoading ] = useState( false )
+  const [showLoading, setShowLoading] = useState(false)
   const [errors, setErrors] = useState({})
 
   let handleInputChange = e => {
@@ -37,12 +40,16 @@ function Landing() {
 
   const handleClick = async (e) => {
     e.preventDefault()
-    setShowLoading( true )
-    const res =  await dispatch(getFlightsInfo(input))
-    if( res.payload === true ){ return setShowLoading( false )}
-    setShowLoading( false )
+    setShowLoading(true)
+    const res = await dispatch(getFlightsInfo(input))
+    dispatch(getPassengers(pass))
+    if (res.payload === true) { return setShowLoading(false) }
+    setShowLoading(false)
     history.push('/home')
-  }
+  } 
+  
+
+  const [pass, setPass] = useState(1)
 
   return (
     <>
@@ -51,10 +58,10 @@ function Landing() {
           Welcome to <span className={s.url}>deviaje.com</span>
         </h1>
         {
-          showLoading &&  <div style={{marginTop:'-8rem'}} > <Loading /> </div> 
+          showLoading && <div style={{ marginTop: '-8rem' }} > <Loading /> </div>
         }
         {
-          modalErr && <Modal title='No flights found' /> 
+          modalErr && <Modal title='No flights found' />
         }
         <div className={s.flex}>
           <div className={s.boxErrors}>
@@ -107,6 +114,18 @@ function Landing() {
             {
               errors.dateTo && <div className={s.errors}>{errors.dateTo}</div>
             }
+          </div>
+
+          <div>
+
+            <div className={s.pass}>
+              <span className={s.placeh}>Passengers</span>  
+              <RemoveIcon onClick={() => setPass(pass - 1)} sx={{ mx: 1 }}/>
+                {pass}
+              <AddIcon onClick={() => setPass(pass + 1)} sx={{ mx: 1 }}/>
+            </div>
+
+
           </div>
 
           {

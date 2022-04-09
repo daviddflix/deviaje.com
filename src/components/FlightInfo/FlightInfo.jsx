@@ -47,12 +47,12 @@ function FlightInfo({departure, arrival, date, cityD, cityA, timeD, timeA, durat
             <div className={s.aerolinea}>aerolinea</div>
             <div className={s.viaje}>
                 <div className={s.ciudad}>
-                    <div className={s.city}>ciudad</div>
+                    <div className={s.city}>{cityA}</div>
                     <div className={s.time}>salida</div>
                 </div> 
                 <div className={s.ciudad}>--------</div>
                 <div className={s.ciudad}>
-                    <div className={s.city}>ciudad</div>
+                    <div className={s.city}>{cityD}</div>
                     <div className={s.time}>hora</div>
                 </div>
                 <div className={s.ciudad}>

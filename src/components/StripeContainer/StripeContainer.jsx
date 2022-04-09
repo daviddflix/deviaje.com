@@ -16,6 +16,7 @@ function StripeContainer() {
     const flight = flights?.filter(f => f.id === id)
     const history = useHistory()
     // const router = useRouter()
+    window.scrollTo(0, 0)
     return (
         <Elements stripe={stripePromise}>
             <PaymentForm

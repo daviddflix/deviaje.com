@@ -6,7 +6,7 @@
     line-height: 1;
     letter-spacing: -.5px;
     color: #444; 
-    margin-left: 30px;
+    margin-left: 50px;
     margin-top: 20px;
 }
 
@@ -15,6 +15,7 @@
     flex-direction: row;
     justify-content: flex-start;
     margin-left: 50px;
+    height: auto;
 }
 
 .travellers{
@@ -22,6 +23,7 @@
     width: 120vh;
     padding: 20px;
     margin-right: 30px;
+    height: auto;
 }
 
 .subtitulo{
@@ -41,9 +43,9 @@
     margin-top: 20px;
 }
 
-.nombre{
+.inp{
     color: var(--color-gray-1);
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1pt;
@@ -71,21 +73,23 @@
     margin-top: 20px;
 }
 
-.btn{
-    margin-left: 50px;
-    margin-top: 30px;
-    width: 200px;
-    height: 40px;
+.nombre{
+    color: grey;
+    font-size: 12px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 5px;
-    border-color: #0a66c2;
-    background-color: lightblue;
-    cursor: pointer;
+    letter-spacing: 1pt;
+    display: block;
+    margin-top: 10px; 
 }
 
-.btn:hover{
-    background-color: white;
-    color: #0a66c2;
+.fecha{
+    color: grey;
+    font-size: 12px;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
