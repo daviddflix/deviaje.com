@@ -89,7 +89,7 @@ function handleChange(e) {
 
 
 function handleSubmit(e){
-  e.preventDefault();  
+  e.preventDefault();
   axiosWithOutToken('/updatepersonalinfo', form, 'POST')
         .then(res => {
           console.log(res.data)
@@ -136,7 +136,7 @@ return (
       label="DNI/Passport"
       name='dni' 
       value={form.dni} 
-      defaultValue="" 
+      // defaultValue="" 
       variant="standard" 
       color='success' 
       onChange={(e) => handleChange(e)}/>
@@ -153,7 +153,7 @@ return (
       label="Age" 
       name='age' 
       value={form.age} 
-      defaultValue="" 
+      // defaultValue="" 
       variant="standard" 
       color='success' 
       onChange={(e) => handleChange(e)}/>
@@ -170,7 +170,7 @@ return (
       label="Phone Number" 
       name='phone' 
       value={form.phone} 
-      defaultValue="" 
+      // defaultValue="" 
       variant="standard" 
       color='success' 
       onChange={(e) => handleChange(e)}/>
@@ -201,7 +201,7 @@ return (
       label="State" 
       name='state' 
       value={form.state} 
-      defaultValue="" 
+      // defaultValue="" 
       variant="standard" 
       color='success' 
       onChange={(e) => handleChange(e)}/>
@@ -215,7 +215,7 @@ return (
       label="City" 
       name='city' 
       value={form.city} 
-      defaultValue="" 
+      // defaultValue="" 
       variant="standard" 
       color='success' 
       onChange={(e) => handleChange(e)}/>
@@ -228,8 +228,8 @@ return (
       id="standard" 
       label="Zip Code" 
       name='zip' 
-      alue={form.zip} 
-      defaultValue="" 
+      value={form.zip} 
+      // defaultValue="" 
       variant="standard" 
       color='success' 
       onChange={(e) => handleChange(e)}/>
@@ -260,7 +260,7 @@ return (
     
     <Box sx={{ '& button': { m: 3 } }}>
     <div>     
-        <Button type='submit' size="medium" color="success" variant="contained"
+        <Button type='submit' size="medium" color="success" variant="contained" onChange={(e) => handleSubmit(e)}
           endIcon={<SendIcon />}>Submit</Button>
       </div>
     </Box>

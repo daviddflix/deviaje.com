@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import {useHistory} from 'react-router-dom'
 import Menu from "@mui/material/Menu";
@@ -5,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import styles from "./Nav.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //import axios from 'axios'
 
@@ -21,6 +22,8 @@ const Nav = () => {
     setAnchorEl(event.currentTarget);
   };
 
+ 
+  
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -45,16 +48,29 @@ const handleForm = ()=> {
     }
   }, [isAuthenticated])
 
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     axiosWithOutToken('/postUser', user, 'post')
+  //       .then(res => {
+  //         console.log(res.data)
+  //       })
+  //       .catch(err => {
+  //         console.log(err)
+  //       })
+  //   }
+  // }, [isAuthenticated])
 
-   return (
+  return (
     <header className='header-container-general'>
-      <div  style={{ borderBottom: '3px solid #d5e3e6' }}>
+      <div
+        className='navbar-header'
+        style={{ borderBottom: '3px solid #d5e3e6' }}
+      >
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems:'center',
-            borderBottom:'1px, solid, black'
+            alignItems: 'top'
           }}
         >
           <div className='navbar-brand-box' style={{ background: '#FDFEFE' }}>
@@ -62,12 +78,7 @@ const handleForm = ()=> {
               <span className={styles.containerTitle}>
                 <h2 className={styles.url}>deviaje.com</h2>
               </span>
-            </Link> 
-          </div>
-
-          <div>
-           <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
-            <NavLink activeClassName={styles.active} className={styles.link} to='/about'>About Us</NavLink>
+            </Link>
           </div>
 
           <div className={styles.containerButton}>
@@ -82,7 +93,7 @@ const handleForm = ()=> {
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClick}
                 >
-                  <img className={styles.imgLogin} src={user.picture} alt='UserPicture' />
+                  <img className={styles.imgLogin} src={user.picture} alt='' />
                 </Button>
                 <Menu
                   id='basic-menu'
@@ -99,7 +110,7 @@ const handleForm = ()=> {
                 </Menu>
               </div>
             ) : (
-              <Button size="medium" variant='outlined' onClick={() => loginWithPopup()}>
+              <Button variant='outlined' onClick={() => loginWithPopup()}>
                 Log In / Register
               </Button>
             )}
