@@ -12,8 +12,8 @@ import { Footer } from "./components/Footer/footer";
 import UserProfile from "./components/userProfile/UserProfile";
 import UserProfileForm from "./components/userProfile/UserProfileForm";
 import { About } from "./components/About/About";
-import Top from "./components/TopDestinations/RutaTop";
 import NoMatch from "./components/404/404";
+import CardDestination from "./components/TopDestinations/RutaTop";
 
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
         </Route>
          
         <Route exact path="/top">
-          <Top />
+          <CardDestination />
         </Route>
 
         <Route exact path="/userconfig">
@@ -45,18 +45,22 @@ function App() {
         </Route>
       
 
-        <Route exact path='/:id'>
-          <FlightDetail />
-        </Route>
+        
         <Route exact path='/success'>
           <SuccessPayment />
         </Route>
-
-         <Route  path="*">
+          
+        <Route  path="*">
           <NoMatch/>
-        </Route>     
-        
+        </Route>
+
+        <Route exact path='/:id'>
+          <FlightDetail />
+        </Route>
+
+      
       </Switch>
+     
       <Footer/>
     </div>
   );

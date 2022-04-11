@@ -116,7 +116,7 @@ function SearchBar( { setShowLoading } ) {
               type="date"
               onChange={handleInputChange}
               name="dateFrom"
-              placeholder="dd-mm-yyyy"
+              placeholder="DD/MM/YYYY"
             />
             { 
             error.dateFrom && <p style={{ color:'red', margin:'2px 0 0 2px', fontSize:'14.5px' }} > { error.dateFrom } </p>
@@ -129,7 +129,7 @@ function SearchBar( { setShowLoading } ) {
               value={input.dateTo}
               onChange={handleInputChange}
               name="dateTo"
-              placeholder="dd-mm-yyyy"
+              placeholder="DD/MM/YYYY"
             />
             { 
             error.dateTo && <p style={{ color:'red', margin:'2px 0 0 2px', fontSize:'14.5px' }} > { error.dateTo } </p>

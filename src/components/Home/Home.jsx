@@ -5,9 +5,8 @@ import { useSelector } from "react-redux";
 import Filter from "../Filter/Filter";
 import { ModalDetails } from '../modalDetails/ModalDetails';
 import { Modal } from "../modal";
-
-import { Paginado } from "../Paginado/paginado";
 import { Loading } from "../loading/Loading";
+import { Paginado } from "../Paginado/paginado";
 import CardFrom from "./CardFrom";
 import CardFromTo from "./CardFromTo";
 import { ModalDetailsReturn } from "../modalDetails/modalDetailsReturn";
@@ -26,13 +25,11 @@ export default function Home() {
   const [ idDetails, setIdDetails ] = useState()
 
   let [currentPage, setcurrentPage] = useState(1);
-  const [flightsPerPage, setFlightsPerPage ] = useState(10)
+  const [flightsPerPage,  ] = useState(10)
   const indexOfLastFlight = currentPage * flightsPerPage; // 10
   const indexOfFirstFlight = indexOfLastFlight - flightsPerPage // 10 - 10 = 0 
-  const currentFlights = flights?.slice(indexOfFirstFlight, indexOfLastFlight)
-
-  console.log(currentFlights)
-
+  const currentFlights = flights && flights?.slice(indexOfFirstFlight, indexOfLastFlight)
+  
   const pagination = (pageNumber) => {
     setcurrentPage(pageNumber)
     window.scroll(0,0)

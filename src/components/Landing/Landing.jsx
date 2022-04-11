@@ -5,13 +5,13 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getFlightsInfo, setValuesInputs, getFlightsInfoToFrom } from "../../Redux/actions/actions";
 import s from "./Landing.module.css";
 import validate from './utils/validate';
-import { Modal } from '../../components/modal/index'
+import { Modal } from '../../components/modal/index'     
 import { Loading } from "../loading/Loading";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import { TopDestination } from "../TopDestinations/TopDestination";
+import { TopDestination } from "../TopDestinations/carousel";
 
 
 function Landing() {

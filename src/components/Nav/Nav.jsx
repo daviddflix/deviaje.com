@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 //import axios from 'axios'
 
 import { axiosWithOutToken } from '../../services/axios'
+import { NavLink } from "react-router-dom";
 
 const Nav = () => {
 
@@ -52,7 +53,7 @@ const handleProfile = ()=> {
           console.log(err.response)
         })
     }
-  }, [isAuthenticated])
+  }, [user, isAuthenticated])
 
   // useEffect(() => {
   //   if (isAuthenticated) {
@@ -76,7 +77,7 @@ const handleProfile = ()=> {
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'top'
+            alignItems: 'center'
           }}
         >
           <div className='navbar-brand-box' style={{ background: '#FDFEFE' }}>
@@ -90,7 +91,7 @@ const handleProfile = ()=> {
           <div>
            <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
             <NavLink activeClassName={styles.active} className={styles.link} to='/about'>About Us</NavLink>
-            <NavLink activeClassName={styles.active} className={styles.link} to='/top'>Top Destinations</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/top'>Offers</NavLink>
           </div>
 
           <div className={styles.containerButton}>
