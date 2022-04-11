@@ -20,7 +20,6 @@ function StripeContainer() {
         <Elements stripe={stripePromise}>
             <PaymentForm
                 price={(flight[0].price * 1.8).toFixed()}
-                // onSuccessfulCheckout={() => router.push("/success")}
                 onSuccessfulCheckout={() => history.push("/success")}
             />
         </Elements>

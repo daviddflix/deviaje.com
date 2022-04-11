@@ -9,13 +9,10 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 
-
-
-
 function Filter( ) {
     const modalErr = useSelector((state) => state.modalErr);
-    const [price, setPrice] = useState('500')
-    const [availability, setAvailability] = useState('1')
+    const [price, setPrice] = useState('')
+    const [availability, setAvailability] = useState('')
   
     const dispatch = useDispatch()
 

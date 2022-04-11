@@ -5,12 +5,12 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import LuggageIcon from '@mui/icons-material/Luggage';
 import WorkIcon from '@mui/icons-material/Work';
 
-export const ModalDetails = ( { setShowDetails, idDetails } ) => {
+export const ModalDetailsReturn = ( { setShowDetails, idDetails, detailsReturn } ) => {
 
-  
   const handleHideDetails = () => {
       setShowDetails( false )
   }
+  console.log(detailsReturn[0])
   const getHoursStop = (departure, arrival) => {
     let num1 = Date.parse(departure)
     let num2 = Date.parse(arrival)
@@ -31,7 +31,7 @@ export const ModalDetails = ( { setShowDetails, idDetails } ) => {
             <ClearIcon  className={styles.iconHide}
                         onClick={ handleHideDetails } />
           {
-            idDetails.route.map( el => (
+            detailsReturn.map( el => (
               <div key={el.id} className={styles.containerPrincipal} >
                 <h3 style={{color:'#17202A', marginTop:'-10px', marginLeft:'10px'}} >{ el.airline }</h3>
                 <div className={styles.containerFromTo}>
@@ -63,11 +63,22 @@ export const ModalDetails = ( { setShowDetails, idDetails } ) => {
               </div>
             ))
           }
-          <div className={styles.containerDurationFinal}> 
+
+          { 
+            detailsReturn[0].return === 0 ?
+            <div className={styles.containerDurationFinal}> 
+                <h4><span style={{color:'#293441'}}>Duration final: </span>
+                    { getHours(idDetails.duration.departure)[0] !== 0 && getHours(idDetails.duration.departure)[0]+'h ' } 
+                    { getHours(idDetails.duration.departure)[1]}m </h4>  
+            </div>
+            :
+            <div className={styles.containerDurationFinal}> 
             <h4><span style={{color:'#293441'}}>Duration final: </span>
-                { getHours(idDetails.duration.total)[0] !== 0 && getHours(idDetails.duration.total)[0]+'h ' } 
-                { getHours(idDetails.duration.total)[1]}m </h4>  
-          </div>
+                { getHours(idDetails.duration.return)[0] !== 0 && getHours(idDetails.duration.return)[0]+'h ' } 
+                { getHours(idDetails.duration.return)[1]}m </h4>  
+          </div> 
+          }
+
           <div className={styles.containerEquipaje}>
             <div className={styles.containerEquipajeFirst}>
               <h4>Baggage</h4>
