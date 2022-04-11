@@ -1,4 +1,4 @@
-import React, {useState, useDispatch} from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -31,7 +31,6 @@ zip: '',
 genre: '',
 vaccinated: ''
 })
-const dispatch = useDispatch();
 
 const [dniError, setDniError] = useState(false);
 const [dniErrorMsg, setDniErrorMsg] = useState('');
@@ -92,18 +91,17 @@ function handleSubmit(e){
   //dispatch(nombreDeLaRuta(form))
   setForm({
     dni: '',
-  age: '',
-  phone: '',
-  country:'',
-  state: '',
-  city: '',
-  zip: '',
-  genre: '',
-  vaccinated: ''
-
+    age: '',
+    phone: '',
+    country:'',
+    state: '',
+    city: '',
+    zip: '',
+    genre: '',
+    vaccinated: ''
   });
   <Alert severity="success">Form created successufully</Alert>
-
+  }
 return (
 <div>
 
@@ -260,6 +258,5 @@ return (
 </div>
 )
 }
-
 
 export default UserProfileForm

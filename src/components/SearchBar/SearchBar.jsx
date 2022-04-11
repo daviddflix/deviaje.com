@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import s from "./SearchBar.module.css";
-import { useDispatch } from "react-redux";
-import { getFlightsInfo } from "../../Redux/actions/actions";
+import { useSelector, useDispatch } from "react-redux";
+import { getFlightsInfo, getFlightsInfoToFrom, setValuesInputs } from "../../Redux/actions/actions";
 import validate from '../Landing/utils/validate'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup'
@@ -10,13 +10,27 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 
 function SearchBar( { setShowLoading } ) {
-  const dispatch = useDispatch();
-  // const flights = useSelector((state) => state.allFlights);
-  
 
+  const dispatch = useDispatch();
+  const dataInputs = useSelector((state) => state.dataInputs);
+  const [ toFrom, setToFrom ] = useState({name:''})
+  
   let handleInputChange = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+  const handleInputChangeRadio = (e) => {
+    if(e.target.value === 'true'){
+      setToFrom(prevData => ({
+        ...prevData,
+        [e.target.name]: true
+      }))
+    }else{
+      setToFrom(prevData => ({
+        ...prevData,
+        [e.target.name]: false
+      }))
+    }
+  }
 
   const [input, setInput] = useState({
     fly_from: "",
@@ -30,18 +44,34 @@ function SearchBar( { setShowLoading } ) {
     dateFrom: "",
     dateTo: "",
   });
+  useEffect(() =>{
+    setInput( dataInputs )
+    setToFrom( state => ({...state, name:dataInputs.toFrom }))
+  },[])
 
-  async function handleClick(e) {
+  const handleClick = (e) => {
     e.preventDefault();
     setError( validate( input ))
     if( Object.keys( validate( input )).length === 0 ){
+      const newInput = {
+        fly_from: input.fly_from,
+        fly_to: input.fly_to,
+        dateFrom: input.dateFrom,
+        dateTo: input.dateTo,
+        toFrom: toFrom.name
+      } 
+      dispatch(setValuesInputs( newInput ))
       setShowLoading( true )  
-      await  dispatch(getFlightsInfo(input));
-      setShowLoading( false )
+      if( newInput.toFrom === true ){
+        dispatch( getFlightsInfoToFrom( input ))
+        setShowLoading( false )
+      }else{
+        dispatch(getFlightsInfo( input ));
+        setShowLoading( false )
+      }
     }
-    
   }
-  
+
   return (
     <div className={s.display}>
       <div className={s.flights}>Flights</div>
@@ -50,10 +80,12 @@ function SearchBar( { setShowLoading } ) {
             className={s.radio}
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
+            name="name"
+            value={toFrom.name}
+            onChange={handleInputChangeRadio}
           >
-            <FormControlLabel value="female" control={<Radio />} label="Ida" sx={{marginLeft:'1px'}} />
-            <FormControlLabel value="male" control={<Radio />} label="Vuelta" />
+            <FormControlLabel value={false} control={<Radio />} label="departure" sx={{marginLeft:'1px'}} />
+            <FormControlLabel value={true} control={<Radio />} label="return" sx={{marginLeft:'10px'}}  />
           </RadioGroup>
         </FormControl>
         <input
@@ -109,27 +141,6 @@ function SearchBar( { setShowLoading } ) {
         Search
       </button>
     </div>
-    // <div className={s.display}>
-    //     <div className={s.flights}>Flights</div>
-    //     <input
-    //         type="text"
-    //         placeholder="Enter departure city"
-    //         className={s.input}
-    //     />
-    //     <input
-    //         type="text"
-    //         placeholder="Enter destination city"
-    //         className={s.input}
-    //     />
-    //     <div className={s.dates}>
-    //         <input type="date" placeholder="Date" className={s.date} />
-    //         <input type="date" className={s.date} />
-    //     </div>
-    //     <button className={s.btn}>
-    //         <SearchIcon />
-    //         Search
-    //     </button>
-    // </div>
   );
 }
 
