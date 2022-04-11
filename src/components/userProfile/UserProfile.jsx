@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import Box from '@mui/material/Box';
@@ -5,7 +6,7 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import form from './UserProfileForm'
+
 
 
 const UserProfile = () => {

@@ -31,6 +31,7 @@ function App() {
         <Route exact path="/about">
           <About />
         </Route>
+         
         <Route exact path="/top">
           <CardDestination />
         </Route>
@@ -42,6 +43,7 @@ function App() {
         <Route exact path="/userprofile">
           <UserProfile />
         </Route>
+      
 
         
         <Route exact path='/success'>
@@ -56,9 +58,6 @@ function App() {
           <FlightDetail />
         </Route>
 
-      
-        
-      
       
       </Switch>
      
