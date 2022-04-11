@@ -1,10 +1,11 @@
-import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION } from "../actions/constants";
+import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION} from "../actions/constants";
 
 const initialState = {
   flights: [],
   allFlights: [],
   modalErr : false,
-  topDestination: []
+  destination: [],
+ 
 };
 
 export default function reducer(state = initialState, action) {
@@ -41,14 +42,14 @@ export default function reducer(state = initialState, action) {
             allFlights: filterDate,
           }
           case PRICE_FILTER:
-          const filterPrice = action.payload?  state.flights.data.filter(p =>  (p.price * 1.8).toFixed() <= action.payload) : alert('no flights')
+          const filterPrice = action.payload && state.flights.data.filter(p =>  (p.price * 1.8).toFixed() <= action.payload)
           return{
             ...state,
             allFlights: filterPrice,
           };
 
           case AVAILABILITY_FILTER:
-          const filterAvailability = state.flights.data.filter(p =>  Object.values(p.availability)[0] <= action.payload)
+          const filterAvailability = action.payload && state.flights.data.filter(p =>  Object.values(p.availability)[0] <= action.payload)
            
           return{
             ...state,
@@ -66,8 +67,12 @@ export default function reducer(state = initialState, action) {
           
           return{
             ...state,
-            topDestination: action.payload
+            destination: action.payload
           }
+
+       
+
+           
 
       default:
         return {...state};

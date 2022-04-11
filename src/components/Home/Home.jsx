@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 
 import { Paginado } from "../Paginado/paginado";
 import { Loading } from "../loading/Loading";
+import Top from "../TopDestinations/destination";
 
 
 export default function Home() {
@@ -31,7 +32,7 @@ export default function Home() {
   const [flightsPerPage,  ] = useState(10)
   const indexOfLastFlight = currentPage * flightsPerPage; // 10
   const indexOfFirstFlight = indexOfLastFlight - flightsPerPage // 10 - 10 = 0 
-  const currentFlights = flights.slice(indexOfFirstFlight, indexOfLastFlight)
+  const currentFlights = flights && flights?.slice(indexOfFirstFlight, indexOfLastFlight)
   
   const pagination = (pageNumber) => {
     setcurrentPage(pageNumber)
@@ -66,7 +67,7 @@ export default function Home() {
           showLoading && <div style={{marginBottom:'100%'}} ><Loading /></div> 
         }
         {
-         
+         currentFlights?
          currentFlights?.map((f) => 
 
             (
@@ -135,11 +136,11 @@ export default function Home() {
                 </div>
             </div>
           )
-        ) 
+        ) : <Top/>
         }
          <Paginado
     flightsPerPage={flightsPerPage}
-    flights={flights.length}
+    flights={flights && flights.length}
     pagination={pagination}
     currentPage={currentPage}
     />

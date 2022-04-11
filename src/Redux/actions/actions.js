@@ -1,4 +1,4 @@
-import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION  } from "./constants";
+import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION, FLIGHTS_INFO  } from "./constants";
 import { axiosWithOutToken } from '../../services/axios'
  
 
@@ -54,17 +54,20 @@ export const topdestination = (payload) => {
     };
 };
 
+
+
+
 export const  rutaTop = () => {
 
   return async (dispatch) => {
 
     try {
         const response = await axiosWithOutToken(
-            `/topdestination?city=buenos%20aires`
+            `topdestination?city=bariloche&q=8`
         )
         return dispatch({
             type: TOP_DESTINATION,
-            payload: response.data,
+            payload: response,
         });  
     } catch ( err ) {
         console.log( err.response );

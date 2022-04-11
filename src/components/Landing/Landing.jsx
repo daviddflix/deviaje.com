@@ -7,7 +7,7 @@ import s from "./Landing.module.css";
 import validate from './utils/validate';
 import { Modal } from '../../components/modal/index'
 import { Loading } from "../loading/Loading";
-import { TopDestination } from "../TopDestinations/TopDestination";
+import { TopDestination } from "../TopDestinations/carousel";
 
 function Landing() {
 
@@ -36,10 +36,10 @@ function Landing() {
     }))
   }
 
-  const handleClick = async (e) => {
+  const handleClick =  (e) => {
     e.preventDefault()
     setShowLoading( true )
-    const res =  await dispatch(getFlightsInfo(input))
+    const res =  dispatch(getFlightsInfo(input))
     if( res.payload === true ){ return setShowLoading( false )}
     setShowLoading( false )
     history.push('/home')

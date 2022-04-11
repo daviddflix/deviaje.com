@@ -29,6 +29,10 @@ const handleForm = ()=> {
   history.push('/userconfig')
 }
 
+const handleProfile = ()=> {
+  history.push('/userprofile')
+}
+
   const handleClickLogout = () => {
     logout();
   };
@@ -68,7 +72,7 @@ const handleForm = ()=> {
           <div>
            <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
             <NavLink activeClassName={styles.active} className={styles.link} to='/about'>About Us</NavLink>
-            <NavLink activeClassName={styles.active} className={styles.link} to='/top'>Top Destinations</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/top'>Offers</NavLink>
           </div>
 
           <div className={styles.containerButton}>
@@ -94,7 +98,7 @@ const handleForm = ()=> {
                     'aria-labelledby': 'basic-button'
                   }}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleProfile}>Profile</MenuItem>
                   <MenuItem onClick={handleForm}>Settings</MenuItem>
                   <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
                 </Menu>

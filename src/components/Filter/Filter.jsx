@@ -14,18 +14,16 @@ import FormLabel from '@mui/material/FormLabel';
 
 function Filter( ) {
   
-    const flights = useSelector(state => state.allFlights)
-    const [price, setPrice] = useState('500')
-    const [availability, setAvailability] = useState('1')
+    // const flights = useSelector(state => state.allFlights)
+    const [price, setPrice] = useState('')
+    const [availability, setAvailability] = useState('')
   
     const dispatch = useDispatch()
 
     const handlecheck = (e) => {
-        if(e.target.checked && flights){
+        if(e.target.checked){
             dispatch(stopsFilter(e.target.value))
-        } else {
-            alert('no flights')
-        }
+        } 
     }
 
     const handleDate = (e) => {
@@ -34,10 +32,11 @@ function Filter( ) {
     }
 
    useEffect(() => {
-       if(flights){
-        dispatch(priceFilter(price))
-       } 
-   }, [dispatch, price, flights])
+       if(price){
+           dispatch(priceFilter(price))
+       }
+   }, [dispatch, price])
+     
 
  
     let handleInputPrice = (e) => {
@@ -45,10 +44,10 @@ function Filter( ) {
       };
 
       useEffect(()=> {
-          if(flights){
+          if(availability){
               dispatch(availabilityFilter(availability))
           }
-      }, [dispatch, availability, flights])
+      }, [dispatch, availability])
 
       let handleInputavailability = (e) => {
         setAvailability(e.target.value);
