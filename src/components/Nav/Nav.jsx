@@ -27,6 +27,12 @@ const Nav = () => {
 
 const handleForm = ()=> {
   history.push('/userconfig')
+  setAnchorEl(null)
+}
+
+const handleProfile = ()=> {
+  history.push('/userprofile')
+  setAnchorEl(null)
 }
 
   const handleClickLogout = () => {
@@ -46,20 +52,7 @@ const handleForm = ()=> {
   }, [isAuthenticated])
 
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     axiosWithOutToken('/postUser', user, 'post')
-  //       .then(res => {
-  //         console.log(res.data)
-  //       })
-  //       .catch(err => {
-  //         console.log(err)
-  //       })
-  //   }
-  // }, [isAuthenticated])
-
-
-  return (
+   return (
     <header className='header-container-general'>
       <div  style={{ borderBottom: '3px solid #d5e3e6' }}>
         <div
@@ -81,6 +74,7 @@ const handleForm = ()=> {
           <div>
            <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
             <NavLink activeClassName={styles.active} className={styles.link} to='/about'>About Us</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/top'>Top Destinations</NavLink>
           </div>
 
           <div className={styles.containerButton}>
@@ -106,7 +100,7 @@ const handleForm = ()=> {
                     'aria-labelledby': 'basic-button'
                   }}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleProfile}>Profile</MenuItem>
                   <MenuItem onClick={handleForm}>Settings</MenuItem>
                   <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
                 </Menu>

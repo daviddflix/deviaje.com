@@ -1,12 +1,13 @@
 import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, 
   DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, GET_INPUTS, 
-  GET_FLIGHTS_INFO_FROM } from "../actions/constants";
+  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION } from "../actions/constants";
 
 const initialState = {
   flights: [],
   allFlights: [],
   dataInputs: {},
   modalErr : false,
+  topDestination: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -71,13 +72,21 @@ export default function reducer(state = initialState, action) {
           allFlights: [],
           modalErr: action.payload
         }
+
         case GET_INPUTS:
           return{
             ...state,
             dataInputs: action.payload
 
           }
+        case TOP_DESTINATION:
+          
+          return{
+            ...state,
+            topDestination: action.payload
+          }
+
       default:
-        return state;
+        return {...state};
   }
 }

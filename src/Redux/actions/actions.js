@@ -1,6 +1,7 @@
-import { GET_FLIGHTS_INFO, GET_FLIGHTS_INFO_FROM, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, 
-  PRICE_FILTER, SCHEDULE_FILTER, AVAILABILITY_FILTER, GET_INPUTS  } from "./constants";
+import { GET_FLIGHTS_INFO, GET_FLIGHTS_INFO_FROM, GET_INPUTS, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION  } from "./constants";
+
 import { axiosWithOutToken } from '../../services/axios'
+
 
 export const getFlightsInfo = (payload) => {
   
@@ -38,6 +39,55 @@ export const getFlightsInfoToFrom = (payload) => {
         )
         return dispatch({
             type: GET_FLIGHTS_INFO_FROM,
+            payload: response.data,
+        });
+      } catch ( err ) {
+        console.log( err.response );
+        return dispatch({
+            type: FLIGHTS_NO_FOUND,
+            payload: true,
+        });
+      }
+    };
+};
+
+export const topdestination = (payload) => {
+
+  return async (dispatch) => {
+   
+    const d = new Date().toISOString()
+    const date = d.slice(0,10)
+    const modDate = date.split('-').reverse().join('/')
+
+
+    try {
+        const response = await axiosWithOutToken(
+            `/getflights?fly_from=buenos%20aires&fly_to=${payload}&date_from=${modDate}&date_to=20/04/2022`
+        )
+        return dispatch({
+            type: GET_FLIGHTS_INFO,
+            payload: response.data,
+        });  
+    } catch ( err ) {
+        console.log( err.response );
+        return dispatch({
+            type: FLIGHTS_NO_FOUND,
+            payload: true,
+        });
+      }
+    };
+};
+
+export const  rutaTop = () => {
+
+  return async (dispatch) => {
+
+    try {
+        const response = await axiosWithOutToken(
+            `http://localhost:4001/topdestination?city=bariloche`
+        )
+        return dispatch({
+            type: TOP_DESTINATION,
             payload: response.data,
         });  
     } catch ( err ) {
@@ -90,5 +140,6 @@ export const setValuesInputs = (value) => {
     payload: value
   }
 }
+
 
 

@@ -60,6 +60,10 @@ body{
     transform: scale(.99);
 }
 
+.btn:hover{
+    background-color: #2979ff;
+}
+
 .flex{
     position: absolute;
     top: 50%;
