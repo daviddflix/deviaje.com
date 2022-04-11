@@ -1,8 +1,11 @@
-import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION} from "../actions/constants";
+import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, 
+  DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, GET_INPUTS, 
+  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION } from "../actions/constants";
 
 const initialState = {
   flights: [],
   allFlights: [],
+  dataInputs: {},
   modalErr : false,
   destination: [],
  
@@ -19,6 +22,13 @@ export default function reducer(state = initialState, action) {
         allFlights: action.payload.data
       };
 
+      case GET_FLIGHTS_INFO_FROM:
+        return {
+          ...state,
+          flights: action.payload,
+          allFlights: action.payload.data,
+      };
+      
       case STOP_FILTER:
         console.log(action.payload)
         let filterStops = action.payload === 'direct'? state.flights.data.filter(p => {
@@ -63,6 +73,13 @@ export default function reducer(state = initialState, action) {
           allFlights: [],
           modalErr: action.payload
         }
+
+        case GET_INPUTS:
+          return{
+            ...state,
+            dataInputs: action.payload
+
+          }
         case TOP_DESTINATION:
           
           return{
