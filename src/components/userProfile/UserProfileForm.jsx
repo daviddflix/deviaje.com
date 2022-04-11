@@ -155,7 +155,6 @@ const UserProfileForm = () => {
                   color='success'
                   onChange={(e) => handleChangeDni(e)} />
               </div>
-
               <div>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DesktopDatePicker
