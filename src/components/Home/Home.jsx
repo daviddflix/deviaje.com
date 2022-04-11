@@ -10,7 +10,6 @@ import { ModalDetails } from '../modalDetails/ModalDetails';
 import Popup from 'reactjs-popup';
 import { CardScaleDetails } from "./CardScaleDetails";
 import { Modal } from "../modal";
-import { Link } from "react-router-dom";
 
 import { Paginado } from "../Paginado/paginado";
 import { Loading } from "../loading/Loading";
@@ -20,7 +19,7 @@ import swal from 'sweetalert';
 
 
 export default function Home() {
-  const { isAuthenticated, user, loginWithPopup } = useAuth0()
+  const { isAuthenticated, user } = useAuth0()
   const history = useHistory()
   const flights = useSelector((state) => state.allFlights);
   const modalErr = useSelector((state) => state.modalErr);

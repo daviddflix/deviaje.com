@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import styled from "@emotion/styled";
 import axios from "axios";
@@ -36,7 +36,7 @@ const CardElementContainer = styled.div`
   }
 `;
 
-const PaymentForm = ({ price, onSuccessfulCheckout }) => {
+const PaymentForm = ({ price }) => {
   const history = useHistory()
   const [processing, setProcessing] = useState(false);
   const [checkoutError, setCheckoutError] = useState();
@@ -102,7 +102,6 @@ const PaymentForm = ({ price, onSuccessfulCheckout }) => {
         button: "Close",
       });
       history.push('/')
-      // onSuccessfulCheckout();
       dispatch(getPassengers(1))
 
     } catch (err) {

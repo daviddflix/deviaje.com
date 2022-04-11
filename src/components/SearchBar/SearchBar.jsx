@@ -13,7 +13,6 @@ import RemoveIcon from '@mui/icons-material/Remove';
 
 function SearchBar({ setShowLoading }) {
   const dispatch = useDispatch();
-  // const flights = useSelector((state) => state.allFlights);
   const [passenger, setPassenger] = useState(1)
 
   let handleInputChange = (e) => {
@@ -43,9 +42,6 @@ function SearchBar({ setShowLoading }) {
       setShowLoading(false)
     }
   }
-
-  // const [pass, setPass] = useState(1)
-  // console.log(pass)
 
   return (
     <div className={s.display}>

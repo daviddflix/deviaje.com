@@ -35,7 +35,6 @@ function PassengersInfo({ setShowPayment }) {
             ...input,
             [e.target.name]: e.target.value
         })
-
     }
 
     function handleNextPassenger() {
@@ -55,8 +54,6 @@ function PassengersInfo({ setShowPayment }) {
 
     console.log(passengers)
     
-    // window.scrollTo(0, 0)
-
     return (
         <div>
             <StepperHorizontal step={1} />
@@ -108,13 +105,10 @@ function PassengersInfo({ setShowPayment }) {
 
                     </div>
 
-
-
                 </div>
 
                 <div className={s.display}>
                     <PaymentDetail price={flight[0].price} />
-
                     <FlightInfo departure={flight[0].flyFrom}
                         arrival={flight[0].flyTo}
                         date={flight[0].local_departure}
@@ -127,9 +121,9 @@ function PassengersInfo({ setShowPayment }) {
 
             </div>
 
-            {passengers.length === pass ? <Button variant="outlined" onClick={() => setShowPayment(true)} sx={{ marginLeft: 5.5, marginTop: 3.5 }}>Continue to payment</Button> : <Button variant="outlined" disabled onClick={() => setShowPayment(true)} sx={{ marginLeft: 5.5, marginTop: 3.5 }}>Continue to payment</Button>}
-
-            {/* <Button variant="outlined" onClick={() => setShowPayment(true)} sx={{ marginLeft: 5.5, marginTop: 3.5 }}>Continue to payment</Button> */}
+            {
+                passengers.length === pass ? <Button variant="outlined" onClick={() => setShowPayment(true)} sx={{ marginLeft: 5.5, marginTop: 3.5 }}>Continue to payment</Button> : <Button variant="outlined" disabled onClick={() => setShowPayment(true)} sx={{ marginLeft: 5.5, marginTop: 3.5 }}>Continue to payment</Button>
+            }
 
         </div>
     );
