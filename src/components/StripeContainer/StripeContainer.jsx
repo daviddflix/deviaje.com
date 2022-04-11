@@ -2,6 +2,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
 import PaymentForm from '../PaymentForm/PaymentForm';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 

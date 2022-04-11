@@ -1,39 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import s from './Filter.module.css';
 import { dateFilter, stopsFilter, priceFilter, availabilityFilter } from '../../Redux/actions/actions';
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import {Modal} from '../modal/index'
-
-
-
 
 
 function Filter( ) {
-    const modalErr = useSelector((state) => state.modalErr);
-    const [price, setPrice] = useState('500')
-    const [check, setCheck] = useState('')
-    const [availability, setAvailability] = useState('1')
-   
+  
+    // const flights = useSelector(state => state.allFlights)
+    const [price, setPrice] = useState('')
+    const [availability, setAvailability] = useState('')
+  
     const dispatch = useDispatch()
 
     const handlecheck = (e) => {
         if(e.target.checked){
-            setCheck(e.target.value)
-        }
+            dispatch(stopsFilter(e.target.value))
+        } 
     }
 
-     useEffect(()=> {
-         if(check){
-       dispatch(stopsFilter(check))
-         }
-        
-     }, [check])
-    
     const handleDate = (e) => {
         e.preventDefault();  
         dispatch(dateFilter(e.target.value))
@@ -41,9 +30,11 @@ function Filter( ) {
 
    useEffect(() => {
        if(price){
-        dispatch(priceFilter(price))
+           dispatch(priceFilter(price))
        }
-   }, [ price])
+   }, [dispatch, price])
+     
+
  
     let handleInputPrice = (e) => {
         setPrice(e.target.value);
@@ -53,18 +44,15 @@ function Filter( ) {
           if(availability){
               dispatch(availabilityFilter(availability))
           }
-      }, [availability])
+      }, [dispatch, availability])
 
       let handleInputavailability = (e) => {
         setAvailability(e.target.value);
       };
 
-
+      
     return (
         <div className={s.filters}>
-             {
-      modalErr && <Modal title='No flights found' /> 
-    }
               <div className={s.container}>
                 <FormControl>
                 <FormLabel id="demo-radio-buttons-group-label">Stops</FormLabel>
@@ -73,20 +61,15 @@ function Filter( ) {
                     defaultValue="direct"
                     name="radio-buttons-group"
                 >
-                    <FormControlLabel value="direct" control={<Radio />} label="Non-Stop" onChange={handlecheck} />
-                    <FormControlLabel value="1" control={<Radio />} label="1 Stop" onChange={handlecheck} />
-                    <FormControlLabel value="2" control={<Radio />} label="2 Stop or more"  onChange={handlecheck}/>
+                    <FormControlLabel value="direct" control={<Radio />} label="Non-Stop" onClick={handlecheck} />
+                    <FormControlLabel value="1" control={<Radio />} label="1 Stop" onClick={handlecheck} />
+                    <FormControlLabel value="2" control={<Radio />} label="2 Stop or more"  onClick={handlecheck}/>
                 </RadioGroup>
                 </FormControl>
               </div>
                
                 
                <div className={s.container2}>
-                    {/* <label className={s.title}>Sort by</label>
-                <div className={s.label}>
-                    <input  className={s.checkbox}  type="checkbox" value='date' checked={check} onChange={handleDate}/>
-                    <label  className={s.label} >Upcoming flights</label>
-                </div> */}
                 <FormControl>
                 <FormLabel id="demo-radio-buttons-group-label">Sort by</FormLabel>
                 <RadioGroup

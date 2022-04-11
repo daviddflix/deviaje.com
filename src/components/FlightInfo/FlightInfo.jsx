@@ -12,8 +12,8 @@ function FlightInfo({departure, arrival, date, cityD, cityA, timeD, timeA, durat
         hour = (hour < 10)? '0' + hour : hour;
         var minute = Math.floor((duration / 60) % 60);
         minute = (minute < 10)? '0' + minute : minute;
-        var second = duration % 60;
-        second = (second < 10)? '0' + second : second;
+        // var second = duration % 60;
+        // second = (second < 10)? '0' + second : second;
         return hour + ':' + minute ;
       }
 

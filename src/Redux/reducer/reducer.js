@@ -1,10 +1,14 @@
-import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, GET_PASSENGERS } from "../actions/constants";
+import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, 
+  DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, GET_INPUTS, 
+  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION, GET_PASSENGERS } from "../actions/constants";
 
 const initialState = {
   flights: [],
   allFlights: [],
   modalErr : false,
-  passengers: 1
+  passengers: 1,
+  dataInputs: {},
+  destination: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -18,6 +22,13 @@ export default function reducer(state = initialState, action) {
         allFlights: action.payload.data
       };
 
+      case GET_FLIGHTS_INFO_FROM:
+        return {
+          ...state,
+          flights: action.payload,
+          allFlights: action.payload.data,
+      };
+      
       case STOP_FILTER:
         console.log(action.payload)
         let filterStops = action.payload === 'direct'? state.flights.data.filter(p => {
@@ -41,14 +52,14 @@ export default function reducer(state = initialState, action) {
             allFlights: filterDate,
           }
           case PRICE_FILTER:
-          const filterPrice =  state.flights.data.filter(p =>  (p.price * 1.8).toFixed() <= action.payload)
+          const filterPrice = action.payload && state.flights.data.filter(p =>  (p.price * 1.8).toFixed() <= action.payload)
           return{
             ...state,
             allFlights: filterPrice,
           };
 
           case AVAILABILITY_FILTER:
-          const filterAvailability = state.flights.data.filter(p =>  Object.values(p.availability)[0] == action.payload)
+          const filterAvailability = action.payload && state.flights.data.filter(p =>  Object.values(p.availability)[0] <= action.payload)
            
           return{
             ...state,
@@ -68,7 +79,20 @@ export default function reducer(state = initialState, action) {
             ...state,
             passengers: action.payload
           }
+        case GET_INPUTS:
+          return{
+            ...state,
+            dataInputs: action.payload
+
+          }
+        case TOP_DESTINATION:
+          
+          return{
+            ...state,
+            destination: action.payload
+          } 
+
       default:
-        return state;
+        return {...state};
   }
 }

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Alert from '@mui/material/Alert';
@@ -15,13 +15,18 @@ import countries from './Countries';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import { isNumberValid, isTwoNumberValid } from './Validations'
-import { useDispatch } from 'react-redux'
+import { isNumberValid } from './Validations'
+import { axiosWithOutToken } from '../../services/axios'
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+
 
 const UserProfileForm = () => {
+  const { isAuthenticated } = useAuth0();
   const [form, setForm] = useState({
     dni: '',
-    age: '',
+    age: new Date(),
     phone: '',
     country: '',
     state: '',
@@ -30,16 +35,24 @@ const UserProfileForm = () => {
     genre: '',
     vaccinated: ''
   })
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const [dniError, setDniError] = useState(false);
   const [dniErrorMsg, setDniErrorMsg] = useState('');
-  const [ageError, setAgeError] = useState(false);
-  const [ageErrorMsg, setAgeErrorMsg] = useState('');
+  const [value, setValue] = useState(new Date());
   const [phoneError, setPhoneError] = useState(false);
   const [phoneErrorMsg, setPhoneErrorMsg] = useState('');
 
   function handleChange(e) {
+    if (e.target.value.length >= 0) {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value
+      })
+    }
+  }
+
+  function handleChangeDni(e) {
     if (e.target.value.length >= 0) {
       setForm({
         ...form,
@@ -53,23 +66,28 @@ const UserProfileForm = () => {
         setDniError(false)
         setDniErrorMsg('')
       }
-      //VALIDACION EDAD
-      if (!isNumberValid(e.target.value)) {
-        setAgeError(true)
-        setAgeErrorMsg('Debe ser solo número')
+    }
+    else {
+      setDniError(false)
+      setDniErrorMsg('')
+    }
+  }
 
-      } else if (e.target.value < 18) {
-        setAgeError(true)
-        setAgeErrorMsg('Debes ser mayor de edad')
+  function handleChangeAge(e) {
+    if (e.target.value.length >= 0) {
+      setForm({
+        ...form,
+        [e.target.name]: value
+      })
+    }
+  }
 
-      } else if (isTwoNumberValid(e.target.value)) {
-        setAgeError(true)
-        setAgeErrorMsg('La edad no puede tener mas de 2 digitos')
-
-      } else {
-        setAgeError(false)
-        setAgeErrorMsg('')
-      }
+  function handleChangePhone(e) {
+    if (e.target.value.length >= 0) {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value
+      })
       //VALIDACION PHONE
       if (!isNumberValid(e.target.value)) {
         setPhoneError(true)
@@ -79,36 +97,42 @@ const UserProfileForm = () => {
         setPhoneErrorMsg('')
       }
     } else {
-      setDniError(false)
-      setDniErrorMsg('')
+      setPhoneError(false)
+      setPhoneErrorMsg('')
     }
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    axiosWithOutToken('/updatepersonalinfo', form, 'POST')
+      .then(res => {
+        console.log(res.data)
+        setForm({
+          dni: '',
+          age: new Date(),
+          phone: '',
+          country: '',
+          state: '',
+          city: '',
+          zip: '',
+          genre: '',
+          vaccinated: ''
+
+        });
+        <Alert severity="success">Form created successufully</Alert>
+      })
+      .catch(err => {
+        console.log(err.response)
+
+      })
 
   }
 
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    //dispatch(nombreDeLaRuta(form))
-    setForm({
-      dni: '',
-      age: '',
-      phone: '',
-      country: '',
-      state: '',
-      city: '',
-      zip: '',
-      genre: '',
-      vaccinated: ''
-
-    });
-    <Alert severity="success">Form created successufully</Alert>
-
-    return (
+  return (
+    isAuthenticated && (
       <div>
-
         <CssBaseline />
         <Typography variant="h4" align='center' gutterBottom component="div" sx={{ m: 2 }}>
-          DATOS PERSONALES
+          PERSONAL INFO
         </Typography>
 
         <Container maxWidth="xl" align='center'>
@@ -117,10 +141,10 @@ const UserProfileForm = () => {
               <div>
                 <TextField
                   required
+                  sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
                   error={dniError}
                   helperText={dniErrorMsg}
                   InputLabelProps={{ shrink: true }}
-                  inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                   id="standard-required"
                   label="DNI/Passport"
                   name='dni'
@@ -128,29 +152,29 @@ const UserProfileForm = () => {
                   defaultValue=""
                   variant="standard"
                   color='success'
-                  onChange={(e) => handleChange(e)} />
+                  onChange={(e) => handleChangeDni(e)} />
+              </div>
+              <div>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DesktopDatePicker
+                    label="Birthday"
+                    value={value}
+                    minDate={new Date('2017-01-01')}
+                    onChange={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} variant="standard"
+                      sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
+                      name='age' onChange={(e) => handleChangeAge(e)} />}
+                  />
+                </LocalizationProvider>
+
               </div>
 
               <div>
                 <TextField
                   required
-                  error={ageError}
-                  helperText={ageErrorMsg}
-                  InputLabelProps={{ shrink: true }}
-                  inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                  id="standard-required"
-                  label="Age"
-                  name='age'
-                  value={form.age}
-                  defaultValue=""
-                  variant="standard"
-                  color='success'
-                  onChange={(e) => handleChange(e)} />
-              </div>
-
-              <div>
-                <TextField
-                  required
+                  sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
                   error={phoneError}
                   helperText={phoneErrorMsg}
                   InputLabelProps={{ shrink: true }}
@@ -162,10 +186,10 @@ const UserProfileForm = () => {
                   defaultValue=""
                   variant="standard"
                   color='success'
-                  onChange={(e) => handleChange(e)} />
+                  onChange={(e) => handleChangePhone(e)} />
               </div>
 
-              <Autocomplete id="country-select-demo" sx={{ m: 1, width: '25ch' }} options={countries} autoHighlight
+              <Autocomplete id="country-select-demo" sx={{ '& > :not(style)': { ml: 2 }, height: '25px', width: '320px' }} options={countries} autoHighlight
                 getOptionLabel={(option) => option.label}
                 renderOption={(props, option) => (
                   <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
@@ -176,6 +200,7 @@ const UserProfileForm = () => {
                 )}
                 renderInput={(params) => (
                   <TextField
+                    name={countries.label}
                     variant="standard" {...params}
                     label="Choose a country"
                     value={form.country}
@@ -185,6 +210,7 @@ const UserProfileForm = () => {
               />
               <div>
                 <TextField
+                  sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
                   InputLabelProps={{ shrink: true }}
                   id="standard-required"
                   label="State"
@@ -199,6 +225,7 @@ const UserProfileForm = () => {
 
               <div>
                 <TextField
+                  sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
                   InputLabelProps={{ shrink: true }}
                   id="standard-required"
                   label="City"
@@ -212,6 +239,7 @@ const UserProfileForm = () => {
 
               <div>
                 <TextField
+                  sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
                   InputLabelProps={{ shrink: true }}
                   inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                   id="standard"
@@ -224,33 +252,33 @@ const UserProfileForm = () => {
                   onChange={(e) => handleChange(e)} />
 
               </div>
-              <div>
-                <FormControl onChange={(e) => handleChange(e)}>
-                  <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                  <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female"
-                    name="row-radio-buttons-group" color='success' row>
-                    <FormControlLabel value="female" name='genre' control={<Radio />} label="Female" />
-                    <FormControlLabel value="male" name='genre' control={<Radio />} label="Male" />
-                  </RadioGroup>
-                </FormControl>
-              </div>
-
-              <div>
-                <FormControl onChange={(e) => handleChange(e)}>
-                  <FormLabel id="demo-radio-buttons-group-label">Vaccinated</FormLabel>
-                  <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="Yes" name="row-radio-buttons-group"
-                    color='success' row>
-                    <FormControlLabel value="Yes" name='vaccinated' control={<Radio />} label="Yes" />
-                    <FormControlLabel value="No" name='vaccinated' control={<Radio />} label="No" />
-                  </RadioGroup>
-                </FormControl>
-              </div>
-
-
-              <Box sx={{ '& button': { m: 3 } }}>
+              <div style={{ "display": "flex", "marginLeft": "25px", "justifyContent": "space-between" }}>
                 <div>
-                  <Button size="medium" color="success" variant="contained"
-                    endIcon={<SendIcon />}>Submit</Button>
+                  <FormControl onChange={(e) => handleChange(e)}>
+                    <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+                    <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female"
+                      color='success' row>
+                      <FormControlLabel value="female" name='genre' control={<Radio />} label="Female" />
+                      <FormControlLabel value="male" name='genre' control={<Radio />} label="Male" />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+
+                <div>
+                  <FormControl onChange={(e) => handleChange(e)}>
+                    <FormLabel id="demo-radio-buttons-group-label">Vaccinated</FormLabel>
+                    <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="Yes"
+                      color='success' row>
+                      <FormControlLabel value="Yes" name='vaccinated' control={<Radio />} label="Yes" />
+                      <FormControlLabel value="No" name='vaccinated' control={<Radio />} label="No" />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              </div>
+              <Box sx={{ '& button': { m: 3 } }}>
+                <div style={{ "width": "450px", "position": "relative", "display": "flex", "justifyContent": "flex-end" }}>
+                  <Button type='submit' size="medium" color="success" variant="contained"
+                    endIcon={<SendIcon />} onChange={(e) => handleSubmit(e)}>Submit</Button>
                 </div>
               </Box>
             </Box>
@@ -258,7 +286,8 @@ const UserProfileForm = () => {
         </Container>
       </div>
     )
-  }
+  )
 }
 
-  export default UserProfileForm
+
+export default UserProfileForm;
