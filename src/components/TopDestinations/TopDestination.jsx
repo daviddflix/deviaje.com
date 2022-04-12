@@ -25,7 +25,7 @@ export  function TopDestination(){
         coordinates:{lat:"", lng:""}
     })
     const [ showLoading, setShowLoading ] = useState( false )
-    console.log(location)
+    //console.log(location)
 
     
     const dispatch = useDispatch()

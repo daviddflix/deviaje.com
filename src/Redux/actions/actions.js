@@ -1,4 +1,5 @@
-import { GET_FLIGHTS_INFO, GET_FLIGHTS_INFO_FROM, GET_INPUTS, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION  } from "./constants";
+import { GET_FLIGHTS_INFO, GET_FLIGHTS_INFO_FROM, GET_INPUTS, FLIGHTS_NO_FOUND, STOP_FILTER,
+       DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION, SHOW_LOADING, CLEAR_STATES  } from "./constants";
 
 import { axiosWithOutToken } from '../../services/axios'
 
@@ -9,6 +10,13 @@ export const getFlightsInfo = (payload) => {
     let fechaModificada = payload.dateFrom.split("-").reverse().join("/");
     let fechaModificada2 = payload.dateTo.split("-").reverse().join("/");
 
+    dispatch({
+      type:CLEAR_STATES
+    })
+    dispatch({
+      type: SHOW_LOADING
+    })
+    
     try {
         const response = await axiosWithOutToken(
             `/getflights?fly_from=${payload.fly_from}&fly_to=${payload.fly_to}&date_from=${fechaModificada}&date_to=${fechaModificada2}`
@@ -33,13 +41,20 @@ export const getFlightsInfoToFrom = (payload) => {
     let fechaModificada = payload.dateFrom.split("-").reverse().join("/");
     let fechaModificada2 = payload.dateTo.split("-").reverse().join("/");
     
+    dispatch({
+      type:CLEAR_STATES
+    })
+
+    dispatch({
+      type: SHOW_LOADING
+    })
     try {
         const response = await axiosWithOutToken(
             `/getflights?fly_from=${payload.fly_from}&fly_to=${payload.fly_to}&date_from=${fechaModificada}&date_to=${fechaModificada2}&return_from=${fechaModificada}&return_to=${fechaModificada2}`
         )
         return dispatch({
             type: GET_FLIGHTS_INFO_FROM,
-            payload: response.data,
+            payload: response.data
         });
       } catch ( err ) {
         console.log( err.response );

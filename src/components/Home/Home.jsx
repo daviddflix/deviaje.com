@@ -15,6 +15,7 @@ import { ModalDetailsReturn } from "../modalDetails/modalDetailsReturn";
 export default function Home() {
   
   const flights = useSelector((state) => state.allFlights);
+  const loading = useSelector((state) => state.loading);
   const modalErr = useSelector((state) => state.modalErr);
   const dataInputs = useSelector((state) => state.dataInputs);
 
@@ -64,12 +65,13 @@ export default function Home() {
     }
       <div className={styles.containerSearch}>
 
-        <SearchBar setShowLoading = { setShowLoading } />
+        <SearchBar/>
         <Filter setShowLoading = { setShowLoading } />
       </div>
       <div className={styles.containerFlights}>
-        {
-          showLoading && <div style={{marginBottom:'100%'}} ><Loading /></div> 
+       
+        { 
+          loading && <div style={{marginBottom:'1500px'}}><Loading /></div>
         }
         
         {

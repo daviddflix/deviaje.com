@@ -36,7 +36,7 @@
 }
 .containerGeneral{
   display: grid;
-  justify-items: start;
+  justify-items: flex-start;
   grid-template-columns: 1fr 2fr;
   /* background-color: #bdd8e4;   */
   background-color: #bacfd8;

@@ -9,7 +9,7 @@ import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 
-function SearchBar( { setShowLoading } ) {
+function SearchBar() {
 
   const dispatch = useDispatch();
   const dataInputs = useSelector((state) => state.dataInputs);
@@ -61,13 +61,11 @@ function SearchBar( { setShowLoading } ) {
         toFrom: toFrom.name
       } 
       dispatch(setValuesInputs( newInput ))
-      setShowLoading( true )  
+      
       if( newInput.toFrom === true ){
         dispatch( getFlightsInfoToFrom( input ))
-        setShowLoading( false )
       }else{
-        dispatch(getFlightsInfo( input ));
-        setShowLoading( false )
+        dispatch(getFlightsInfo( input ))
       }
     }
   }
