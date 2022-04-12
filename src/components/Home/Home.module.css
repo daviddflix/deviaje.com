@@ -7,6 +7,7 @@
   margin-bottom: 1.8rem;
   border-radius: 1rem;
 }
+
 .home {
   flex: 73.5%; 
   position: relative;
@@ -34,10 +35,21 @@
   align-items: stretch;
   width: 90%;
 }
-.containerGeneral{
+/* .containerGeneral{
   display: grid;
   justify-items: flex-start;
+  grid-template-columns: 2fr ;
   grid-template-columns: 1fr 2fr;
+  background-color: #bdd8e4;  
+  background-color: #bacfd8;
+} */
+
+.containerGeneral{
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-start;
+  grid-template-columns: 2fr ;
+  /* grid-template-columns: 1fr 2fr; */
   /* background-color: #bdd8e4;   */
   background-color: #bacfd8;
 }
@@ -171,3 +183,4 @@
   justify-content:flex-start;
   position: relative
 }
+

@@ -1,6 +1,7 @@
-import { GET_FLIGHTS_INFO, GET_FLIGHTS_INFO_FROM, GET_INPUTS, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION  } from "./constants";
+import { GET_FLIGHTS_INFO, GET_FLIGHTS_INFO_FROM, GET_INPUTS, FLIGHTS_NO_FOUND, STOP_FILTER, DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION, GET_PASSENGERS, } from "./constants";
 
 import { axiosWithOutToken } from '../../services/axios'
+import axios from "axios";
  
 
 export const getFlightsInfo = (payload) => {
@@ -137,12 +138,18 @@ export const availabilityFilter = (value) => {
   }
 } 
 
+export const getPassengers = (payload) => {
+  return{
+    type: GET_PASSENGERS,
+    payload
+  }
+}
+
 export const setValuesInputs = (value) => {
   return{
     type: GET_INPUTS,
     payload: value
   }
 }
-
 
 

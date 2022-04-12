@@ -15,7 +15,6 @@ import { About } from "./components/About/About";
 import NoMatch from "./components/404/404";
 import CardDestination from "./components/TopDestinations/RutaTop";
 
-
 function App() {
   return (
     <div>
@@ -50,9 +49,9 @@ function App() {
           <SuccessPayment />
         </Route>
           
-        <Route  path="*">
+        {/* <Route  path="*">
           <NoMatch/>
-        </Route>
+        </Route> */}
 
         <Route exact path='/:id'>
           <FlightDetail />

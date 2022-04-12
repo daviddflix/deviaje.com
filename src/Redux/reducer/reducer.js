@@ -1,14 +1,15 @@
 import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, 
   DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, GET_INPUTS, 
-  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION } from "../actions/constants";
+  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION, GET_PASSENGERS, } from "../actions/constants";
 
 const initialState = {
   flights: [],
   allFlights: [],
-  dataInputs: {},
   modalErr : false,
+  passengers: 1,
+  dataInputs: {},
   destination: [],
- 
+  passengersInfo: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -74,6 +75,11 @@ export default function reducer(state = initialState, action) {
           modalErr: action.payload
         }
 
+        case GET_PASSENGERS:
+          return{
+            ...state,
+            passengers: action.payload
+          }
         case GET_INPUTS:
           return{
             ...state,
@@ -85,11 +91,7 @@ export default function reducer(state = initialState, action) {
           return{
             ...state,
             destination: action.payload
-          }
-
-       
-
-           
+          } 
 
       default:
         return {...state};
