@@ -23,7 +23,7 @@ import union from './assets/union.png';
 import { axiosWithOutToken } from '../../services/axios'
 import swal from 'sweetalert';
 import { useDispatch } from "react-redux";
-import { getPassengers } from "../../Redux/actions/actions";
+import { getPassengers, resetData } from "../../Redux/actions/actions";
 import StepperHorizontal from '../Stepper/StepperHorizontal';
 
 const CardElementContainer = styled.div`
@@ -101,9 +101,10 @@ const PaymentForm = ({ price }) => {
         icon: "success",
         button: "Close",
       });
+      
       history.push('/')
       dispatch(getPassengers(1))
-
+      dispatch(resetData())
     } catch (err) {
       setCheckoutError(err.message);
     }

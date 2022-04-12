@@ -1,5 +1,5 @@
 import { GET_FLIGHTS_INFO, GET_FLIGHTS_INFO_FROM, GET_INPUTS, FLIGHTS_NO_FOUND, STOP_FILTER,
-       DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES  } from "./constants";
+       DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES, GET_DATA, RESET_DATA  } from "./constants";
 
 import { axiosWithOutToken } from '../../services/axios'
 import axios from "axios";
@@ -167,4 +167,15 @@ export const setValuesInputs = (value) => {
   }
 }
 
+export const getData = (payload) => {
+  return{
+    type: GET_DATA,
+    payload
+  }
+}
 
+export function resetData(){
+  return{
+    type: RESET_DATA
+  }
+}

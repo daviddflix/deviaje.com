@@ -6,7 +6,7 @@ import PaymentDetail from '../PaymentDetail/PaymentDetail';
 import s from './PassengersInfo.module.css';
 import Button from '@mui/material/Button';
 import StepperHorizontal from '../Stepper/StepperHorizontal';
-
+import { getData } from '../../Redux/actions/actions';
 
 function PassengersInfo({ setShowPayment }) {
 
@@ -44,6 +44,7 @@ function PassengersInfo({ setShowPayment }) {
             setPassengers([
                 ...passengers,
                 input])
+            dispatch(getData(input))
             setInput({
                 name: '',
                 lastname: '',
