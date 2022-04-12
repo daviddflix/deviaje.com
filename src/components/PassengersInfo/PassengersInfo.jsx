@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import FlightInfo from '../FlightInfo/FlightInfo';
 import PaymentDetail from '../PaymentDetail/PaymentDetail';
@@ -13,8 +13,10 @@ function PassengersInfo({ setShowPayment }) {
     const flights = useSelector(state => state.allFlights)
     const { id } = useParams()
     const flight = flights?.filter(f => f.id === id)
-
+    
     const pass = useSelector(state => state.passengers)
+
+    const dispatch = useDispatch()
 
     const array = []
     for (var i = 0; i < pass; i++) {
@@ -52,7 +54,6 @@ function PassengersInfo({ setShowPayment }) {
         }
     }
 
-    console.log(passengers)
     
     return (
         <div>

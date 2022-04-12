@@ -136,9 +136,7 @@ const CardFromTo = ({ handleDetails, f }) => {
                     <h4 className={styles.taxes}>Taxes-rates:USD{flights.currency} <span>{(f.price * .8).toFixed()}</span></h4>
                     <h4 className={styles.finalPrice}>Final Price:USD{flights.currency} <span style={{fontSize:'23px', color:'#000'}}>{(f.price * 1.8).toFixed()}</span></h4>
                       
-                    {/* <Link to={`/${f.id}`}> */}
                     <button className={styles.buttonBuy} onClick={() => handleBuy(`/${f.id}`)}>Buy</button>
-                    {/* </Link> */}
 
                 </div>
             </div>
