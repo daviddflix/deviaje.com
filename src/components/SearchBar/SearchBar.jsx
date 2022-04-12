@@ -8,10 +8,12 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
   
-function SearchBar( { setShowLoading } ) {
+function SearchBar() {
+
   const dispatch = useDispatch();
   const [passenger, setPassenger] = useState(1)
   const dataInputs = useSelector((state) => state.dataInputs);
@@ -63,15 +65,13 @@ function SearchBar( { setShowLoading } ) {
         toFrom: toFrom.name
       } 
       dispatch(setValuesInputs( newInput ))
-      setShowLoading( true )  
+      
       if( newInput.toFrom === true ){
         dispatch( getFlightsInfoToFrom( input ))
         dispatch(getPassengers(passenger))
-        setShowLoading( false )
       }else{
-        dispatch(getFlightsInfo( input ));
+        dispatch(getFlightsInfo( input ))
         dispatch(getPassengers(passenger))
-        setShowLoading( false )
       }
     }
   }

@@ -15,6 +15,7 @@ import { ModalDetailsReturn } from "../modalDetails/modalDetailsReturn";
 export default function Home() {
 
   const flights = useSelector((state) => state.allFlights);
+  const loading = useSelector((state) => state.loading);
   const modalErr = useSelector((state) => state.modalErr);
   const dataInputs = useSelector((state) => state.dataInputs);
 
@@ -61,42 +62,31 @@ export default function Home() {
         modalErr && <Modal title='No flights found' />
       }
       <div className={styles.containerSearch}>
-
-        <div className={styles.containerGeneral}>
-
-          {
-            showDetails && <ModalDetails idDetails={idDetails} setShowDetails={setShowDetails} />
-          }
-          {
-            modalErr && <Modal title='No flights found' />
-          }
-          <div className={styles.containerSearch}>
-            <SearchBar setShowLoading={setShowLoading} />
-            <Filter setShowLoading={setShowLoading} />
-          </div>
-          <div className={styles.containerFlights}>
-            {
-              showLoading && <div style={{ marginBottom: '100%' }} ><Loading /></div>
-            }
-
-            {
-              dataInputs.toFrom ? currentFlights?.map((f) => (
-                <CardFromTo key={f.id} f={f} handleDetails={handleDetailsReturn} />))
-                :
-                currentFlights?.map((f) =>
-                (
-                  <CardFrom key={f.id} f={f} handleDetails={handleDetails} />
-                )
-                )
-            }
-            <Paginado
-              flightsPerPage={flightsPerPage}
-              flights={flights && flights.length}
-              pagination={pagination}
-              currentPage={currentPage}
+        <SearchBar/>
+        <Filter setShowLoading = { setShowLoading } />
+      </div>
+      <div className={styles.containerFlights}>
+       
+        { 
+          loading && <div style={{marginBottom:'1500px'}}><Loading /></div>
+        }
+        
+        {
+          dataInputs.toFrom ? currentFlights?.map((f)=>(
+            <CardFromTo key={f.id} f={f} handleDetails = { handleDetailsReturn } />)) 
+          : 
+          currentFlights?.map((f) => 
+            (
+              <CardFrom key={f.id} f={f} handleDetails = { handleDetails } />
+            )
+          ) 
+        }
+         <Paginado
+            flightsPerPage={flightsPerPage}
+            flights={flights && flights.length}
+            pagination={pagination}
+            currentPage={currentPage}
             />
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -1,15 +1,19 @@
 import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, 
   DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, GET_INPUTS, 
-  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION, GET_PASSENGERS, } from "../actions/constants";
+  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES } from "../actions/constants";
+
 
 const initialState = {
   flights: [],
   allFlights: [],
   modalErr : false,
+  topDestination: [],
+  loading: false,
   passengers: 1,
   dataInputs: {},
   destination: [],
   passengersInfo: []
+
 };
 
 export default function reducer(state = initialState, action) {
@@ -20,16 +24,29 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         flights: action.payload,
-        allFlights: action.payload.data
+        allFlights: action.payload.data,
+        loading: false
       };
+      case CLEAR_STATES:
+        return {
+          ...state,
+          flights: [],
+          allFlights: []
+        }
+      case SHOW_LOADING:
+        return{
+          ...state,
+          loading:true
+        }
 
       case GET_FLIGHTS_INFO_FROM:
         return {
           ...state,
           flights: action.payload,
           allFlights: action.payload.data,
+          loading: false
       };
-      
+    
       case STOP_FILTER:
         console.log(action.payload)
         let filterStops = action.payload === 'direct'? state.flights.data.filter(p => {
