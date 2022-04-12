@@ -1,14 +1,19 @@
 import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER, 
   DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, GET_INPUTS, 
-  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION, SHOW_LOADING, CLEAR_STATES } from "../actions/constants";
+  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES } from "../actions/constants";
+
 
 const initialState = {
   flights: [],
   allFlights: [],
-  dataInputs: {},
   modalErr : false,
   topDestination: [],
-  loading: false
+  loading: false,
+  passengers: 1,
+  dataInputs: {},
+  destination: [],
+  passengersInfo: []
+
 };
 
 export default function reducer(state = initialState, action) {
@@ -65,14 +70,14 @@ export default function reducer(state = initialState, action) {
             allFlights: filterDate,
           }
           case PRICE_FILTER:
-          const filterPrice =  state.flights.data.filter(p =>  (p.price * 1.8).toFixed() <= action.payload)
+          const filterPrice = action.payload && state.flights.data.filter(p =>  (p.price * 1.8).toFixed() <= action.payload)
           return{
             ...state,
             allFlights: filterPrice,
           };
 
           case AVAILABILITY_FILTER:
-          const filterAvailability = state.flights.data.filter(p =>  Object.values(p.availability)[0] == action.payload)
+          const filterAvailability = action.payload && state.flights.data.filter(p =>  Object.values(p.availability)[0] <= action.payload)
            
           return{
             ...state,
@@ -87,6 +92,11 @@ export default function reducer(state = initialState, action) {
           modalErr: action.payload
         }
 
+        case GET_PASSENGERS:
+          return{
+            ...state,
+            passengers: action.payload
+          }
         case GET_INPUTS:
           return{
             ...state,
@@ -97,8 +107,8 @@ export default function reducer(state = initialState, action) {
           
           return{
             ...state,
-            topDestination: action.payload
-          }
+            destination: action.payload
+          } 
 
       default:
         return {...state};

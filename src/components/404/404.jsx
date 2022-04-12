@@ -1,11 +1,10 @@
 import { useHistory } from 'react-router-dom'
-import { NavLink } from 'react-router-dom'
 import s from './styles.module.css'
 import Button from '@mui/material/Button';
 
 export default  function NoMatch(){
 
-     const history = useHistory()
+     const history = useHistory() 
 
      const handle = () => {
         history.push('/')

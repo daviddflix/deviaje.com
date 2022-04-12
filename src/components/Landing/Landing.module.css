@@ -68,8 +68,8 @@ body{
     position: absolute;
     top: 50%;
     left: 40px;
-    width: 850px;
-    height: 160px;
+    width: 1200px;
+    height: 150px;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     border-left: 3px solid #0a66c2;
@@ -115,12 +115,30 @@ body{
     flex-direction: column;
 }
 
+.pass{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    height: 40px;
+    border-radius: 6px;
+    padding: 5px;
+    margin-right: 20px;
+}
+
+.placeh{
+    color: gray;
+    letter-spacing: 1px;
+}
+
 .radio{
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
-    height: 40px;
+    height: 60px;
     outline: none;
     border-radius: 6px;
     border: none;
@@ -132,4 +150,5 @@ body{
     margin-left: 3.5rem;
     background: white;
     padding-right: 15rem;
+    margin-bottom: 40px;
 }

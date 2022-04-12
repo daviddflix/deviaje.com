@@ -1,8 +1,9 @@
 import { GET_FLIGHTS_INFO, GET_FLIGHTS_INFO_FROM, GET_INPUTS, FLIGHTS_NO_FOUND, STOP_FILTER,
-       DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION, SHOW_LOADING, CLEAR_STATES  } from "./constants";
+       DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES  } from "./constants";
 
 import { axiosWithOutToken } from '../../services/axios'
-
+import axios from "axios";
+ 
 
 export const getFlightsInfo = (payload) => {
   
@@ -67,7 +68,7 @@ export const getFlightsInfoToFrom = (payload) => {
 };
 
 export const topdestination = (payload) => {
-
+  console.log('payload acion', payload)
   return async (dispatch) => {
    
     const d = new Date().toISOString()
@@ -77,7 +78,7 @@ export const topdestination = (payload) => {
 
     try {
         const response = await axiosWithOutToken(
-            `/getflights?fly_from=buenos%20aires&fly_to=${payload}&date_from=${modDate}&date_to=20/04/2022`
+            `/getflights?fly_from=buenos%20aires&fly_to=${payload}&date_from=${modDate}&date_to=29/04/2022`
         )
         return dispatch({
             type: GET_FLIGHTS_INFO,
@@ -93,17 +94,20 @@ export const topdestination = (payload) => {
     };
 };
 
+
+
+
 export const  rutaTop = () => {
 
   return async (dispatch) => {
 
     try {
         const response = await axiosWithOutToken(
-            `http://localhost:4001/topdestination?city=bariloche`
+            `topdestination?city=bariloche&q=8`
         )
         return dispatch({
             type: TOP_DESTINATION,
-            payload: response.data,
+            payload: response,
         });  
     } catch ( err ) {
         console.log( err.response );
@@ -149,12 +153,18 @@ export const availabilityFilter = (value) => {
   }
 } 
 
+export const getPassengers = (payload) => {
+  return{
+    type: GET_PASSENGERS,
+    payload
+  }
+}
+
 export const setValuesInputs = (value) => {
   return{
     type: GET_INPUTS,
     payload: value
   }
 }
-
 
 

@@ -7,15 +7,26 @@ import Popup from 'reactjs-popup';
 import { IoIosAirplane } from "react-icons/io";
 import { useSelector } from "react-redux";
 import styles from "./cardFromTo.module.css";
+import { useAuth0 } from '@auth0/auth0-react'
+import { useHistory } from "react-router-dom";
+import swal from 'sweetalert';
 
 const CardFromTo = ({ handleDetails, f }) => {
 
   const flights = useSelector((state) => state.allFlights);
+
+  const { isAuthenticated, user } = useAuth0()
+  const history = useHistory()
  
   const filterDeparture = f.route?.filter( el => el.return === 0)
   const filterReturn = f.route?.filter( el => el.return === 1)
     
   const index = f.route.length - 1
+
+  const handleBuy = aux => {
+    user && isAuthenticated ? history.push(aux) : swal("Stop!", "If you want to buy, you must be registered!", "error")
+
+  }
     
   return (
         <div key={f.id} className={styles.containerPrincipal} >
@@ -125,9 +136,7 @@ const CardFromTo = ({ handleDetails, f }) => {
                     <h4 className={styles.taxes}>Taxes-rates:USD{flights.currency} <span>{(f.price * .8).toFixed()}</span></h4>
                     <h4 className={styles.finalPrice}>Final Price:USD{flights.currency} <span style={{fontSize:'23px', color:'#000'}}>{(f.price * 1.8).toFixed()}</span></h4>
                       
-                    <Link to={`/${f.id}`}>
-                        <button className={styles.buttonBuy}>Buy</button>
-                    </Link>
+                    <button className={styles.buttonBuy} onClick={() => handleBuy(`/${f.id}`)}>Buy</button>
 
                 </div>
             </div>

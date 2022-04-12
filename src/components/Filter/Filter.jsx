@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import s from './Filter.module.css';
 import { dateFilter, stopsFilter, priceFilter, availabilityFilter } from '../../Redux/actions/actions';
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -10,7 +10,8 @@ import FormLabel from '@mui/material/FormLabel';
 
 
 function Filter( ) {
-    const modalErr = useSelector((state) => state.modalErr);
+  
+    // const flights = useSelector(state => state.allFlights)
     const [price, setPrice] = useState('')
     const [availability, setAvailability] = useState('')
   
@@ -19,7 +20,7 @@ function Filter( ) {
     const handlecheck = (e) => {
         if(e.target.checked){
             dispatch(stopsFilter(e.target.value))
-        }
+        } 
     }
 
     const handleDate = (e) => {
@@ -29,9 +30,11 @@ function Filter( ) {
 
    useEffect(() => {
        if(price){
-        dispatch(priceFilter(price))
+           dispatch(priceFilter(price))
        }
    }, [dispatch, price])
+     
+
  
     let handleInputPrice = (e) => {
         setPrice(e.target.value);
