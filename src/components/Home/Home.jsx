@@ -46,9 +46,6 @@ export default function Home() {
     setShowDetailsReturn(true)
   }
 
-  
-
-  window.scrollTo(0, 0)
   return (
 
     <div className={styles.containerGeneral}>

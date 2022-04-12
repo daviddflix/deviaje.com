@@ -88,8 +88,8 @@ function SearchBar( { setShowLoading } ) {
             value={toFrom.name}
             onChange={handleInputChangeRadio}
           >
-            <FormControlLabel value={false} control={<Radio />} label="departure" sx={{marginLeft:'1px'}} />
-            <FormControlLabel value={true} control={<Radio />} label="return" sx={{marginLeft:'10px'}}  />
+            <FormControlLabel value={true} control={<Radio />} label="Round trip" sx={{marginLeft:'10px'}}  />
+            <FormControlLabel value={false} control={<Radio />} label="One way" sx={{marginLeft:'1px'}} />
           </RadioGroup>
         </FormControl>
         <input
@@ -139,32 +139,20 @@ function SearchBar( { setShowLoading } ) {
             error.dateTo && <p style={{ color:'red', margin:'2px 0 0 2px', fontSize:'14.5px' }} > { error.dateTo } </p>
             }
           </div>
-        {/* </div> */}
-        <div>
-          <input
-            className={s.date}
-            type="date"
-            value={input.dateTo}
-            onChange={handleInputChange}
-            name="dateTo"
-            placeholder="dd-mm-yyyy"
-          />
-          {
-            error.dateTo && <p style={{ color: 'red', margin: '2px 0 0 2px', fontSize: '14.5px' }} > {error.dateTo} </p>
-          }
-        </div>
-
       </div>
+
       <div className={s.pass}>
         <span className={s.placeh}>Passengers</span>
         <RemoveIcon onClick={() => setPassenger(passenger - 1)} sx={{ mx: 1 }} />
         {passenger}
         <AddIcon onClick={() => setPassenger(passenger + 1)} sx={{ mx: 1 }} />
       </div>
+
       <button className={s.btn} type="submit" onClick={handleClick}>
         <SearchIcon />
         Search
       </button>
+
     </div>
   );
 }

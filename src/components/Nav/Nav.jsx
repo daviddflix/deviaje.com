@@ -1,6 +1,6 @@
 
 import React, { useEffect } from "react";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
@@ -23,21 +23,21 @@ const Nav = () => {
     setAnchorEl(event.currentTarget);
   };
 
- 
-  
+
+
   const handleClose = () => {
     setAnchorEl(null)
   }
 
-const handleForm = ()=> {
-  history.push('/userconfig')
-  setAnchorEl(null)
-}
+  const handleForm = () => {
+    history.push('/userconfig')
+    setAnchorEl(null)
+  }
 
-const handleProfile = ()=> {
-  history.push('/userprofile')
-  setAnchorEl(null)
-}
+  const handleProfile = () => {
+    history.push('/userprofile')
+    setAnchorEl(null)
+  }
 
   const handleClickLogout = () => {
     logout();
@@ -85,11 +85,11 @@ const handleProfile = ()=> {
               <span className={styles.containerTitle}>
                 <h2 className={styles.url}>deviaje.com</h2>
               </span>
-            </Link> 
+            </Link>
           </div>
 
           <div>
-           <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
             <NavLink activeClassName={styles.active} className={styles.link} to='/about'>About Us</NavLink>
             <NavLink activeClassName={styles.active} className={styles.link} to='/top'>Offers</NavLink>
           </div>

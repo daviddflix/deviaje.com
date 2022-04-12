@@ -49,9 +49,9 @@ function App() {
           <SuccessPayment />
         </Route>
           
-        <Route  path="*">
+        {/* <Route  path="*">
           <NoMatch/>
-        </Route>
+        </Route> */}
 
         <Route exact path='/:id'>
           <FlightDetail />
