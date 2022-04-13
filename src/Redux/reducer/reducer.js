@@ -31,7 +31,8 @@ export default function reducer(state = initialState, action) {
         return {
           ...state,
           flights: [],
-          allFlights: []
+          allFlights: [],
+          destination: [],
         }
       case SHOW_LOADING:
         return{
@@ -107,7 +108,8 @@ export default function reducer(state = initialState, action) {
           
           return{
             ...state,
-            destination: action.payload
+            destination: action.payload,
+            loading: false
           } 
 
       default:

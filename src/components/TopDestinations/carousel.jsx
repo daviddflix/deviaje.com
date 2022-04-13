@@ -3,7 +3,7 @@ import s from './styles.module.css'
 import img from './assets/woman.jpg'
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { topdestination } from '../../Redux/actions/actions';
+import { topdestination, setValuesInputs } from '../../Redux/actions/actions';
 import top from './assets/istanbul.jpg'
 import top1 from './assets/medellin.jpg'   
 import top2 from './assets/miami2.jpg'
@@ -11,27 +11,25 @@ import top3 from './assets/nueva-york_0.webp'
 import top4 from './assets/frankfurt-2.jpg'
 import top5 from './assets/las vegas.webp'
 import top6 from './assets/barcelona.jpg'
-import { Loading } from '../loading/Loading';
+//import { Loading } from '../loading/Loading';
 import Carousel from 'react-bootstrap/Carousel'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import getCity from './helpers/getCity'
+//import getCity from './helpers/getCity'
 import {useHistory} from 'react-router-dom'
    
 
 export  function TopDestination(){
 
-
+    const toFrom = {}
+    toFrom.toFrom =  false
     const history = useHistory()
     const [location, setLocation] = useState({
         loaded:false,
         coordinates:{lat:"", lng:""}
     })
-    const [ showLoading, setShowLoading ] = useState(false)
-    let [ data, setData] = useState('') // origin
-    console.log('location',location)
-    console.log('city',data)
+    //const [ showLoading, setShowLoading ] = useState(false)
+    //let [ data, setData] = useState('') // origin
   
-
    useEffect(() => {
     if(!("geolocation" in navigator)){
       onError({
@@ -43,33 +41,48 @@ export  function TopDestination(){
 }, [])
 
 
-   useEffect(() => {
-    const updateCity = () => {
-        getCity(location)
-           .then((city) => {
-               setData(prev => ({...prev, city}))
-           })
-           .catch(err => console.log('errorCity',err))
-    }
-    updateCity()
-   } ,[location])
-
-
-
-
+//    useEffect(() => {
+//     const updateCity = () => {
+//         getCity(location)
+//            .then((city) => {
+//                setData(prev => ({...prev, city}))
+//            })
+//            .catch(err => console.log('errorCity',err))
+//     }
+//     updateCity()
+//    } ,[location])
 
     
     const dispatch = useDispatch()
 
     const handleSearch = (e) =>{  
-        setShowLoading(true)
-     dispatch(topdestination(e.target.value))
-    setShowLoading(false)
-    history.push('/home')
+        //setShowLoading(true)
+        
+        const d = new Date().toISOString()
+        const date = d.slice(0,10)
+
+        const inputValues = {
+            fly_from: 'buenos aires',
+            fly_to: e.target.value,
+            dateFrom: date,
+            dateTo: '2022-04-29',
+        }
+        const newInputValues = {
+            fly_from: 'buenos aires',
+            fly_to: e.target.value,
+            dateFrom: date,
+            dateTo: '2022-04-29',
+            toFrom: toFrom.toFrom
+        }
+
+        dispatch(setValuesInputs( newInputValues ))
+        dispatch(topdestination( inputValues ))
+        //dispatch(setValuesInputs( toFrom ))
+        //dispatch(topdestination(e.target.value))
+        //setShowLoading(false)
+        history.push('/home')
    }
 
-  
-   
    const onSuccess = location => {
        setLocation({
           loaded:true,
@@ -91,20 +104,17 @@ export  function TopDestination(){
        history.push('/top')
    }
 
-
- 
-
     return(
         <div className={s.mainContainer}>
-              {
+              {/* {
           showLoading &&  <div style={{position: 'abolsute'}} > <Loading /> </div> 
-              }
+              } */}
              
             <div className={s.container}>
                 <h2 className={s.title}>Top Destinations</h2>
          <Carousel>
             <Carousel.Item>
-                    <input type='image' value='istabul' name='istabul' className={s.slide} src={top} alt="Istabul" onClick={(e) => handleSearch(e, data)}/>
+                    <input type='image' value='istabul' name='istabul' className={s.slide} src={top} alt="Istabul" onClick={(e) => handleSearch(e)}/>
                 <Carousel.Caption>
                 <p>Istanbul</p>
                 </Carousel.Caption>
