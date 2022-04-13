@@ -2,9 +2,7 @@ import { GET_FLIGHTS_INFO, GET_FLIGHTS_INFO_FROM, GET_INPUTS, FLIGHTS_NO_FOUND, 
        DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES  } from "./constants";
 
 import { axiosWithOutToken } from '../../services/axios'
-import axios from "axios";
  
-
 export const getFlightsInfo = (payload) => {
   
   return async (dispatch) => {
@@ -71,15 +69,27 @@ export const topdestination = (payload) => {
   console.log('payload acion', payload)
   return async (dispatch) => {
    
-    const d = new Date().toISOString()
-    const date = d.slice(0,10)
-    const modDate = date.split('-').reverse().join('/')
+    // const d = new Date().toISOString()
+    // const date = d.slice(0,10)
+    // const modDate = date.split('-').reverse().join('/')
+    
+    const modDateFrom = payload.dateFrom.split('-').reverse().join('/')
+    const modDateTo = payload.dateTo.split('-').reverse().join('/')
+    dispatch({
+      type:CLEAR_STATES
+    })
 
+    dispatch({
+      type: SHOW_LOADING
+    })
 
     try {
-        const response = await axiosWithOutToken(
-            `/getflights?fly_from=buenos%20aires&fly_to=${payload}&date_from=${modDate}&date_to=29/04/2022`
-        )
+       const response = await axiosWithOutToken(
+        `/getflights?fly_from=${payload.fly_from}&fly_to=${payload.fly_to}&date_from=${modDateFrom}&date_to=${modDateTo}`
+       )
+      //  const response = await axiosWithOutToken(
+      //       `/getflights?fly_from=buenos%20aires&fly_to=${payload}&date_from=${modDate}&date_to=29/04/2022`
+      //   )
         return dispatch({
             type: GET_FLIGHTS_INFO,
             payload: response.data,
@@ -93,9 +103,6 @@ export const topdestination = (payload) => {
       }
     };
 };
-
-
-
 
 export const  rutaTop = () => {
 

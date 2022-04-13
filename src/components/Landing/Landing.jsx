@@ -108,8 +108,8 @@ function Landing() {
               defaultValue={false}
               onChange={handleInputChangeRadio}
             >
-              <FormControlLabel value={true} control={<Radio />} label="Round trip" sx={{ marginLeft: '.5rem' }} />
-              <FormControlLabel value={false} control={<Radio />} label="One way" sx={{ marginLeft: '8.2rem', marginTop: '-2.7rem' }} />
+              <FormControlLabel value={true} control={<Radio />} label="Round trip" sx={{ marginLeft: '.2rem', marginTop: '7px'}} />
+              <FormControlLabel value={false} control={<Radio />} label="One way" sx={{ marginLeft: '7rem', marginTop: '-54px' }} />
             </RadioGroup>
           </FormControl>
           <div className={s.boxErrors}>
@@ -123,7 +123,7 @@ function Landing() {
               style={{ position: 'relative', left: '-2rem' }}
             />
             {
-              errors.fly_from && <div style={{ position: 'absolute', bottom: '.3rem', left: '2.7rem' }} className={s.errors}>{errors.fly_from}</div>
+              errors.fly_from && <div style={{ position: 'absolute', bottom: '.3rem', left: '2.5rem' }} className={s.errors}>{errors.fly_from}</div>
             }
           </div>
           <div className={s.boxErrors}>
@@ -137,7 +137,7 @@ function Landing() {
               style={{ position: 'relative', left: '-2rem' }}
             />
             {
-              errors.fly_to && <div style={{ position: 'absolute', bottom: '.3rem', left: '14rem' }} className={s.errors}>{errors.fly_to}</div>
+              errors.fly_to && <div style={{ position: 'absolute', bottom: '.3rem', left: '15.5rem' }} className={s.errors}>{errors.fly_to}</div>
             }
           </div>
 
@@ -151,7 +151,7 @@ function Landing() {
               style={{ position: 'relative', left: '-2rem' }}
             />
             {
-              errors.dateFrom && <div style={{ position: 'absolute', bottom: '.3rem', left: '25.5rem' }} className={s.errors}>{errors.dateFrom}</div>
+              errors.dateFrom && <div style={{ position: 'absolute', bottom: '.3rem', left: '28.5rem' }} className={s.errors}>{errors.dateFrom}</div>
             }
           </div>
 
@@ -164,7 +164,7 @@ function Landing() {
               style={{ position: 'relative', left: '-2rem' }}
             />
             {
-              errors.dateTo && <div style={{ position: 'absolute', bottom: '.3rem', left: '33.8rem' }} className={s.errors}>{errors.dateTo}</div>
+              errors.dateTo && <div style={{ position: 'absolute', bottom: '.3rem', left: '38.5rem' }} className={s.errors}>{errors.dateTo}</div>
             }
           </div>
 

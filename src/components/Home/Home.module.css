@@ -1,9 +1,9 @@
 .containerPrincipal{
   display: flex;
+  width: 95%;
   border: 2px solid #F8F9F9;
-  /* background-color: #dbe6e6; */
   background-color: #e5eeee; 
-  margin-top: 1.8rem;
+  margin-top: 2.2rem;
   margin-bottom: 1.8rem;
   border-radius: 1rem;
 }
@@ -18,7 +18,6 @@
   height: 200px;
   margin-top: 1.8rem;
   border-radius: 1rem;
-  /* background-color: #dbe6e6; */
   background-color: #e5eeee; 
   border-right: #00000036 solid 1px 
 }
