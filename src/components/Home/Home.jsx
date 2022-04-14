@@ -63,7 +63,7 @@ export default function Home() {
       }
       <div className={styles.containerSearch}>
         <SearchBar/>
-        <Filter setShowLoading = { setShowLoading } />
+        <Filter />
       </div>
       <div className={styles.containerFlights}>
        

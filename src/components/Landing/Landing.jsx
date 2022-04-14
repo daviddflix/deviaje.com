@@ -10,6 +10,7 @@ import { Modal } from '../../components/modal/index'
 import { Loading } from "../loading/Loading";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { IconButton } from "@material-ui/core";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -69,7 +70,8 @@ function Landing() {
       fly_to: input.fly_to,
       dateFrom: input.dateFrom,
       dateTo: input.dateTo,
-      toFrom: toFrom.name
+      toFrom: toFrom.name,
+      pass
     }
     dispatch(setValuesInputs(newInput))
     dispatch(getPassengers(pass))
@@ -108,8 +110,8 @@ function Landing() {
               defaultValue={false}
               onChange={handleInputChangeRadio}
             >
-              <FormControlLabel value={true} control={<Radio />} label="Round trip" sx={{ marginLeft: '.2rem', marginTop: '7px'}} />
-              <FormControlLabel value={false} control={<Radio />} label="One way" sx={{ marginLeft: '7rem', marginTop: '-54px' }} />
+              <FormControlLabel value={true} control={<Radio />} label=" Round trip" sx={{ marginLeft: '1rem', marginTop: '7px'}} />
+              <FormControlLabel value={false} control={<Radio />} label=" One way" sx={{ marginLeft: '8rem', marginTop: '-54px' }} />
             </RadioGroup>
           </FormControl>
           <div className={s.boxErrors}>
@@ -123,7 +125,7 @@ function Landing() {
               style={{ position: 'relative', left: '-2rem' }}
             />
             {
-              errors.fly_from && <div style={{ position: 'absolute', bottom: '.3rem', left: '2.5rem' }} className={s.errors}>{errors.fly_from}</div>
+              errors.fly_from && <div style={{ position: 'absolute', bottom: '.3rem', left: '1.5rem' }} className={s.errors}>{errors.fly_from}</div>
             }
           </div>
           <div className={s.boxErrors}>
@@ -137,7 +139,7 @@ function Landing() {
               style={{ position: 'relative', left: '-2rem' }}
             />
             {
-              errors.fly_to && <div style={{ position: 'absolute', bottom: '.3rem', left: '15.5rem' }} className={s.errors}>{errors.fly_to}</div>
+              errors.fly_to && <div style={{ position: 'absolute', bottom: '.3rem', left: '14.5rem' }} className={s.errors}>{errors.fly_to}</div>
             }
           </div>
 
@@ -151,7 +153,7 @@ function Landing() {
               style={{ position: 'relative', left: '-2rem' }}
             />
             {
-              errors.dateFrom && <div style={{ position: 'absolute', bottom: '.3rem', left: '28.5rem' }} className={s.errors}>{errors.dateFrom}</div>
+              errors.dateFrom && <div style={{ position: 'absolute', bottom: '.3rem', left: '27.7rem' }} className={s.errors}>{errors.dateFrom}</div>
             }
           </div>
 
@@ -164,15 +166,25 @@ function Landing() {
               style={{ position: 'relative', left: '-2rem' }}
             />
             {
-              errors.dateTo && <div style={{ position: 'absolute', bottom: '.3rem', left: '38.5rem' }} className={s.errors}>{errors.dateTo}</div>
+              errors.dateTo && <div style={{ position: 'absolute', bottom: '.3rem', left: '37.5rem' }} className={s.errors}>{errors.dateTo}</div>
             }
           </div>
 
           <div className={s.pass}>
             <span className={s.placeh}>Passengers</span>
-            <RemoveIcon onClick={() => setPass(pass - 1)} sx={{ mx: 1 }} />
-            {pass}
-            <AddIcon onClick={() => setPass(pass + 1)} sx={{ mx: 1 }} />
+            <IconButton
+              onClick={() => setPass(pass - 1)}
+              disabled={ pass <= 1 ? true : false }
+            >
+              <RemoveIcon  sx={{ cursor: 'pointer' }} />
+            </IconButton>
+              {pass}
+            <IconButton
+              onClick={() => setPass(pass + 1)}
+              disabled={ pass >= 6 ? true : false }
+            >
+              <AddIcon  sx={{ cursor:'pointer' }} />
+            </IconButton>
           </div>
 
           {

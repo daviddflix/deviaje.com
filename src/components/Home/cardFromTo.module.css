@@ -1,9 +1,9 @@
 .containerPrincipal{
     display: flex;
-    width: 95%;
+    width: 90%;
     border: 2px solid #F8F9F9;
     background-color: #e5eeee;
-    margin-top: 1.8rem;
+    margin-top: 2.35rem;
     margin-bottom: 1.8rem;
     border-radius: 1rem;
   }
@@ -145,12 +145,13 @@
     font-size:1.8rem;
   }
   .priceSimbol{
-    position: absolute;
+    /* position: absolute;
     top:65px;
-    right:90px;
+    right:90px; */
     font-family: 'Roboto Mono', monospace;
     color:rgb(39, 36, 36);
-    font-size:1.5rem
+    font-size:1.5rem;
+    margin-top:.22rem
   }
   .taxes{
     margin-bottom: 1rem;
@@ -194,4 +195,11 @@
     margin-left: 1rem;
     justify-content:flex-start;
     position: relative
+  }
+
+  .containerPriceNum{
+    display: flex;
+    position:absolute;
+    top:4rem;
+    left:11rem  
   }
