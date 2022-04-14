@@ -132,6 +132,7 @@ export function stopsFilter (value){
       payload: value
   }
 }
+     
 export const hideModalErr = () => {
   return {
     type: FLIGHTS_NO_FOUND,

@@ -2,7 +2,6 @@ import { GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND,  STOP_FILTER,
   DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, GET_INPUTS, 
   GET_FLIGHTS_INFO_FROM, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES } from "../actions/constants";
 
-
 const initialState = {
   flights: [],
   allFlights: [],
@@ -50,20 +49,58 @@ export default function reducer(state = initialState, action) {
     
       case STOP_FILTER:
         console.log(action.payload)
-        let filterStops = action.payload === 'direct'? state.flights.data.filter(p => {
-           return p.route.length === 1
-        }) : state.flights.data.filter(p => {
-          if(action.payload === '1'){
-            return p.route.length === 2
-          } else {
-            return p.route.length >= 3
+        if(action.payload.toFrom === false){
+          let filterStops = action.payload.value === 'direct'? state.flights.data.filter(p => {
+            return  p.route.length === 1 
+          }) : state.flights.data.filter(p => {
+            if(action.payload.value === '1'){
+              return p.route.length === 2
+            } else {
+              return p.route.length >= 3
+            }
+          })
+        
+          if(filterStops.length === 0){
+             return{
+               ...state,
+               modalErr : true,
+               allFlights: filterStops,
+             }
+           }else if(filterStops.length !== 0) {
+              return {
+              ...state,
+              allFlights: filterStops,
+            } 
           }
-       })
-        return {
-          ...state,
-          allFlights: filterStops,
-          
-        };
+        }else{
+            const  filterStops = action.payload.value === 'direct'? state.flights.data.filter(p => {
+            const filterDeparture = p.route?.filter( el => el.return === 0)
+            const filterReturn = p.route?.filter( el => el.return === 1)
+            return filterDeparture.length === 1 && filterReturn.length === 1
+          }) : state.flights.data.filter(p => {
+            const filterDeparture = p.route?.filter( el => el.return === 0)
+            const filterReturn = p.route?.filter( el => el.return === 1)
+            if(action.payload.value === '1'){
+              return filterDeparture.length === 2 && filterReturn.length === 2
+            } else {
+              return filterDeparture.length >=3 && filterReturn.length >= 3
+            }
+          })
+
+          if(filterStops.length === 0){
+             return{
+               ...state,
+               modalErr : true,
+               allFlights: filterStops,
+             }
+           }else if(filterStops.length !== 0) {
+            return {
+            ...state,
+            allFlights: filterStops,
+            }
+          }
+        }
+
         case DATE_FILTER:
           const filterDate = action.payload === 'date'? state.flights.data.sort((a,b) => (a.local_departure > b.local_departure ? 1 : -1)): state.flights.sort((a, b) => (a.local_departure > b.local_departure ? -1 : 1))
           return{
@@ -88,8 +125,9 @@ export default function reducer(state = initialState, action) {
        case FLIGHTS_NO_FOUND:
         return {
           ...state,
-          flights: [],
+          // flights: [],
           allFlights: [],
+          loading: false,
           modalErr: action.payload
         }
 

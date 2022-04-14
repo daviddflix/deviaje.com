@@ -17,6 +17,7 @@ function SearchBar() {
   const dispatch = useDispatch();
   const [passenger, setPassenger] = useState(1)
   const dataInputs = useSelector((state) => state.dataInputs);
+  const passengers = useSelector((state) => state.passengers);
   const [ toFrom, setToFrom ] = useState({name:''})
   
   let handleInputChange = (e) => {
@@ -51,6 +52,7 @@ function SearchBar() {
   useEffect(() =>{
     setInput( dataInputs )
     setToFrom( state => ({...state, name:dataInputs.toFrom }))
+    setPassenger( passengers )
   },[])
 
   const handleClick = (e) => {

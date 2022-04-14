@@ -125,11 +125,10 @@ const CardFromTo = ({ handleDetails, f }) => {
             <div className={styles.containerPriceFinal}>
                 <div className={styles.price}>
                     <h3 className={styles.titlePrice}>Price</h3>
-                    <div className={styles.flex}>
+                    <div className={styles.containerPriceNum}>
                       <h6 className={styles.priceSimbol}>USD{flights.currency}</h6>
                       <h4 className={styles.padding_left} 
-                            style={{position: 'absolute', top:'62px',
-                                    right:'35px', fontSize:'1.75rem'}}>{f.price}</h4>
+                            style={{fontSize:'1.75rem'}}>{f.price}</h4>
                     </div>
                 </div> 
                 <div style={{marginTop:'0rem'}}>       
