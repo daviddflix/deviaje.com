@@ -12,8 +12,10 @@ import { Footer } from "./components/Footer/footer";
 import UserProfile from "./components/userProfile/UserProfile";
 import UserProfileForm from "./components/userProfile/UserProfileForm";
 import { About } from "./components/About/About";
-import NoMatch from "./components/404/404";
+//import NoMatch from "./components/404/404";
 import CardDestination from "./components/TopDestinations/RutaTop";
+import ChatbotBtn from './components/ChatBot/Chatbot-btn/Chatbot-btn'
+
 
 function App() {
   return (
@@ -42,8 +44,10 @@ function App() {
         <Route exact path="/userprofile">
           <UserProfile />
         </Route>
-      
-
+        
+        {/* <Route exact path='/chatbot'>
+          < ChatbotBtn />
+        </Route> */}
         
         <Route exact path='/success'>
           <SuccessPayment />
@@ -59,7 +63,7 @@ function App() {
 
       
       </Switch>
-     
+      < ChatbotBtn />
       <Footer/>
     </div>
   );
