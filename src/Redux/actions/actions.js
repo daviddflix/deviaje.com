@@ -1,5 +1,5 @@
 import { GET_FLIGHTS_INFO, GET_FLIGHTS_INFO_FROM, GET_INPUTS, FLIGHTS_NO_FOUND, STOP_FILTER,
-       DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES, GET_DATA, RESET_DATA  } from "./constants";
+       DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES, GET_DATA, RESET_DATA, GET_RETURN, RESET_RETURN, GET_PASSENGERSINFO  } from "./constants";
 
 import { axiosWithOutToken } from '../../services/axios'
 import axios from "axios";
@@ -98,13 +98,9 @@ export const topdestination = (payload) => {
 
 
 export const  rutaTop = () => {
-
   return async (dispatch) => {
-
     try {
-        const response = await axiosWithOutToken(
-            `topdestination?city=bariloche&q=8`
-        )
+        const response = await axiosWithOutToken(`topdestination?city=bariloche&q=8`)
         return dispatch({
             type: TOP_DESTINATION,
             payload: response,
@@ -177,5 +173,18 @@ export const getData = (payload) => {
 export function resetData(){
   return{
     type: RESET_DATA
+  }
+}
+
+export function getReturn(payload){
+  return{
+    type: GET_RETURN,
+    payload
+  }
+}
+
+export function resetReturn(){
+  return{
+    type: RESET_RETURN
   }
 }

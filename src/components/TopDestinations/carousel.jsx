@@ -28,8 +28,8 @@ export  function TopDestination(){
     })
     const [ showLoading, setShowLoading ] = useState(false)
     let [ data, setData] = useState('') // origin
-    console.log('location',location)
-    console.log('city',data)
+    // console.log('location',location)
+    // console.log('city',data)
   
 
    useEffect(() => {
@@ -43,16 +43,16 @@ export  function TopDestination(){
 }, [])
 
 
-   useEffect(() => {
-    const updateCity = () => {
-        getCity(location)
-           .then((city) => {
-               setData(prev => ({...prev, city}))
-           })
-           .catch(err => console.log('errorCity',err))
-    }
-    updateCity()
-   } ,[location])
+//    useEffect(() => {
+//     const updateCity = () => {
+//         getCity(location)
+//            .then((city) => {
+//                setData(prev => ({...prev, city}))
+//            })
+//            .catch(err => console.log('errorCity',err))
+//     }
+//     updateCity()
+//    } ,[location])
 
 
 

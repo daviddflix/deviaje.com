@@ -12,4 +12,5 @@ export const SHOW_LOADING = 'SHOW_LOADING'
 export const CLEAR_STATES = 'CLEAR_STATES'
 export const GET_DATA = 'GET_DATA'
 export const RESET_DATA = 'RESET_DATA'
-
+export const GET_RETURN = 'GET_RETURN'
+export const RESET_RETURN = 'RESET_RETURN'

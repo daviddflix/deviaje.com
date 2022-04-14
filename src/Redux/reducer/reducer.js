@@ -1,7 +1,7 @@
 import {
   GET_FLIGHTS_INFO, FLIGHTS_NO_FOUND, STOP_FILTER,
   DATE_FILTER, PRICE_FILTER, AVAILABILITY_FILTER, GET_INPUTS,
-  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES, GET_DATA, RESET_DATA
+  GET_FLIGHTS_INFO_FROM, TOP_DESTINATION, GET_PASSENGERS, SHOW_LOADING, CLEAR_STATES, GET_DATA, RESET_DATA, GET_RETURN, RESET_RETURN
 } from "../actions/constants";
 
 
@@ -14,7 +14,8 @@ const initialState = {
   passengers: 1,
   dataInputs: {},
   destination: [],
-  passengersInfo: []
+  passengersInfo: [],
+  return: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -120,6 +121,18 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         passengersInfo: []
+      }
+
+    case GET_RETURN:
+      return{
+        ...state,
+        return: action.payload
+      }
+
+    case RESET_RETURN:
+      return{
+        ...state,
+        return: []
       }
 
     default:

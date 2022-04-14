@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import FlightInfo from '../FlightInfo/FlightInfo';
@@ -6,7 +6,7 @@ import PaymentDetail from '../PaymentDetail/PaymentDetail';
 import s from './PassengersInfo.module.css';
 import Button from '@mui/material/Button';
 import StepperHorizontal from '../Stepper/StepperHorizontal';
-import { getData } from '../../Redux/actions/actions';
+import { getData, resetReturn } from '../../Redux/actions/actions';
 
 function PassengersInfo({ setShowPayment }) {
 
@@ -55,7 +55,10 @@ function PassengersInfo({ setShowPayment }) {
         }
     }
 
-    
+    useEffect(() => {
+        return () => dispatch(resetReturn()) 
+      }, [])
+
     return (
         <div>
             <StepperHorizontal step={1} />

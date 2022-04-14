@@ -35,25 +35,11 @@
   align-items: stretch;
   width: 90%;
 }
-/* .containerGeneral{
-  display: grid;
-  justify-items: flex-start;
-<<<<<<< HEAD
-=======
-  grid-template-columns: 2fr ;
->>>>>>> e4f94f5ceaa9be0f18a2f8df468bdd65acb0c47e
-  grid-template-columns: 1fr 2fr;
-  background-color: #bdd8e4;  
-  background-color: #bacfd8;
-} */
 
 .containerGeneral{
   display: flex;
   flex-direction: row;
   justify-items: flex-start;
-  grid-template-columns: 2fr ;
-  /* grid-template-columns: 1fr 2fr; */
-  /* background-color: #bdd8e4;   */
   background-color: #bacfd8;
 }
 
