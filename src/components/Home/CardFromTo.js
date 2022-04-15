@@ -57,10 +57,10 @@ const CardFromTo = ({ handleDetails, f }) => {
                 
                             { 
                               filterDeparture.length === 1 ? 
-                                <p style={{}}>Non-Stop</p>
+                                <p style={{marginBottom:0}}>Non-Stop</p>
                               : 
                                 <Popup
-                                  trigger={  <p style={{cursor: 'pointer'}}>
+                                  trigger={  <p style={{cursor: 'pointer', marginBottom:0}}>
                                   {filterDeparture.length > 2 ? (filterDeparture.length - 1) + ' Stops' : (filterDeparture.length - 1) + ' Stop'}</p> }
                                   position='top center'
                                   on={['hover', 'focus']}
@@ -100,10 +100,10 @@ const CardFromTo = ({ handleDetails, f }) => {
                           <h4 className={styles.padding_left}>
                             { 
                               filterReturn.length === 1 ? 
-                                <p style={{}}>Non-Stop</p>
+                                <p style={{marginBottom:0}}>Non-Stop</p>
                               : 
                                 <Popup
-                                  trigger={  <p style={{cursor: 'pointer'}}>
+                                  trigger={  <p style={{cursor: 'pointer', marginBottom:0}}>
                                   {filterReturn.length > 2 ? (filterReturn.length - 1) + ' Stops' : (filterReturn.length - 1) + ' Stop'}</p> }
                                   position='top center'
                                   on={['hover', 'focus']}

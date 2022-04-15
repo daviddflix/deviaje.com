@@ -1,6 +1,6 @@
 .containerPrincipal{
   display: flex;
-  width: 90%;
+  width: 95%;
   border: 2px solid #F8F9F9;
   background-color: #e5eeee; 
   margin-top: 2.35rem;
@@ -190,7 +190,7 @@
 .containerPriceNum{
   display: flex;
   position:absolute;
-  top:2.5rem;
-  left:11rem  
+  top:2rem;
+  left:7rem  
 }
 

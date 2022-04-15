@@ -16,7 +16,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  
+  console.log(action)
   switch (action.type) {
 
     case GET_FLIGHTS_INFO:
@@ -107,14 +107,23 @@ export default function reducer(state = initialState, action) {
             ...state,
             allFlights: filterDate,
           }
-          case PRICE_FILTER:
-          const filterPrice = action.payload && state.flights.data.filter(p =>  (p.price * 1.8).toFixed() <= action.payload)
-          return{
-            ...state,
-            allFlights: filterPrice,
-          };
+        case PRICE_FILTER:
+          const filterPrice = action.payload && state.flights.data.filter(p =>  parseInt( (p.price * 1.8).toFixed() )  <= parseInt( action.payload ) )
+          
+          if(filterPrice.length === 0 ){
+            return{
+              ...state,
+              modalErr : true,
+              allFlights: filterPrice
+            }
+          }else{
+            return{
+              ...state,
+              allFlights: filterPrice,
+            }
+          }
 
-          case AVAILABILITY_FILTER:
+        case AVAILABILITY_FILTER:
           const filterAvailability = action.payload && state.flights.data.filter(p =>  Object.values(p.availability)[0] <= action.payload)
            
           return{
