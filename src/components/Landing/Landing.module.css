@@ -113,6 +113,8 @@ body{
 .boxErrors{
     display: flex;
     flex-direction: column;
+    position:relative;
+    left: 1rem;
 }
 
 .radio{

@@ -37,7 +37,7 @@ function PassengersInfo({ setShowPayment }) {
                 </div>
 
                 <div className={s.display}>
-                    <PaymentDetail price={flight[0].price} />
+                    <PaymentDetail  price={flight[0].price} />
 
                     <FlightInfo departure={flight[0].flyFrom}
                         arrival={flight[0].flyTo}

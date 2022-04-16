@@ -63,7 +63,10 @@ export  function TopDestination(){
 
     const handleSearch = (e) =>{  
         setShowLoading(true)
-     dispatch(topdestination(e.target.value))
+        if(e.target.value){
+            dispatch(topdestination(e.target.value))
+            setShowLoading(true)
+        }
     setShowLoading(false)
     history.push('/home')
    }
