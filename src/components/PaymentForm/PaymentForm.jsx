@@ -114,6 +114,7 @@ const PaymentForm = ({ price }) => {
       console.log(data)
       console.log(passengersInfo)
       await axiosWithOutToken('/passengersInfo', { passengersInfo, data}, 'POST')
+      await axiosWithOutToken('/postClientDetails', { billingDetails, price}, 'POST')
       history.push('/')
       dispatch(getPassengers(1))
       dispatch(resetData())
