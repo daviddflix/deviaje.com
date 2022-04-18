@@ -157,14 +157,14 @@ function Landing() {
                 defaultValue={ true }
                 onChange={handleInputChangeRadio}
               >
-                <FormControlLabel value={true} control={<Radio />} label=" Round trip" sx={{ marginLeft: '.5rem', marginTop: '7px'}} />
-                <FormControlLabel value={false} control={<Radio />} label=" One way" sx={{ marginLeft: '8rem', marginTop: '-54px' }} />
+                <FormControlLabel value={true} control={<Radio />} label={t("searchBar.vuelta")} sx={{ marginLeft: '.5rem', marginTop: '7px'}} />
+                <FormControlLabel value={false} control={<Radio />} label={t("searchBar.ida")} sx={{ marginLeft: '8rem', marginTop: '-54px' }} />
               </RadioGroup>
             </FormControl>
             <div className={s.boxErrors}>
               <input
                 type="text"
-                placeholder="Enter departure city"
+                placeholder={t("searchBar.phSalida")}
                 value={input.fly_from}
                 onChange={e => handleInputChange(e)}
                 name="fly_from"
@@ -178,7 +178,7 @@ function Landing() {
             <div className={s.boxErrors}>
               <input
                 type="text"
-                placeholder="Enter destination city"
+                placeholder={t("searchBar.phDestino")}
                 value={input.fly_to}
                 onChange={e => handleInputChange(e)}
                 name="fly_to"
@@ -239,7 +239,7 @@ function Landing() {
               Object.keys(errors).length === 0  ?
                 (<button className={s.btn} type="submit" onClick={e => handleClick(e)}>
                   <SearchIcon />
-                  Search
+                  {t("searchBar.btn")}
                 </button>)
                 : <button className={s.btn} type="submit" onClick={e => handleClick(e)} disabled>
                   <SearchIcon />
@@ -248,7 +248,7 @@ function Landing() {
             }
           </div>
 
-          <FormControlLabel className={s.checkbox} control={<Checkbox onChange={ handleChangeCheck } />} label="flight date range" />
+          <FormControlLabel className={s.checkbox} control={<Checkbox onChange={ handleChangeCheck } />} label={t("searchBar.range")} />
 
           {/* <div className={s.pass}>
             <span className={s.placeh}>{t("searchBar.pasajeros")}</span>

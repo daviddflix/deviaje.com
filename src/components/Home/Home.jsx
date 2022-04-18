@@ -10,6 +10,7 @@ import { Paginado } from "../Paginado/paginado";
 import CardFrom from "./CardFrom";
 import CardFromTo from "./CardFromTo";
 import { ModalDetailsReturn } from "../modalDetails/modalDetailsReturn";
+import { useTranslation } from "react-i18next";
 
 
 export default function Home() {
@@ -46,6 +47,8 @@ export default function Home() {
     setShowDetailsReturn(true)
   }
 
+  const [t, i18n] = useTranslation('global')
+
   return (
 
     <div className={styles.containerGeneral}>
@@ -58,7 +61,7 @@ export default function Home() {
           setShowDetails={setShowDetailsReturn} detailsReturn={detailsReturn} />
       }
       {
-        modalErr && <Modal title='No flights found' />
+        modalErr && <Modal title={t("home.modal")} />
       }
       <div className={styles.containerSearch}>
         <SearchBar/>
