@@ -17,8 +17,9 @@ import { isNumberValid } from './Validations'
 import { axiosWithOutToken } from '../../services/axios'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker'; 
-import style from './Form.module.css'
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+
+import swal from 'sweetalert'
 
 
 
@@ -29,7 +30,7 @@ const UserProfileForm = () => {
   const { isAuthenticated, user } = useAuth0();
   const [form, setForm] = useState({
     dni: '',
-    age: new Date(),
+    age: '',
     phone: '',
     country: '',
     state: '',
@@ -45,6 +46,15 @@ const UserProfileForm = () => {
   const [value, setValue] = useState(new Date());
   const [phoneError, setPhoneError] = useState(false);
   const [phoneErrorMsg, setPhoneErrorMsg] = useState('');
+
+  const alertSucess = () => {
+    swal({
+      title: 'Updated',
+      text: 'Profile Updated sucessfully',
+      icon: "success",
+      timer: 3000,
+    })
+  }
 
   function handleChange(e) {
     if (e.target.value.length >= 0) {
@@ -77,16 +87,6 @@ const UserProfileForm = () => {
     }
   }
 
-  function handleChangeAge(e) {
-    e.preventDefault()
-    if (e.target.value.length >= 0) {
-      setForm({
-        ...form,
-        [e.target.name]: value
-      })
-    }
-  }
-
   function handleChangePhone(e) {
     e.preventDefault()
     if (e.target.value.length >= 0) {
@@ -109,13 +109,14 @@ const UserProfileForm = () => {
   }
   function handleSubmit(e) {
     e.preventDefault();
+    //console.log(form)
     let {email} = user
     axiosWithOutToken('/updatepersonalinfo', form, email, 'POST')
       .then(res => {
         console.log(res.data)
         setForm({
           dni: '',
-          age: new Date(),
+          age: '',
           phone: '',
           country: '',
           state: '',
@@ -125,7 +126,7 @@ const UserProfileForm = () => {
           vaccinated: ''
 
         });
-        <Alert severity="success">Form created successufully</Alert>
+         alertSucess()  
       })
       .catch(err => {
         console.log(err.response)
@@ -135,10 +136,10 @@ const UserProfileForm = () => {
   }
   return (
     isAuthenticated && (
-      <div className={style.div}>
+      <div>
         <CssBaseline />
         
-        <Typography className={style.title} variant="h4" align='center' gutterBottom component="div" sx={{ m: 2 }}>
+        <Typography variant="h4" align='center' gutterBottom component="div" sx={{ m: 2 }}>
           PERSONAL INFO
         </Typography>
         
@@ -164,24 +165,27 @@ const UserProfileForm = () => {
                   defaultValue=""
                   variant="standard"
                   color='success'
-                  onChange={(e) => handleChangeDni(e)} />
+                  onChange={(e) => handleChangeDni(e)} /> 
               </div>
               <div>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}> 
                   <DesktopDatePicker
                     label="Date of Birth"
                     value={value}
                     minDate={new Date('1930-01-01')}
                     onChange={(newValue) => {
                       setValue(newValue);
+                      setForm({
+                        ...form,
+                        age: value
+                      })
                     }}
                     renderInput={(params) => 
                     <TextField {...params}
                       InputLabelProps={{ shrink: true }} 
                       variant="standard"
                       sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
-                      name='age' 
-                      onChange={(e) => handleChangeAge(e)} />}
+                       />}
                   />
                 </LocalizationProvider>
 
@@ -267,7 +271,7 @@ const UserProfileForm = () => {
                 <div>
                   <FormControl onChange={(e) => handleChange(e)}>
                     <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                    <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female"
+                    <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue=""
                       color='success' row>
                       <FormControlLabel value="female" name='genre' control={<Radio />} label="Female" />
                       <FormControlLabel value="male" name='genre' control={<Radio />} label="Male" />
@@ -278,7 +282,7 @@ const UserProfileForm = () => {
                 <div>
                   <FormControl onChange={(e) => handleChange(e)}>
                     <FormLabel id="demo-radio-buttons-group-label">Vaccinated</FormLabel>
-                    <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="Yes"
+                    <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue=""
                       color='success' row>
                       <FormControlLabel value="Yes" name='vaccinated' control={<Radio />} label="Yes" />
                       <FormControlLabel value="No" name='vaccinated' control={<Radio />} label="No" />
