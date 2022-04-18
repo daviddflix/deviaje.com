@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
-import Box from '@mui/material/Box';
+import  Box  from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -10,8 +10,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Alert from '@mui/material/Alert';
 import Container from '@mui/material/Container';
-import Autocomplete from '@mui/material/Autocomplete';
-import countries from './Countries';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
@@ -19,7 +17,12 @@ import { isNumberValid } from './Validations'
 import { axiosWithOutToken } from '../../services/axios'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker'; 
+import style from './Form.module.css'
+
+
+
+
 
 
 const UserProfileForm = () => {
@@ -53,6 +56,7 @@ const UserProfileForm = () => {
   }
 
   function handleChangeDni(e) {
+    e.preventDefault()
     if (e.target.value.length >= 0) {
       setForm({
         ...form,
@@ -74,6 +78,7 @@ const UserProfileForm = () => {
   }
 
   function handleChangeAge(e) {
+    e.preventDefault()
     if (e.target.value.length >= 0) {
       setForm({
         ...form,
@@ -83,6 +88,7 @@ const UserProfileForm = () => {
   }
 
   function handleChangePhone(e) {
+    e.preventDefault()
     if (e.target.value.length >= 0) {
       setForm({
         ...form,
@@ -127,18 +133,23 @@ const UserProfileForm = () => {
       })
 
   }
-
   return (
     isAuthenticated && (
-      <div>
+      <div className={style.div}>
         <CssBaseline />
-        <Typography variant="h4" align='center' gutterBottom component="div" sx={{ m: 2 }}>
+        
+        <Typography className={style.title} variant="h4" align='center' gutterBottom component="div" sx={{ m: 2 }}>
           PERSONAL INFO
         </Typography>
+        
 
-        <Container maxWidth="xl" align='center'>
+        <Container maxWidth="xl" align='center' >
           <FormControl>
-            <Box component="form" sx={{ '& > :not(style)': { m: 1 }, display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2, 1fr)', height: '70vh', width: '100vh' }} noValidate autoComplete="off">
+            <Box 
+            component="form" 
+            sx={{ '& > :not(style)': { m: 1 }, display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2, 1fr)', height: '70vh', width: '100vh' }} 
+            noValidate 
+            autoComplete="off">
               <div>
                 <TextField
                   required
@@ -158,15 +169,19 @@ const UserProfileForm = () => {
               <div>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DesktopDatePicker
-                    label="Birthday"
+                    label="Date of Birth"
                     value={value}
-                    minDate={new Date('2017-01-01')}
+                    minDate={new Date('1930-01-01')}
                     onChange={(newValue) => {
                       setValue(newValue);
                     }}
-                    renderInput={(params) => <TextField {...params} variant="standard"
+                    renderInput={(params) => 
+                    <TextField {...params}
+                      InputLabelProps={{ shrink: true }} 
+                      variant="standard"
                       sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
-                      name='age' onChange={(e) => handleChangeAge(e)} />}
+                      name='age' 
+                      onChange={(e) => handleChangeAge(e)} />}
                   />
                 </LocalizationProvider>
 
@@ -190,25 +205,20 @@ const UserProfileForm = () => {
                   onChange={(e) => handleChangePhone(e)} />
               </div>
 
-              <Autocomplete id="country-select-demo" sx={{ '& > :not(style)': { ml: 2 }, height: '25px', width: '320px' }} options={countries} autoHighlight
-                getOptionLabel={(option) => option.label}
-                renderOption={(props, option) => (
-                  <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                    <img loading="lazy" width="20" src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                      srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`} alt="" />
-                    {option.label} ({option.code}) +{option.phone}
-                  </Box>
-                )}
-                renderInput={(params) => (
-                  <TextField
-                    name={countries.label}
-                    variant="standard" {...params}
-                    label="Choose a country"
-                    value={form.country}
-                    inputProps={{ ...params.inputProps, autoComplete: 'new-password', }}
-                    onChange={(e) => handleChange(e)} />
-                )}
-              />
+              <div>
+                <TextField
+                  sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
+                  InputLabelProps={{ shrink: true }}
+                  name='country'
+                  label="Choose a country"
+                  id="standard"
+                  value={form.country}
+                  defaultValue=""                    
+                  variant="standard" 
+                  color='success'
+                  onChange={(e) => handleChange(e)} />
+              </div>
+
               <div>
                 <TextField
                   sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
@@ -279,7 +289,7 @@ const UserProfileForm = () => {
               <Box sx={{ '& button': { m: 3 } }}>
                 <div style={{ "width": "450px", "position": "relative", "display": "flex", "justifyContent": "flex-end" }}>
                   <Button type='submit' size="medium" color="success" variant="contained"
-                    endIcon={<SendIcon />} onClicke={(e) => handleSubmit(e)}>Submit</Button>
+                    endIcon={<SendIcon />} onClick={(e) => handleSubmit(e)}>Submit</Button>
                 </div>
               </Box>
             </Box>
@@ -289,6 +299,7 @@ const UserProfileForm = () => {
     )
   )
 }
+
 
 
 export default UserProfileForm;
