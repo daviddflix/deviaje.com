@@ -18,7 +18,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import { TopDestination } from "../TopDestinations/carousel";
 import Checkbox from '@mui/material/Checkbox';
-
+import { useTranslation } from 'react-i18next';
 
 function Landing() {
 
@@ -43,6 +43,7 @@ function Landing() {
     return errors
 }
 
+  const [t, i18n] = useTranslation('global')
   const dispatch = useDispatch()
   
   const history = useHistory()
@@ -136,7 +137,7 @@ function Landing() {
     <>
       <div className={s.fondo}>
         <h1 className={s.titulo}>
-          Welcome to <span className={s.url}>deviaje.com</span>
+          {t("header.titulo")}<span className={s.url}>{t("header.url")}</span>
         </h1>
         {
           showLoading && <div style={{ marginTop: '-8.2rem' }} > <Loading /> </div>
@@ -144,6 +145,7 @@ function Landing() {
         {
           modalErr && <Modal title='No flights found' />
         }
+
         <div className={s.containerPrincipal}>
           <div className={s.flex}>
             <FormControl>
@@ -217,7 +219,7 @@ function Landing() {
             </div>
 
             <div className={s.pass}>
-              <span className={s.placeh}>Passengers</span>
+              <span className={s.placeh}>{t("searchBar.pasajeros")}</span>
               <IconButton
                 onClick={() => setPass(pass - 1)}
                 disabled={ pass <= 1 ? true : false }
@@ -241,12 +243,43 @@ function Landing() {
                 </button>)
                 : <button className={s.btn} type="submit" onClick={e => handleClick(e)} disabled>
                   <SearchIcon />
-                  Search
+                  {t("searchBar.btn")}
                 </button>
             }
           </div>
+
           <FormControlLabel className={s.checkbox} control={<Checkbox onChange={ handleChangeCheck } />} label="flight date range" />
-        </div>
+
+          {/* <div className={s.pass}>
+            <span className={s.placeh}>{t("searchBar.pasajeros")}</span>
+            <IconButton
+              onClick={() => setPass(pass - 1)}
+              disabled={ pass <= 1 ? true : false }
+            >
+              <RemoveIcon  sx={{ cursor: 'pointer' }} />
+            </IconButton>
+              {pass}
+            <IconButton
+              onClick={() => setPass(pass + 1)}
+              disabled={ pass >= 6 ? true : false }
+            >
+              <AddIcon  sx={{ cursor:'pointer' }} />
+            </IconButton>
+          </div> */}
+
+          {/* {
+            Object.keys(errors).length === 0 && input.fly_to && input.fly_from && input.dateFrom && input.dateTo ?
+              (<button className={s.btn} type="submit" onClick={e => handleClick(e)}>
+                <SearchIcon />
+                Search
+              </button>)
+              : <button className={s.btn} type="submit" onClick={e => handleClick(e)} disabled>
+                <SearchIcon />
+                {t("searchBar.btn")}
+              </button>
+          } */}
+
+        </div> 
       </div>
       <TopDestination />
     </>
