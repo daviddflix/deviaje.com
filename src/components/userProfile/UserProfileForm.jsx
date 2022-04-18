@@ -17,12 +17,8 @@ import { isNumberValid } from './Validations'
 import { axiosWithOutToken } from '../../services/axios'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker'; 
-import style from './Form.module.css'
-
-
-
-
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import { useTranslation } from 'react-i18next';
 
 
 const UserProfileForm = () => {
@@ -133,13 +129,15 @@ const UserProfileForm = () => {
       })
 
   }
+
+  const [t, i18n] = useTranslation('global')
+
   return (
     isAuthenticated && (
-      <div className={style.div}>
+      <div>
         <CssBaseline />
-        
-        <Typography className={style.title} variant="h4" align='center' gutterBottom component="div" sx={{ m: 2 }}>
-          PERSONAL INFO
+        <Typography variant="h4" align='center' gutterBottom component="div" sx={{ m: 2 }}>
+          {t("userProfileForm.per")}
         </Typography>
         
 
@@ -158,7 +156,7 @@ const UserProfileForm = () => {
                   helperText={dniErrorMsg}
                   InputLabelProps={{ shrink: true }}
                   id="standard-required"
-                  label="DNI/Passport"
+                  label={t("userProfileForm.doc")}
                   name='dni'
                   value={form.dni}
                   defaultValue=""
@@ -169,7 +167,7 @@ const UserProfileForm = () => {
               <div>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DesktopDatePicker
-                    label="Date of Birth"
+                    label={t("userProfileForm.fecha")}
                     value={value}
                     minDate={new Date('1930-01-01')}
                     onChange={(newValue) => {
@@ -196,7 +194,7 @@ const UserProfileForm = () => {
                   InputLabelProps={{ shrink: true }}
                   inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                   id="standard-required"
-                  label="Phone Number"
+                  label={t("userProfileForm.tel")}
                   name='phone'
                   value={form.phone}
                   defaultValue=""
@@ -210,7 +208,7 @@ const UserProfileForm = () => {
                   sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
                   InputLabelProps={{ shrink: true }}
                   name='country'
-                  label="Choose a country"
+                  label={t("userProfileForm.pais")}
                   id="standard"
                   value={form.country}
                   defaultValue=""                    
@@ -224,7 +222,7 @@ const UserProfileForm = () => {
                   sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
                   InputLabelProps={{ shrink: true }}
                   id="standard-required"
-                  label="State"
+                  label={t("userProfileForm.estado")}
                   name='state'
                   value={form.state}
                   defaultValue=""
@@ -239,7 +237,7 @@ const UserProfileForm = () => {
                   sx={{ '& > :not(style)': { m: 1, mr: 2 }, height: '25px', width: '350px' }}
                   InputLabelProps={{ shrink: true }}
                   id="standard-required"
-                  label="City"
+                  label={t("userProfileForm.ciu")}
                   name='city'
                   value={form.city}
                   defaultValue=""
@@ -254,7 +252,7 @@ const UserProfileForm = () => {
                   InputLabelProps={{ shrink: true }}
                   inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                   id="standard"
-                  label="Zip Code"
+                  label={t("userProfileForm.cp")}
                   name='zip'
                   alue={form.zip}
                   defaultValue=""
@@ -266,22 +264,22 @@ const UserProfileForm = () => {
               <div style={{ "display": "flex", "marginLeft": "25px", "justifyContent": "space-between" }}>
                 <div>
                   <FormControl onChange={(e) => handleChange(e)}>
-                    <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+                    <FormLabel id="demo-radio-buttons-group-label">{t("userProfileForm.g")}</FormLabel>
                     <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female"
                       color='success' row>
-                      <FormControlLabel value="female" name='genre' control={<Radio />} label="Female" />
-                      <FormControlLabel value="male" name='genre' control={<Radio />} label="Male" />
+                      <FormControlLabel value="female" name='genre' control={<Radio />} label={t("userProfileForm.f")} />
+                      <FormControlLabel value="male" name='genre' control={<Radio />} label={t("userProfileForm.m")} />
                     </RadioGroup>
                   </FormControl>
                 </div>
 
                 <div>
                   <FormControl onChange={(e) => handleChange(e)}>
-                    <FormLabel id="demo-radio-buttons-group-label">Vaccinated</FormLabel>
+                    <FormLabel id="demo-radio-buttons-group-label">{t("userProfileForm.v")}</FormLabel>
                     <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="Yes"
                       color='success' row>
-                      <FormControlLabel value="Yes" name='vaccinated' control={<Radio />} label="Yes" />
-                      <FormControlLabel value="No" name='vaccinated' control={<Radio />} label="No" />
+                      <FormControlLabel value="Yes" name='vaccinated' control={<Radio />} label={t("userProfileForm.s")} />
+                      <FormControlLabel value="No" name='vaccinated' control={<Radio />} label={t("userProfileForm.n")} />
                     </RadioGroup>
                   </FormControl>
                 </div>
@@ -289,7 +287,7 @@ const UserProfileForm = () => {
               <Box sx={{ '& button': { m: 3 } }}>
                 <div style={{ "width": "450px", "position": "relative", "display": "flex", "justifyContent": "flex-end" }}>
                   <Button type='submit' size="medium" color="success" variant="contained"
-                    endIcon={<SendIcon />} onClick={(e) => handleSubmit(e)}>Submit</Button>
+                    endIcon={<SendIcon />} onClicke={(e) => handleSubmit(e)}>{t("userProfileForm.btn")}</Button>
                 </div>
               </Box>
             </Box>
