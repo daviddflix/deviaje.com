@@ -17,8 +17,6 @@ import top7 from './assets/Miami-In-April-Cover.webp'
 import { useHistory } from 'react-router-dom'
 import { useEffect } from 'react';
 
-
-
 export default function CardDestination() {
 
   const dispatch = useDispatch()
@@ -124,7 +122,7 @@ export default function CardDestination() {
 
           <Card sx={{ maxWidth: 250, height: 360, margin: '1rem' }}>
             <CardActionArea>
-              <input type="image" alt='las vegas' src={top2} height="140" width='100%' value='las vegas' onClick={handleSearch} />
+              <input type="image" alt='las vegas' src={top5} height="140" width='100%' value='las vegas' onClick={handleSearch} />
               <CardContent>
                 <Typography variant="h5" component="div">
                   Visit { cityname && cityname[2] }
@@ -211,7 +209,7 @@ export default function CardDestination() {
 
           <Card sx={{ maxWidth: 250, height: 360, margin: '1rem' }}>
             <CardActionArea>
-              <input type="image" alt='mexico city' src={top5} height="140" width='100%' value='mexico city' onClick={(e) => handleSearch(e)} />
+              <input type="image" alt='mexico city' src={top2} height="140" width='100%' value='mexico city' onClick={(e) => handleSearch(e)} />
               <CardContent>
                 <Typography variant="h5" component="div">
                   Visit { cityname && cityname[5] }

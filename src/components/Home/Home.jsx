@@ -23,7 +23,6 @@ export default function Home() {
   const [showDetailsReturn, setShowDetailsReturn] = useState(false)
   const [detailsReturn, setDetailsReturn] = useState([])
 
-  const [showLoading, setShowLoading] = useState(false)
   const [idDetails, setIdDetails] = useState()
 
   let [currentPage, setcurrentPage] = useState(1);
@@ -31,7 +30,7 @@ export default function Home() {
   const indexOfLastFlight = currentPage * flightsPerPage; // 10
   const indexOfFirstFlight = indexOfLastFlight - flightsPerPage // 10 - 10 = 0 
   const currentFlights = flights && flights?.slice(indexOfFirstFlight, indexOfLastFlight)
-
+  
   const pagination = (pageNumber) => {
     setcurrentPage(pageNumber)
     window.scroll(0, 0)
@@ -82,7 +81,7 @@ export default function Home() {
           ) 
         }
         {
-          currentFlights.length !== 0 && <Paginado
+          currentFlights && currentFlights.length !== 0 && <Paginado
                                               flightsPerPage={flightsPerPage}
                                               flights={flights && flights.length}
                                               pagination={pagination}
