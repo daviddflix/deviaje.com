@@ -12,6 +12,9 @@ import { Link } from "react-router-dom";
 
 import { axiosWithOutToken } from '../../services/axios'
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import es from './assets/es.png'
+import en from './assets/en.png'
 
 const Nav = () => {
 
@@ -23,7 +26,7 @@ const Nav = () => {
     setAnchorEl(event.currentTarget);
   };
 
-
+  const [t, i18n] = useTranslation('global')
 
   const handleClose = () => {
     setAnchorEl(null)
@@ -55,18 +58,6 @@ const Nav = () => {
     }
   }, [user, isAuthenticated])
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     axiosWithOutToken('/postUser', user, 'post')
-  //       .then(res => {
-  //         console.log(res.data)
-  //       })
-  //       .catch(err => {
-  //         console.log(err)
-  //       })
-  //   }
-  // }, [isAuthenticated])
-
   return (
     <header className='header-container-general'>
       <div
@@ -89,9 +80,18 @@ const Nav = () => {
           </div>
 
           <div>
-            <NavLink activeClassName={styles.active} className={styles.link} to='/home'>Home</NavLink>
-            <NavLink activeClassName={styles.active} className={styles.link} to='/about'>About Us</NavLink>
-            <NavLink activeClassName={styles.active} className={styles.link} to='/top'>Offers</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/home'>{t("nav.home")}</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/about'>{t("nav.about")}</NavLink>
+            <NavLink activeClassName={styles.active} className={styles.link} to='/top'>{t("nav.offers")}</NavLink>
+          </div>
+
+          <div>
+            <button onClick={() => i18n.changeLanguage('es')} className={styles.flags}>
+              <img src={es} alt="espaniol" />
+            </button>
+            <button onClick={() => i18n.changeLanguage('en')} className={styles.flags}>
+              <img src={en} alt="espaniol" />
+            </button>
           </div>
 
           <div className={styles.containerButton}>
@@ -117,9 +117,9 @@ const Nav = () => {
                     'aria-labelledby': 'basic-button'
                   }}
                 >
-                  <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                  <MenuItem onClick={handleForm}>Settings</MenuItem>
-                  <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
+                  <MenuItem onClick={handleProfile}>{t("nav.per")}</MenuItem>
+                  <MenuItem onClick={handleForm}>{t("nav.s")}</MenuItem>
+                  <MenuItem onClick={handleClickLogout}>{t("nav.l")}</MenuItem>
                 </Menu>
               </div>
             ) : (
