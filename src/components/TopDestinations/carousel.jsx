@@ -184,7 +184,7 @@ export  function TopDestination(){
                 <img className={s.img} src={img} alt="Woman on computer" />
                 <div className={s.offers}>
                     <p className={s.text}>{t("ofertas.texto")}</p>
-                    <Button onClick={buttonToOffersPage} size="small" variant="contained">{t("ofertas.btn")}</Button>
+                    <button onClick={buttonToOffersPage} className={s.btnOffers} >{t("ofertas.btn")}</button>
                 </div>
             </div>
         </div>
