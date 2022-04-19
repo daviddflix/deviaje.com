@@ -26,20 +26,26 @@ function Landing() {
   function validate(input){
     let errors = {}
     if(!input.fly_from){
-        errors.fly_from = "Departure city required"
+        // errors.fly_from = "Departure city required"
+        errors.fly_from = t("searchBar.salida")
     }
     if(!input.fly_to){
-        errors.fly_to = "Destination required"
+        // errors.fly_to = "Destination required"
+        errors.fly_to = t("searchBar.des")
     } else if(input.fly_to.toLowerCase() === input.fly_from.toLowerCase()){
-        errors.fly_to = "Origin and destination cant be the same"
+        // errors.fly_to = "Origin and destination cant be the same"
+        errors.fly_to = t("searchBar.e")
     }
     if(!input.dateFrom){
-        errors.dateFrom = "Date required"
+        // errors.dateFrom = "Date required"
+        errors.dateFrom = t("searchBar.f")
     }
     if(!input.dateTo && (toFrom.name || check)){
-        errors.dateTo = "Return date required"
+        // errors.dateTo = "Return date required"
+        errors.dateTo = t("searchBar.f2")
     } else if(Date.parse(input.dateTo) < Date.parse(input.dateFrom)){
-        errors.dateTo = "Return date must be after departure date"
+        // errors.dateTo = "Return date must be after departure date"
+        errors.dateTo = t("searchBar.f3")
     }
     return errors
 }
