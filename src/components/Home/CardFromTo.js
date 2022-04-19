@@ -90,7 +90,7 @@ const CardFromTo = ({ handleDetails, f }) => {
                           <IoIosAirplane  style={{color:'#3e3f3f', fontSize:'1.5rem'}} />
                           <h4 style={{color:'#3e3f3f', fontSize:'1.35rem', fontFamily: 'Bebas Neue'}}>{t("cardFromTo.vuelta")}</h4>
                         </div>
-                        <h5 style={{color:'#535555', fontFamily: 'Bebas Neue', fontSize: '1rem'}}>{f.route[index].local_departure.slice(0, 10)}</h5>
+                        <h5 style={{color:'#535555', fontFamily: 'Bebas Neue', fontSize: '1.1rem'}}>{f.route[index].local_departure.slice(0, 10)}</h5>
                       </div>
                       <div className={styles.container_departure}>
                         <div style={{display: 'flex', flex:'40%'}}>
