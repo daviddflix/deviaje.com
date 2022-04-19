@@ -55,6 +55,7 @@ export  function TopDestination(){
 
     
     const dispatch = useDispatch()
+    const check = false
 
     const handleSearch = (e) =>{  
         //setShowLoading(true)
@@ -73,7 +74,8 @@ export  function TopDestination(){
             fly_to: e.target.value,
             dateFrom: date,
             dateTo: '2022-04-29',
-            toFrom: toFrom.toFrom
+            toFrom: toFrom.toFrom,
+            check
         }
 
         dispatch(setValuesInputs( newInputValues ))
