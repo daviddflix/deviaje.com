@@ -10,7 +10,7 @@ import styles from "./cardFromTo.module.css";
 import { useAuth0 } from '@auth0/auth0-react'
 import { useHistory } from "react-router-dom";
 import swal from 'sweetalert';
-import { getReturn, resetReturn } from '../../Redux/actions/actions';
+import { getReturn, resetData, resetReturn } from '../../Redux/actions/actions';
 import { useTranslation } from 'react-i18next';
 
 const CardFromTo = ({ handleDetails, f }) => {
@@ -28,6 +28,7 @@ const CardFromTo = ({ handleDetails, f }) => {
   const handleBuy = aux => {
     user && isAuthenticated ? history.push(aux) : swal(t("cardFrom.alerta"), t("cardFrom.alerta2"), "error")
     dispatch(getReturn(filterReturn))
+    dispatch(resetData())
   }
   
   const dispatch = useDispatch()
