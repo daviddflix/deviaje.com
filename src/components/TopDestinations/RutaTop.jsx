@@ -51,7 +51,8 @@ export default function CardDestination() {
             fly_to: e.target.value,
             dateFrom: date,
             dateTo: '2022-04-29',
-            toFrom: toFrom.toFrom
+            toFrom: toFrom.toFrom,
+            check: false
     }
     dispatch(setValuesInputs( newInputValues ))
     // dispatch(topdestination(e.target.value))
