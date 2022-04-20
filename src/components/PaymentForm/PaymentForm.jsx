@@ -75,7 +75,7 @@ const PaymentForm = ({ price }) => {
     const cardElement = elements.getElement("card");
 
     try {
-      const { data: clientSecret } = await axios.post("http://localhost:4001/payment", {
+      const { data: clientSecret } = await axios.post("/payment", {
         amount: price * 100
       });
 
