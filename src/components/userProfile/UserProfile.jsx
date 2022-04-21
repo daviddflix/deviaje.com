@@ -11,10 +11,10 @@ import { axiosWithOutToken } from '../../services/axios'
 
 
 
-const UserProfile = () => {
+const UserProfile = async () => {
     const { isAuthenticated, user } = useAuth0();
     const [t, i18n] = useTranslation('global')
-    const data = axiosWithOutToken('/getpersonalinfo', 'GET')
+    const data = await axiosWithOutToken('/getpersonalinfo', 'GET')
    
             
     console.log(data)

@@ -108,7 +108,7 @@ const UserProfileForm = () => {
     e.preventDefault();
     //console.log(form)
     let {email} = user
-    axiosWithOutToken('/updatepersonalinfo', form, email, 'POST')
+    axiosWithOutToken('/updatepersonalinfo', {...form, email}, 'POST')
       .then(res => {
         console.log(res.data)
         setForm({
