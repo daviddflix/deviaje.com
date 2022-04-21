@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://deviaje.kerokuapp.com";   
+axios.defaults.baseURL = "https://deviaje.herokuapp.com";   
 //https://deviaje.herokuapp.com
    
 export const axiosWithOutToken = async (endpoint, data, method = "GET") => {
