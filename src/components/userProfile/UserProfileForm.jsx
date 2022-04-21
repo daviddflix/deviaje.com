@@ -293,7 +293,7 @@ const UserProfileForm = () => {
               <Box sx={{ '& button': { m: 3 } }}>
                 <div style={{ "width": "450px", "position": "relative", "display": "flex", "justifyContent": "flex-end" }}>
                   <Button type='submit' size="medium" color="success" variant="contained"
-                    endIcon={<SendIcon />} onClicke={(e) => handleSubmit(e)}>{t("userProfileForm.btn")}</Button>
+                    endIcon={<SendIcon />} onClick={(e) => handleSubmit(e)}>{t("userProfileForm.btn")}</Button>
                 </div>
               </Box>
             </Box>
