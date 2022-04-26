@@ -15,9 +15,6 @@ const UserProfile = async () => {
     const { isAuthenticated, user } = useAuth0();
     const [t, i18n] = useTranslation('global')
     const data = await axiosWithOutToken('/getpersonalinfo', 'GET')
-   
-            
-    console.log(data)
 
     return (
         isAuthenticated  && (
