@@ -124,7 +124,7 @@ const Nav = () => {
                 </Menu>
               </div>
             ) : (
-              <Button variant='outlined' onClick={() => loginWithPopup()}>
+              <Button style={{borderRadius:'5px', padding:'.5rem'}} variant='contained' onClick={() => loginWithPopup()}>
                 Log In / Register
               </Button>
             )}
