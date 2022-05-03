@@ -23,7 +23,7 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 
 
 const UserProfileForm = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const [form, setForm] = useState({
     dni: '',
     age: new Date(),
@@ -103,7 +103,8 @@ const UserProfileForm = () => {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    axiosWithOutToken('/updatepersonalinfo', form, 'POST')
+    let {email} = user
+    axiosWithOutToken('/updatepersonalinfo', form, email, 'POST')
       .then(res => {
         console.log(res.data)
         setForm({
@@ -278,7 +279,7 @@ const UserProfileForm = () => {
               <Box sx={{ '& button': { m: 3 } }}>
                 <div style={{ "width": "450px", "position": "relative", "display": "flex", "justifyContent": "flex-end" }}>
                   <Button type='submit' size="medium" color="success" variant="contained"
-                    endIcon={<SendIcon />} onChange={(e) => handleSubmit(e)}>Submit</Button>
+                    endIcon={<SendIcon />} onClick={(e) => handleSubmit(e)}>Submit</Button>
                 </div>
               </Box>
             </Box>

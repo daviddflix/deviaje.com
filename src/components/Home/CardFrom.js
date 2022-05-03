@@ -7,10 +7,19 @@ import Popup from 'reactjs-popup';
 import { IoIosAirplane } from "react-icons/io";
 import { useSelector } from "react-redux";
 import styles from "./Home.module.css";
+import { useAuth0 } from '@auth0/auth0-react'
+import { useHistory } from "react-router-dom";
+import swal from 'sweetalert';
 
 const CardFrom = ({ handleDetails, f }) => {
 
     const flights = useSelector((state) => state.allFlights);
+    const { isAuthenticated, user } = useAuth0()
+    const history = useHistory()
+
+    const handleBuy = aux => {
+      user && isAuthenticated ? history.push(aux) : swal("Stop!", "If you want to buy, you must be registered!", "error")
+    }
 
     return (
         <div key={f.id} className={styles.containerPrincipal} >
@@ -36,10 +45,10 @@ const CardFrom = ({ handleDetails, f }) => {
                         <div style={{display: 'flex', flex:'20%', justifyContent:'right'}}>  
                           <h4 className={styles.padding_left}>
                             { f.route.length === 1 ? 
-                            <p style={{}}>Non-Stop</p>
+                            <p style={{marginBottom:0}}>Non-Stop</p>
                             : 
                               <Popup
-                                trigger={  <p style={{cursor: 'pointer'}}>
+                                trigger={  <p style={{cursor: 'pointer', marginBottom:0}}>
                                 {f.route.length > 2 ? (f.route.length - 1) + ' Stops' : (f.route.length - 1) + ' Stop'}</p> }
                                 position='top center'
                                 on={['hover', 'focus']}
@@ -58,11 +67,9 @@ const CardFrom = ({ handleDetails, f }) => {
                 <div className={styles.containerPriceFinal}>
                   <div className={styles.price}>
                     <h3 className={styles.titlePrice}>Price</h3>
-                    <div className={styles.flex}>
+                    <div className={styles.containerPriceNum}>
                       <h6 className={styles.priceSimbol}>USD{flights.currency}</h6>
-                      <h4 className={styles.padding_left} 
-                            style={{position: 'absolute', top:'37px',
-                                    right:'22px', fontSize:'1.5rem'}}>{f.price}</h4>
+                      <h4 className={styles.padding_left} style={{fontSize:'1.5rem'}} >{f.price}</h4>
                     </div>
                   </div> 
                      <div style={{marginTop:'-7rem'}}>       
@@ -70,9 +77,9 @@ const CardFrom = ({ handleDetails, f }) => {
                       <h4 className={styles.taxes}>Taxes-rates: USD {flights.currency} <span> {(f.price * .8).toFixed()}</span></h4>
                       <h4 className={styles.finalPrice}>Final Price: USD{flights.currency} <span style={{fontSize:'22px', color:'#2b2727'}}>{(f.price * 1.8).toFixed()}</span></h4>
                       
-                      <Link to={`/${f.id}`}>
-                        <button className={styles.buttonBuy}>Buy</button>
-                      </Link>
+                      {/* <Link to={`/${f.id}`}> */}
+                      <button className={styles.buttonBuy} onClick={() => handleBuy(`/${f.id}`)}>Buy</button>
+                      {/* </Link> */}
 
                     </div>
                 </div>

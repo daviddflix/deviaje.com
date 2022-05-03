@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import { IconButton } from "@material-ui/core";
 import s from "./SearchBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getFlightsInfo, getFlightsInfoToFrom, setValuesInputs } from "../../Redux/actions/actions";
+import { getFlightsInfo, getFlightsInfoToFrom, setValuesInputs, getPassengers } from "../../Redux/actions/actions";
 import validate from '../Landing/utils/validate'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 
-function SearchBar( { setShowLoading } ) {
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+  
+function SearchBar() {
 
   const dispatch = useDispatch();
+  const [passenger, setPassenger] = useState(1)
   const dataInputs = useSelector((state) => state.dataInputs);
+  const passengers = useSelector((state) => state.passengers);
   const [ toFrom, setToFrom ] = useState({name:''})
   
   let handleInputChange = (e) => {
@@ -47,6 +53,7 @@ function SearchBar( { setShowLoading } ) {
   useEffect(() =>{
     setInput( dataInputs )
     setToFrom( state => ({...state, name:dataInputs.toFrom }))
+    setPassenger( passengers )
   },[])
 
   const handleClick = (e) => {
@@ -61,13 +68,13 @@ function SearchBar( { setShowLoading } ) {
         toFrom: toFrom.name
       } 
       dispatch(setValuesInputs( newInput ))
-      setShowLoading( true )  
+      
       if( newInput.toFrom === true ){
         dispatch( getFlightsInfoToFrom( input ))
-        setShowLoading( false )
+        dispatch(getPassengers(passenger))
       }else{
-        dispatch(getFlightsInfo( input ));
-        setShowLoading( false )
+        dispatch(getFlightsInfo( input ))
+        dispatch(getPassengers(passenger))
       }
     }
   }
@@ -84,8 +91,8 @@ function SearchBar( { setShowLoading } ) {
             value={toFrom.name}
             onChange={handleInputChangeRadio}
           >
-            <FormControlLabel value={false} control={<Radio />} label="departure" sx={{marginLeft:'1px'}} />
-            <FormControlLabel value={true} control={<Radio />} label="return" sx={{marginLeft:'10px'}}  />
+            <FormControlLabel value={true} control={<Radio />} label="Round trip" sx={{marginLeft:'10px'}}  />
+            <FormControlLabel value={false} control={<Radio />} label="One way" sx={{marginLeft:'1px'}} />
           </RadioGroup>
         </FormControl>
         <input
@@ -135,11 +142,30 @@ function SearchBar( { setShowLoading } ) {
             error.dateTo && <p style={{ color:'red', margin:'2px 0 0 2px', fontSize:'14.5px' }} > { error.dateTo } </p>
             }
           </div>
-        </div>
+      </div>
+
+      <div className={s.pass}>
+        <span className={s.placeh}>Passengers</span>
+        <IconButton
+            onClick={() => setPassenger(passenger - 1)}
+            disabled={ passenger <= 1 ? true : false }
+        >
+        <RemoveIcon  sx={{ mx: 1 }} />
+        </IconButton>
+        {passenger}
+        <IconButton
+            onClick={() => setPassenger(passenger + 1)}
+            disabled={ passenger >= 6 ? true : false }
+            >
+        <AddIcon sx={{ mx: 1 }} />
+        </IconButton>
+      </div>
+
       <button className={s.btn} type="submit" onClick={handleClick}>
         <SearchIcon />
         Search
       </button>
+
     </div>
   );
 }

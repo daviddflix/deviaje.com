@@ -14,14 +14,11 @@ function StripeContainer() {
     const flights = useSelector(state => state.allFlights)
     const {id} = useParams()
     const flight = flights?.filter(f => f.id === id)
-    const history = useHistory()
     
+    window.scrollTo(0, 0) // para llevar la ventana arriba
     return (
         <Elements stripe={stripePromise}>
-            <PaymentForm
-                price={(flight[0].price * 1.8).toFixed()}
-                onSuccessfulCheckout={() => history.push("/success")}
-            />
+            <PaymentForm price={(flight[0].price * 1.8).toFixed()} />
         </Elements>
     );
 }

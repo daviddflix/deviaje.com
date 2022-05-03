@@ -1,9 +1,9 @@
 .containerPrincipal{
     display: flex;
+    width: 95%;
     border: 2px solid #F8F9F9;
-    /* background-color: #dbe6e6; */
     background-color: #e5eeee;
-    margin-top: 1.8rem;
+    margin-top: 2.35rem;
     margin-bottom: 1.8rem;
     border-radius: 1rem;
   }
@@ -18,13 +18,11 @@
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    /* background-color: #dbe6e6;  */
     background-color: #e5eeee;
     border-right: #00000036 solid 1px 
   }
 
   .home {
-    /* flex: 73.5%; */
     position: relative;
     border: 2px solid #F8F9F9; 
     display: flex;
@@ -33,7 +31,6 @@
     height: 150px;
     margin-top: 1.8rem;
     border-radius: 1rem;
-    /* background-color: #dbe6e6;  */
     background-color: #e5eeee;
     border-right: #00000036 solid 1px 
   }
@@ -54,7 +51,6 @@
     display: grid;
     justify-items: start;
     grid-template-columns: 1fr 2fr;
-    /* background-color: #bdd8e4;   */
     background-color: #bacfd8;
   }
   
@@ -110,7 +106,7 @@
     position:absolute;
     top:-28px;
     left:0; 
-    padding: 1rem;
+    padding: .5rem 1rem .5rem 1rem;
     background:#FDFEFE;
     border-bottom-right-radius: 1.2rem;
     border-top-left-radius: 1rem;
@@ -121,7 +117,7 @@
     position:absolute;
     top:-28px;
     left:0; 
-    padding: 1rem 2.4rem 1rem 1rem;
+    padding: .5rem 2.4rem .5rem 1rem;
     background:#FDFEFE;
     border-bottom-right-radius: 1.2rem;
     
@@ -142,19 +138,20 @@
   
   .titlePrice{
     position: absolute; 
-    top:25px; 
+    top:10px; 
     right:25px;
     font-family: 'Roboto Mono', monospace;
     color:rgb(39, 36, 36);
     font-size:1.8rem;
   }
   .priceSimbol{
-    position: absolute;
+    /* position: absolute;
     top:65px;
-    right:90px;
+    right:90px; */
     font-family: 'Roboto Mono', monospace;
     color:rgb(39, 36, 36);
-    font-size:1.5rem
+    font-size:1.5rem;
+    margin-top:.22rem
   }
   .taxes{
     margin-bottom: 1rem;
@@ -198,4 +195,11 @@
     margin-left: 1rem;
     justify-content:flex-start;
     position: relative
+  }
+
+  .containerPriceNum{
+    display: flex;
+    position:absolute;
+    top:2.5rem;
+    left:6rem  
   }
