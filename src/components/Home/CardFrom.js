@@ -1,25 +1,29 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import { CardScaleDetails } from "./CardScaleDetails";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Popup from 'reactjs-popup';
 import { IoIosAirplane } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Home.module.css";
 import { useAuth0 } from '@auth0/auth0-react'
 import { useHistory } from "react-router-dom";
 import swal from 'sweetalert';
+import { useTranslation } from 'react-i18next';
+import { resetData } from '../../Redux/actions/actions';
 
 const CardFrom = ({ handleDetails, f }) => {
 
     const flights = useSelector((state) => state.allFlights);
     const { isAuthenticated, user } = useAuth0()
     const history = useHistory()
-
+    const dispatch = useDispatch()
     const handleBuy = aux => {
-      user && isAuthenticated ? history.push(aux) : swal("Stop!", "If you want to buy, you must be registered!", "error")
+      user && isAuthenticated ? history.push(aux) : swal(t("cardFrom.alerta"), t("cardFrom.alerta2"), "error")
+      dispatch(resetData())
     }
+    
+    const [t, i18n] = useTranslation('global')
 
     return (
         <div key={f.id} className={styles.containerPrincipal} >
@@ -28,7 +32,7 @@ const CardFrom = ({ handleDetails, f }) => {
                       <div  className={styles.subTitle}>
                         <div style={{display: 'flex'}}>
                           <IoIosAirplane  style={{color:'#3e3f3f', fontSize:'1.5rem'}} />
-                          <h4 style={{color:'#3e3f3f', fontSize:'1.35rem', fontFamily: 'Bebas Neue'}}>Departure</h4>
+                          <h4 style={{color:'#3e3f3f', fontSize:'1.35rem', fontFamily: 'Bebas Neue'}}>{t("cardFrom.departure")}</h4>
                         </div>
                         <h5 style={{color:'#535555', fontFamily: 'Bebas Neue', fontSize: '1.1rem'}}>{f.local_departure.slice(0, 10)}</h5>
                       </div>
@@ -45,7 +49,7 @@ const CardFrom = ({ handleDetails, f }) => {
                         <div style={{display: 'flex', flex:'20%', justifyContent:'right'}}>  
                           <h4 className={styles.padding_left}>
                             { f.route.length === 1 ? 
-                            <p style={{marginBottom:0}}>Non-Stop</p>
+                            <p style={{marginBottom:0}}>{t("cardFrom.directo")}</p>
                             : 
                               <Popup
                                 trigger={  <p style={{cursor: 'pointer', marginBottom:0}}>
@@ -66,7 +70,7 @@ const CardFrom = ({ handleDetails, f }) => {
                 </div>
                 <div className={styles.containerPriceFinal}>
                   <div className={styles.price}>
-                    <h3 className={styles.titlePrice}>Price</h3>
+                    <h3 className={styles.titlePrice}>{t("cardFrom.precio")}</h3>
                     <div className={styles.containerPriceNum}>
                       <h6 className={styles.priceSimbol}>USD{flights.currency}</h6>
                       <h4 className={styles.padding_left} style={{fontSize:'1.5rem'}} >{f.price}</h4>
@@ -74,12 +78,10 @@ const CardFrom = ({ handleDetails, f }) => {
                   </div> 
                      <div style={{marginTop:'-7rem'}}>       
 
-                      <h4 className={styles.taxes}>Taxes-rates: USD {flights.currency} <span> {(f.price * .8).toFixed()}</span></h4>
-                      <h4 className={styles.finalPrice}>Final Price: USD{flights.currency} <span style={{fontSize:'22px', color:'#2b2727'}}>{(f.price * 1.8).toFixed()}</span></h4>
+                      <h4 className={styles.taxes}>{t("cardFrom.imp")}: USD {flights.currency} <span> {(f.price * .8).toFixed()}</span></h4>
+                      <h4 className={styles.finalPrice}>{t("cardFrom.final")}: USD{flights.currency} <span style={{fontSize:'22px', color:'#2b2727'}}>{(f.price * 1.8).toFixed()}</span></h4>
                       
-                      {/* <Link to={`/${f.id}`}> */}
-                      <button className={styles.buttonBuy} onClick={() => handleBuy(`/${f.id}`)}>Buy</button>
-                      {/* </Link> */}
+                      <button className={styles.buttonBuy} onClick={() => handleBuy(`/${f.id}`)}>{t("cardFrom.btn")}</button>
 
                     </div>
                 </div>

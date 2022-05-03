@@ -25,6 +25,8 @@ import swal from 'sweetalert';
 import { useDispatch, useSelector } from "react-redux";
 import { getPassengers, resetData } from "../../Redux/actions/actions";
 import StepperHorizontal from '../Stepper/StepperHorizontal';
+import { useAuth0 } from "@auth0/auth0-react";
+import { useTranslation } from "react-i18next";
 
 const CardElementContainer = styled.div`
   height: 40px;
@@ -37,6 +39,8 @@ const CardElementContainer = styled.div`
 `;
 
 const PaymentForm = ({ price }) => {
+  const { user } = useAuth0()
+  
   const history = useHistory()
   const [processing, setProcessing] = useState(false);
   const [checkoutError, setCheckoutError] = useState();
@@ -65,13 +69,12 @@ const PaymentForm = ({ price }) => {
       }
     };
     
-    await axiosWithOutToken('/paymentForm', billingDetails, 'POST')
     setProcessing(true);
 
     const cardElement = elements.getElement("card");
 
     try {
-      const { data: clientSecret } = await axios.post("http://localhost:4001/payment", {
+      const { data: clientSecret } = await axios.post("/payment", {
         amount: price * 100
       });
 
@@ -96,14 +99,19 @@ const PaymentForm = ({ price }) => {
         setProcessing(false);
         return;
       }    
-      // await axiosWithOutToken('/passengersInfo', passengersInfo, 'POST')
+      
       await swal({
-        title: "Thank you!",
-        text: "We have successfully processed your payment!",
+        title: t("paymentForm.gracias"),
+        text: t("paymentForm.pro"),
         icon: "success",
         button: "Close",
       });
 
+      await axiosWithOutToken('/paymentForm', billingDetails, 'POST')
+      let data = user.email
+      
+      await axiosWithOutToken('/passengersInfo', { passengersInfo, data}, 'POST')
+      await axiosWithOutToken('/postClientDetails', { billingDetails, price}, 'POST')
       history.push('/')
       dispatch(getPassengers(1))
       dispatch(resetData())
@@ -152,17 +160,19 @@ const PaymentForm = ({ price }) => {
     p: 4,
   };
 
+  const [t, i18n] = useTranslation('global')
+
   return (
     <div>
       <StepperHorizontal step={2}/>
       <form onSubmit={handleFormSubmit}>
 
         <div className={s.grid}>
-          <div className={s.title}>Complete with the card information</div>
+          <div className={s.title}>{t("paymentForm.tit")}</div>
           <div>
             <Button onClick={handleOpen}>
               <CreditCardIcon />
-              Check payment options
+              {t("paymentForm.pag")}
             </Button>
             <Modal
               open={open}
@@ -172,7 +182,7 @@ const PaymentForm = ({ price }) => {
             >
               <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Payment options
+                {t("paymentForm.opc")}
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <img src={visa} className={s.imagen} alt='imagen not found' />
@@ -204,7 +214,7 @@ const PaymentForm = ({ price }) => {
 
           <Row>
             <SubmitButton disabled={processing || !stripe}>
-              {processing ? "Processing..." : `Pay $${price}`}
+              {processing ? t("paymentForm.p") : t("paymentForm.pago")}
             </SubmitButton>
           </Row>
         </div>

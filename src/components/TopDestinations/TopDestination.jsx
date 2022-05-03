@@ -17,16 +17,11 @@ import { Loading } from '../loading/Loading';
 
 export function TopDestination() {
 
-
-    //     const apiKey = 'AIzaSyDpDeQ4dvtyfQoxkE6xz1tc5Ll05eXfX3w'
-    //    const reverse = `https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY`
     const [location, setLocation] = useState({
         loaded: false,
         coordinates: { lat: "", lng: "" }
     })
     const [showLoading, setShowLoading] = useState(false)
-    //console.log(location)
-
 
     const dispatch = useDispatch()
     const handleSearch = (e) => {
@@ -34,7 +29,6 @@ export function TopDestination() {
         dispatch(topdestination(e.target.value))
         setShowLoading(true)
     }
-
 
     const onSuccess = location => {
         setLocation({
@@ -52,7 +46,6 @@ export function TopDestination() {
             error,
         })
     }
-
 
     useEffect(() => {
         if (!("geolocation" in navigator)) {
@@ -123,7 +116,7 @@ export function TopDestination() {
                 <img className={s.img} src={img} alt="Woman on computer" />
                 <div className={s.offers}>
                     <p className={s.text}>If you have not yet defined your destination, you may be interested in seeing our offers section.</p>
-                    <Button size="small" variant="contained">View Offers</Button>
+                    <Button size="small" variant="contained" >View Offers</Button>
                 </div>
             </div>
         </div>

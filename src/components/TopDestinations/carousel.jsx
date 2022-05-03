@@ -1,4 +1,3 @@
-import Button from '@mui/material/Button';
 import s from './styles.module.css'
 import img from './assets/woman.jpg'
 import { useDispatch } from 'react-redux';
@@ -11,11 +10,10 @@ import top3 from './assets/nueva-york_0.webp'
 import top4 from './assets/frankfurt-2.jpg'
 import top5 from './assets/las vegas.webp'
 import top6 from './assets/barcelona.jpg'
-//import { Loading } from '../loading/Loading';
 import Carousel from 'react-bootstrap/Carousel'
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import getCity from './helpers/getCity'
 import {useHistory} from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
    
 
 export  function TopDestination(){
@@ -27,8 +25,6 @@ export  function TopDestination(){
         loaded:false,
         coordinates:{lat:"", lng:""}
     })
-    //const [ showLoading, setShowLoading ] = useState(false)
-    //let [ data, setData] = useState('') // origin
   
    useEffect(() => {
     if(!("geolocation" in navigator)){
@@ -38,25 +34,13 @@ export  function TopDestination(){
       })
     }
     navigator.geolocation.getCurrentPosition(onSuccess, onError)
-}, [])
-
-
-//    useEffect(() => {
-//     const updateCity = () => {
-//         getCity(location)
-//            .then((city) => {
-//                setData(prev => ({...prev, city}))
-//            })
-//            .catch(err => console.log('errorCity',err))
-//     }
-//     updateCity()
-//    } ,[location])
+    }, [])
 
     
     const dispatch = useDispatch()
+    const check = false
 
     const handleSearch = (e) =>{  
-        //setShowLoading(true)
         
         const d = new Date().toISOString()
         const date = d.slice(0,10)
@@ -72,14 +56,12 @@ export  function TopDestination(){
             fly_to: e.target.value,
             dateFrom: date,
             dateTo: '2022-04-29',
-            toFrom: toFrom.toFrom
+            toFrom: toFrom.toFrom,
+            check
         }
 
         dispatch(setValuesInputs( newInputValues ))
         dispatch(topdestination( inputValues ))
-        //dispatch(setValuesInputs( toFrom ))
-        //dispatch(topdestination(e.target.value))
-        //setShowLoading(false)
         history.push('/home')
         window.scroll(0, 0)
    }
@@ -105,14 +87,13 @@ export  function TopDestination(){
        history.push('/top')
    }
 
+   const [t, i18n] = useTranslation('global')
+
     return(
         <div className={s.mainContainer}>
-              {/* {
-          showLoading &&  <div style={{position: 'abolsute'}} > <Loading /> </div> 
-              } */}
              
             <div className={s.container}>
-                <h2 className={s.title}>Top Destinations</h2>
+                <h2 className={s.title}>{t("carousel.top")}</h2>
          <Carousel>
             <Carousel.Item>
                     <input type='image' value='istabul' name='istabul' className={s.slide} src={top} alt="Istabul" onClick={(e) => handleSearch(e)}/>
@@ -177,11 +158,11 @@ export  function TopDestination(){
         </Carousel>
             </div>
             <div className={s.container}>
-                <h2 className={s.title}>Offers you cannot wait</h2>
+                <h2 className={s.title}>{t("ofertas.ofertas")}</h2>
                 <img className={s.img} src={img} alt="Woman on computer" />
                 <div className={s.offers}>
-                    <p className={s.text}>If you have not yet defined your destination, you may be interested in seeing our offers section.</p>
-                    <Button onClick={buttonToOffersPage} size="small" variant="contained">View Offers</Button>
+                    <p className={s.text}>{t("ofertas.texto")}</p>
+                    <button onClick={buttonToOffersPage} className={s.btnOffers} >{t("ofertas.btn")}</button>
                 </div>
             </div>
         </div>
